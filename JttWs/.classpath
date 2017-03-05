@@ -1,195 +1,196 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src/main/java">
+	<classpathentry path="src/main/java" kind="src">
 		<attributes>
 			<attribute name="FROM_GRADLE_MODEL" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="src/main/resources">
+	<classpathentry path="src/main/resources" kind="src">
 		<attributes>
 			<attribute name="FROM_GRADLE_MODEL" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="src/test/java">
+	<classpathentry path="src/test/java" kind="src">
 		<attributes>
 			<attribute name="FROM_GRADLE_MODEL" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
-	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v8.0">
+	<classpathentry path="org.eclipse.jst.j2ee.internal.web.container" kind="con"/>
+	<classpathentry path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v8.0" kind="con">
 		<attributes>
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.buildship.core.gradleclasspathcontainer">
+	<classpathentry path="org.eclipse.buildship.core.gradleclasspathcontainer" kind="con">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8/">
-		<accessrules>
-			<accessrule kind="accessible" pattern="**"/>
-		</accessrules>
-	</classpathentry>
-	<classpathentry kind="lib" path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/ch.qos.logback/logback-classic/1.1.3/d90276fff414f06cb375f2057f6778cd63c6082f/logback-classic-1.1.3.jar" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/ch.qos.logback/logback-classic/1.1.3/f4915df0360e7529c61f9e78ef3a06c19238e62e/logback-classic-1.1.3-sources.jar">
+	<classpathentry path="bin" kind="output"/>
+	<classpathentry path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8/" kind="con"/>
+	<classpathentry path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/ch.qos.logback/logback-classic/1.1.3/d90276fff414f06cb375f2057f6778cd63c6082f/logback-classic-1.1.3.jar" kind="lib" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/ch.qos.logback/logback-classic/1.1.3/f4915df0360e7529c61f9e78ef3a06c19238e62e/logback-classic-1.1.3-sources.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.springframework/spring-webmvc/4.3.6.RELEASE/ea55690d6d61ad70e2569db1e1add1603e427862/spring-webmvc-4.3.6.RELEASE.jar" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.springframework/spring-webmvc/4.3.6.RELEASE/51719142a860240ba4648bb6384e5653bffc82e9/spring-webmvc-4.3.6.RELEASE-sources.jar">
+	<classpathentry path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.springframework/spring-webmvc/4.3.6.RELEASE/ea55690d6d61ad70e2569db1e1add1603e427862/spring-webmvc-4.3.6.RELEASE.jar" kind="lib" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.springframework/spring-webmvc/4.3.6.RELEASE/51719142a860240ba4648bb6384e5653bffc82e9/spring-webmvc-4.3.6.RELEASE-sources.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/javax.servlet/jstl/1.2/74aca283cd4f4b4f3e425f5820cda58f44409547/jstl-1.2.jar" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/javax.servlet/jstl/1.2/2f5877ef15adb721421e80f5aa2b6fe069eec8ed/jstl-1.2-sources.jar">
+	<classpathentry path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/javax.servlet/jstl/1.2/74aca283cd4f4b4f3e425f5820cda58f44409547/jstl-1.2.jar" kind="lib" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/javax.servlet/jstl/1.2/2f5877ef15adb721421e80f5aa2b6fe069eec8ed/jstl-1.2-sources.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/Amelia/.m2/repository/org/apache/httpcomponents/httpclient/4.1.2/httpclient-4.1.2.jar" sourcepath="/Users/Amelia/.m2/repository/org/apache/httpcomponents/httpclient/4.1.2/httpclient-4.1.2-sources.jar">
+	<classpathentry path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/javax.servlet/javax.servlet-api/3.0.1/6bf0ebb7efd993e222fc1112377b5e92a13b38dd/javax.servlet-api-3.0.1.jar" kind="lib" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/javax.servlet/javax.servlet-api/3.0.1/1952f91d84016a39e31346c9d18bd8c9c4a128a/javax.servlet-api-3.0.1-sources.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/SystemDigest/SystemDigest/1.2.52/2b86a51af1dcf37b33e73b7b851f70c808847504/SystemDigest-1.2.52.jar">
+	<classpathentry path="/Users/Amelia/.m2/repository/org/apache/httpcomponents/httpclient/4.1.2/httpclient-4.1.2.jar" kind="lib" sourcepath="/Users/Amelia/.m2/repository/org/apache/httpcomponents/httpclient/4.1.2/httpclient-4.1.2-sources.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/jupa/JsonUpgradingPersistenceArchitecture/1.1.55/6fa20d88fbb81d531c3835e1a64fae3c7e7eeb35/JsonUpgradingPersistenceArchitecture-1.1.55.jar">
+	<classpathentry path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/SystemDigest/SystemDigest/1.2.52/2b86a51af1dcf37b33e73b7b851f70c808847504/SystemDigest-1.2.52.jar" kind="lib">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/JenkinsTestTracker/JenkinsTestTracker/1.5.209/182e01f2ea9e8d56622fb7c3ea71992c5b9b2179/JenkinsTestTracker-1.5.209.jar">
+	<classpathentry path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/jupa/JsonUpgradingPersistenceArchitecture/1.1.55/6fa20d88fbb81d531c3835e1a64fae3c7e7eeb35/JsonUpgradingPersistenceArchitecture-1.1.55.jar" kind="lib">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/JenkinsTestTracker/JenkinsTestTracker/1.5.209/eca096d03eb602143067e5723f9c7517479ea029/JenkinsTestTracker-1.5.209-tests.jar">
+	<classpathentry path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/JenkinsTestTracker/JenkinsTestTracker/1.5.209/182e01f2ea9e8d56622fb7c3ea71992c5b9b2179/JenkinsTestTracker-1.5.209.jar" kind="lib">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/Amelia/.m2/repository/junit/junit/4.12/junit-4.12.jar" sourcepath="/Users/Amelia/.m2/repository/junit/junit/4.12/junit-4.12-sources.jar">
+	<classpathentry path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/JenkinsTestTracker/JenkinsTestTracker/1.5.209/eca096d03eb602143067e5723f9c7517479ea029/JenkinsTestTracker-1.5.209-tests.jar" kind="lib">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/pl.pragmatists/JUnitParams/1.0.5/11c4fb84973ba635673e5e026abf27078aab8bd9/JUnitParams-1.0.5.jar" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/pl.pragmatists/JUnitParams/1.0.5/1f13277f8d6778d51f3a84811b6705a99c72bcdb/JUnitParams-1.0.5-sources.jar">
+	<classpathentry path="/Users/Amelia/.m2/repository/junit/junit/4.12/junit-4.12.jar" kind="lib" sourcepath="/Users/Amelia/.m2/repository/junit/junit/4.12/junit-4.12-sources.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/Amelia/.m2/repository/org/hamcrest/hamcrest-all/1.3/hamcrest-all-1.3.jar" sourcepath="/Users/Amelia/.m2/repository/org/hamcrest/hamcrest-all/1.3/hamcrest-all-1.3-sources.jar">
+	<classpathentry path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/pl.pragmatists/JUnitParams/1.0.5/11c4fb84973ba635673e5e026abf27078aab8bd9/JUnitParams-1.0.5.jar" kind="lib" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/pl.pragmatists/JUnitParams/1.0.5/1f13277f8d6778d51f3a84811b6705a99c72bcdb/JUnitParams-1.0.5-sources.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/Amelia/.m2/repository/org/mockito/mockito-all/1.9.5/mockito-all-1.9.5.jar">
+	<classpathentry path="/Users/Amelia/.m2/repository/org/hamcrest/hamcrest-all/1.3/hamcrest-all-1.3.jar" kind="lib" sourcepath="/Users/Amelia/.m2/repository/org/hamcrest/hamcrest-all/1.3/hamcrest-all-1.3-sources.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.springframework/spring-test/4.3.6.RELEASE/233edfdbe5f895cd6585001ef30122e5604442b4/spring-test-4.3.6.RELEASE.jar" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.springframework/spring-test/4.3.6.RELEASE/223e3c4360e3ee95f223ffbe2f435eeef52a6852/spring-test-4.3.6.RELEASE-sources.jar">
+	<classpathentry path="/Users/Amelia/.m2/repository/org/mockito/mockito-all/1.9.5/mockito-all-1.9.5.jar" kind="lib">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/ch.qos.logback/logback-core/1.1.3/e3c02049f2dbbc764681b40094ecf0dcbc99b157/logback-core-1.1.3.jar" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/ch.qos.logback/logback-core/1.1.3/a69d9a62a693f391ad19d8ac19fa85a7a60cbc7c/logback-core-1.1.3-sources.jar">
+	<classpathentry path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.springframework/spring-test/4.3.6.RELEASE/233edfdbe5f895cd6585001ef30122e5604442b4/spring-test-4.3.6.RELEASE.jar" kind="lib" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.springframework/spring-test/4.3.6.RELEASE/223e3c4360e3ee95f223ffbe2f435eeef52a6852/spring-test-4.3.6.RELEASE-sources.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.7.7/2b8019b6249bb05d81d3a3094e468753e2b21311/slf4j-api-1.7.7.jar" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.7.7/acd62e31cc314266e73eebed0b6dd7ea974a0ed/slf4j-api-1.7.7-sources.jar">
+	<classpathentry path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/ch.qos.logback/logback-core/1.1.3/e3c02049f2dbbc764681b40094ecf0dcbc99b157/logback-core-1.1.3.jar" kind="lib" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/ch.qos.logback/logback-core/1.1.3/a69d9a62a693f391ad19d8ac19fa85a7a60cbc7c/logback-core-1.1.3-sources.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.springframework/spring-aop/4.3.6.RELEASE/d70b2393d380cd468d9a14969efaf9022c67c0/spring-aop-4.3.6.RELEASE.jar" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.springframework/spring-aop/4.3.6.RELEASE/c6d15c225b300c981060c8c2beb26bf4a8914232/spring-aop-4.3.6.RELEASE-sources.jar">
+	<classpathentry path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.7.7/2b8019b6249bb05d81d3a3094e468753e2b21311/slf4j-api-1.7.7.jar" kind="lib" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.7.7/acd62e31cc314266e73eebed0b6dd7ea974a0ed/slf4j-api-1.7.7-sources.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/4.3.6.RELEASE/1585715ed598b76a23dac931c27aa039b189eafb/spring-beans-4.3.6.RELEASE.jar" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/4.3.6.RELEASE/9a93dd1daa209146297f0d0a1ba900be43cbee50/spring-beans-4.3.6.RELEASE-sources.jar">
+	<classpathentry path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.springframework/spring-aop/4.3.6.RELEASE/d70b2393d380cd468d9a14969efaf9022c67c0/spring-aop-4.3.6.RELEASE.jar" kind="lib" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.springframework/spring-aop/4.3.6.RELEASE/c6d15c225b300c981060c8c2beb26bf4a8914232/spring-aop-4.3.6.RELEASE-sources.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/4.3.6.RELEASE/5f3041020113e3202a7ae9defe36e7b5d2fb87eb/spring-context-4.3.6.RELEASE.jar" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/4.3.6.RELEASE/49943c4c9945a5a4e256d7e360ad3872696a769e/spring-context-4.3.6.RELEASE-sources.jar">
+	<classpathentry path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/4.3.6.RELEASE/1585715ed598b76a23dac931c27aa039b189eafb/spring-beans-4.3.6.RELEASE.jar" kind="lib" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/4.3.6.RELEASE/9a93dd1daa209146297f0d0a1ba900be43cbee50/spring-beans-4.3.6.RELEASE-sources.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.springframework/spring-core/4.3.6.RELEASE/690da099c3c2d2536210f0fd06ff3f336de43ad9/spring-core-4.3.6.RELEASE.jar" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.springframework/spring-core/4.3.6.RELEASE/45f4d3c6337a323202f4bc0a9adbd3e1d595cb18/spring-core-4.3.6.RELEASE-sources.jar">
+	<classpathentry path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/4.3.6.RELEASE/5f3041020113e3202a7ae9defe36e7b5d2fb87eb/spring-context-4.3.6.RELEASE.jar" kind="lib" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.springframework/spring-context/4.3.6.RELEASE/49943c4c9945a5a4e256d7e360ad3872696a769e/spring-context-4.3.6.RELEASE-sources.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.springframework/spring-expression/4.3.6.RELEASE/13b53568cfd7b308e70efcbac6cdd0c5d597ba1/spring-expression-4.3.6.RELEASE.jar" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.springframework/spring-expression/4.3.6.RELEASE/ba3bb5030b02ded635044da772c27fce7220523f/spring-expression-4.3.6.RELEASE-sources.jar">
+	<classpathentry path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.springframework/spring-core/4.3.6.RELEASE/690da099c3c2d2536210f0fd06ff3f336de43ad9/spring-core-4.3.6.RELEASE.jar" kind="lib" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.springframework/spring-core/4.3.6.RELEASE/45f4d3c6337a323202f4bc0a9adbd3e1d595cb18/spring-core-4.3.6.RELEASE-sources.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.springframework/spring-web/4.3.6.RELEASE/8b8bf8fc6ed4acd5ae0baa6179f1cccc52aaa9aa/spring-web-4.3.6.RELEASE.jar" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.springframework/spring-web/4.3.6.RELEASE/e41b15afc71764f982eec257729ac3fddda78f3e/spring-web-4.3.6.RELEASE-sources.jar">
+	<classpathentry path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.springframework/spring-expression/4.3.6.RELEASE/13b53568cfd7b308e70efcbac6cdd0c5d597ba1/spring-expression-4.3.6.RELEASE.jar" kind="lib" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.springframework/spring-expression/4.3.6.RELEASE/ba3bb5030b02ded635044da772c27fce7220523f/spring-expression-4.3.6.RELEASE-sources.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/Amelia/.m2/repository/org/apache/httpcomponents/httpcore/4.1.2/httpcore-4.1.2.jar" sourcepath="/Users/Amelia/.m2/repository/org/apache/httpcomponents/httpcore/4.1.2/httpcore-4.1.2-sources.jar">
+	<classpathentry path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.springframework/spring-web/4.3.6.RELEASE/8b8bf8fc6ed4acd5ae0baa6179f1cccc52aaa9aa/spring-web-4.3.6.RELEASE.jar" kind="lib" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.springframework/spring-web/4.3.6.RELEASE/e41b15afc71764f982eec257729ac3fddda78f3e/spring-web-4.3.6.RELEASE-sources.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/Amelia/.m2/repository/commons-codec/commons-codec/1.4/commons-codec-1.4.jar" sourcepath="/Users/Amelia/.m2/repository/commons-codec/commons-codec/1.4/commons-codec-1.4-sources.jar">
+	<classpathentry path="/Users/Amelia/.m2/repository/org/apache/httpcomponents/httpcore/4.1.2/httpcore-4.1.2.jar" kind="lib" sourcepath="/Users/Amelia/.m2/repository/org/apache/httpcomponents/httpcore/4.1.2/httpcore-4.1.2-sources.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/info.solidsoft.gradle.pitest/gradle-pitest-plugin/1.1.9/ef96e5fbbae60a4b8cbef5d131c387f455d01d09/gradle-pitest-plugin-1.1.9.jar" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/info.solidsoft.gradle.pitest/gradle-pitest-plugin/1.1.9/3ae321567164f8af9d3faa0a0e378a1acdcf242b/gradle-pitest-plugin-1.1.9-sources.jar">
+	<classpathentry path="/Users/Amelia/.m2/repository/commons-codec/commons-codec/1.4/commons-codec-1.4.jar" kind="lib" sourcepath="/Users/Amelia/.m2/repository/commons-codec/commons-codec/1.4/commons-codec-1.4-sources.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.controlsfx/controlsfx/8.40.11/61694ec2668cc69116e970c7513aa3501179bc00/controlsfx-8.40.11.jar" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.controlsfx/controlsfx/8.40.11/14c3501e32ab880a0686aa7cacf35c01077c3c81/controlsfx-8.40.11-sources.jar">
+	<classpathentry path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/info.solidsoft.gradle.pitest/gradle-pitest-plugin/1.1.9/ef96e5fbbae60a4b8cbef5d131c387f455d01d09/gradle-pitest-plugin-1.1.9.jar" kind="lib" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/info.solidsoft.gradle.pitest/gradle-pitest-plugin/1.1.9/3ae321567164f8af9d3faa0a0e378a1acdcf242b/gradle-pitest-plugin-1.1.9-sources.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/Amelia/.m2/repository/org/json/json/20151123/json-20151123.jar" sourcepath="/Users/Amelia/.m2/repository/org/json/json/20151123/json-20151123-sources.jar">
+	<classpathentry path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.controlsfx/controlsfx/8.40.11/61694ec2668cc69116e970c7513aa3501179bc00/controlsfx-8.40.11.jar" kind="lib" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.controlsfx/controlsfx/8.40.11/14c3501e32ab880a0686aa7cacf35c01077c3c81/controlsfx-8.40.11-sources.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/com.opencsv/opencsv/3.8/248d4d05fe253a02a05601978f7de1305b8a961e/opencsv-3.8.jar" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/com.opencsv/opencsv/3.8/86b653cf0662d0c8eec8b2885d0bc41692996ba8/opencsv-3.8-sources.jar">
+	<classpathentry path="/Users/Amelia/.m2/repository/org/json/json/20151123/json-20151123.jar" kind="lib" sourcepath="/Users/Amelia/.m2/repository/org/json/json/20151123/json-20151123-sources.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/Amelia/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar" sourcepath="/Users/Amelia/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3-sources.jar">
+	<classpathentry path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/com.opencsv/opencsv/3.8/248d4d05fe253a02a05601978f7de1305b8a961e/opencsv-3.8.jar" kind="lib" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/com.opencsv/opencsv/3.8/86b653cf0662d0c8eec8b2885d0bc41692996ba8/opencsv-3.8-sources.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.4/5fe28b9518e58819180a43a850fbc0dd24b7c050/commons-lang3-3.4.jar" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.4/b49dafc9cfef24c356827f322e773e7c26725dd2/commons-lang3-3.4-sources.jar">
+	<classpathentry path="/Users/Amelia/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar" kind="lib" sourcepath="/Users/Amelia/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3-sources.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/commons-beanutils/commons-beanutils/1.9.2/7a87d845ad3a155297e8f67d9008f4c1e5656b71/commons-beanutils-1.9.2.jar" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/commons-beanutils/commons-beanutils/1.9.2/53746de93a0b30f346c082074a40c01a6cebdfa7/commons-beanutils-1.9.2-sources.jar">
+	<classpathentry path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.4/5fe28b9518e58819180a43a850fbc0dd24b7c050/commons-lang3-3.4.jar" kind="lib" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.4/b49dafc9cfef24c356827f322e773e7c26725dd2/commons-lang3-3.4-sources.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/Amelia/.m2/repository/commons-collections/commons-collections/3.2.1/commons-collections-3.2.1.jar">
+	<classpathentry path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/commons-beanutils/commons-beanutils/1.9.2/7a87d845ad3a155297e8f67d9008f4c1e5656b71/commons-beanutils-1.9.2.jar" kind="lib" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/commons-beanutils/commons-beanutils/1.9.2/53746de93a0b30f346c082074a40c01a6cebdfa7/commons-beanutils-1.9.2-sources.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.2/4bfc12adfe4842bf07b657f0369c4cb522955686/commons-logging-1.2.jar" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.2/ecf26c7507d67782a3bbd148d170b31dfad001aa/commons-logging-1.2-sources.jar">
+	<classpathentry path="/Users/Amelia/.m2/repository/commons-collections/commons-collections/3.2.1/commons-collections-3.2.1.jar" kind="lib">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry path="/Users/Amelia/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.2/4bfc12adfe4842bf07b657f0369c4cb522955686/commons-logging-1.2.jar" kind="lib" sourcepath="/Users/Amelia/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.2/ecf26c7507d67782a3bbd148d170b31dfad001aa/commons-logging-1.2-sources.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
+		</attributes>
+	</classpathentry>
 </classpath>
