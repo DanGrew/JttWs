@@ -110,23 +110,41 @@ public class JobListHandler {
          includedJobNames.addAll( Arrays.asList( includedJobs.replaceAll( ", ", "," ).split( "," ) ) );
       }
       
-      List< ConfigurationEntry > entries = new ArrayList<>();
-      List< JwsJenkinsJob > filteredJobs = new ArrayList<>();
-      for ( JwsJenkinsJob job : jobs ) {
-         ConfigurationEntry entry = new ConfigurationEntry( job.name() );
-         entries.add( entry );
-         if ( includedJobs != null ) {
-            if ( includedJobNames.contains( job.name() ) ) {
-               filteredJobs.add( job );
-            } else {
-               entry.inactive();
-            }
-         } else {
-            filteredJobs.add( job );
-         }
-      }
+      final List< JwsJenkinsJob > filteredJobs = new ArrayList<>();
+      configurationProvider.provideConfigurationEntries( 
+            ATTRIBUTE_JOB_ENTRIES, 
+            model, 
+            jobs, 
+            job -> addToFilteredJobsIfIncluded( filteredJobs, includedJobNames, job ), 
+            job -> job.name() 
+      );
+      
       model.addAttribute( ATTRIBUTE_JOBS, filteredJobs );      
-      model.addAttribute( ATTRIBUTE_JOB_ENTRIES, entries );
+   }//End Method
+   
+   /**
+    * Method to add the given {@link JwsJenkinsJob} to the filtered jobs if the name has been
+    * included.
+    * @param filteredJobs the {@link List} of {@link JwsJenkinsJob} that have been filtered.
+    * @param includedJobNames the {@link Set} of names included by being ticked.
+    * @param job the {@link JwsJenkinsJob} to check fro inclusion.
+    * @return true if the {@link JwsJenkinsJob} has been included, false otherwise.
+    */
+   private boolean addToFilteredJobsIfIncluded( 
+            List< JwsJenkinsJob > filteredJobs, 
+            Set< String > includedJobNames, 
+            JwsJenkinsJob job 
+   ) {
+      if ( !includedJobNames.isEmpty() ) {
+         if ( includedJobNames.contains( job.name() ) ) {
+            filteredJobs.add( job );
+         } else {
+            return false;
+         }
+      } else {
+         filteredJobs.add( job );
+      }
+      return true;
    }//End Method
    
 }//End Class

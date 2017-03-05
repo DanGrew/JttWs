@@ -13,6 +13,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -38,7 +39,6 @@ import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
 public class JobListHandlerTest {
 
    @Mock private CookieManager cookies;
-   @Mock private ConfigurationProvider configuration;
    @Mock private JobTableSortingConverter sortingConverter;
    private List< JwsJenkinsJob > jobs;
    
@@ -59,10 +59,13 @@ public class JobListHandlerTest {
       jobs.add( new JwsJenkinsJob( new JenkinsJobImpl( "Job3" ) ) );
       jobs.add( new JwsJenkinsJob( new JenkinsJobImpl( "Job4" ) ) );
       
-      systemUnderTest = new JobListHandler( cookies, configuration, sortingConverter );
+      systemUnderTest = new JobListHandler( cookies, new ConfigurationProvider(), sortingConverter );
    }//End Method
 
    @Test public void shouldTakeSortingAndApplyToModel() {
+      ConfigurationProvider configuration = mock( ConfigurationProvider.class );
+      systemUnderTest = new JobListHandler( cookies, configuration, sortingConverter );
+      
       when( cookies.retrieveCookie( JobListHandler.PARAMETER_SORT, request, response ) ).thenReturn( JobTableSorting.NameDecreasing.name() );
       when( sortingConverter.convert( JobTableSorting.NameDecreasing.name() ) ).thenReturn( JobTableSorting.NameDecreasing );
       
