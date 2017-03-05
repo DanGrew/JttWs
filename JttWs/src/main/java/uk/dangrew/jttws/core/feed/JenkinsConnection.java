@@ -8,14 +8,18 @@
  */
 package uk.dangrew.jttws.core.feed;
 
+import java.time.Clock;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.client.HttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.sun.javafx.application.PlatformImpl;
@@ -25,25 +29,31 @@ import javafx.beans.property.SimpleObjectProperty;
 import uk.dangrew.jtt.api.handling.live.LiveStateFetcher;
 import uk.dangrew.jtt.api.sources.ExternalApi;
 import uk.dangrew.jtt.api.sources.JenkinsApiImpl;
-import uk.dangrew.jtt.model.users.JenkinsUser;
-import uk.dangrew.jtt.storage.database.JenkinsDatabase;
-import uk.dangrew.jtt.storage.database.JenkinsDatabaseImpl;
+import uk.dangrew.jtt.model.jobs.BuildState;
+import uk.dangrew.jtt.model.jobs.JenkinsJob;
+import uk.dangrew.jttws.core.bean.JwsJenkinsDatabase;
 import uk.dangrew.jttws.core.login.JenkinsCredentials;
 import uk.dangrew.jttws.core.login.JenkinsLoginPrompt;
-import uk.dangrew.jttws.mvc.repository.JenkinsJobDto;
+import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
 
 /**
  * Working progress!!! The only part thats still prototype.
  */
 @Component
+@EnableScheduling
 public class JenkinsConnection implements ApplicationContextAware {
    
    private static final Logger logger = LoggerFactory.getLogger( JenkinsConnection.class );
-   private List< JenkinsJobDto > jobs;
-   private JenkinsDatabase database;
+   private List< JwsJenkinsJob > jobs;
+   private Clock clock;
+   
+   @Autowired
+   private JwsJenkinsDatabase database;
+   private LiveStateFetcher fetcher;
    
    @Override public void setApplicationContext( ApplicationContext applicationContext ) {
       this.jobs = new ArrayList<>();
+      this.clock = Clock.systemUTC();
       
       logger.debug( "calling on: " + toString() );
       
@@ -56,7 +66,6 @@ public class JenkinsConnection implements ApplicationContextAware {
          credentials.set( new JenkinsLoginPrompt().showAndWait().get() );
       } );
       
-      database = new JenkinsDatabaseImpl();
       final ObjectProperty< ExternalApi > property = new SimpleObjectProperty<>();
          ExternalApi api = new JenkinsApiImpl();
          HttpClient client = api.attemptLogin( credentials.get().getLocation(), credentials.get().getUsername(), credentials.get().getPassword() );
@@ -71,24 +80,39 @@ public class JenkinsConnection implements ApplicationContextAware {
          LiveStateFetcher fetcher = new LiveStateFetcher( database, property.get() );
          fetcher.loadLastCompletedBuild();
          database.jenkinsJobs().forEach( j -> {
-            JenkinsJobDto dto = new JenkinsJobDto( j.nameProperty().get() );
-            dto.setBuildTimestamp( j.buildTimestampProperty().get() );
-            dto.setStatus( j.getBuildStatus() );
-            
-            StringBuilder builder = new StringBuilder();
-            for( JenkinsUser user : j.culprits() ) {
-               builder.append( user.nameProperty().get() ).append( ", " );
-            }
-            if ( builder.length() > 2 ) {
-               builder.setLength( builder.length() - 2 );
-            }
-            dto.setCommitters( builder.toString() );
+            JwsJenkinsJob dto = new JwsJenkinsJob( j );
             jobs.add( dto );
          } );
+         
+         this.fetcher = fetcher;
    }
    
-   public List< JenkinsJobDto > getJobs() {
-      return jobs;
+   public List< JwsJenkinsJob > getJobs() {
+      return new ArrayList<>( jobs );
    }
+   
+   @Scheduled( fixedRate = 5000 )
+   public void updateDatabase(){
+      if ( fetcher != null ) {
+         fetcher.updateBuildState();
+      }
+   }//End Method
+   
+   @Scheduled( fixedRate = 1000 )
+   public void updateBuildTime(){
+      for ( JenkinsJob job : database.jenkinsJobs() ) {
+         if ( job.buildStateProperty().get().equals( BuildState.Built ) ) {
+            continue;
+         }
+         
+         long currentTime = clock.millis();
+         long timestamp = job.buildTimestampProperty().get();
+         if ( timestamp > currentTime ) {
+            continue;
+         }
+         
+         job.currentBuildTimeProperty().set( currentTime - timestamp );
+      }
+   }//End Method
 
 }//End Class

@@ -13,8 +13,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import uk.dangrew.jttws.mvc.repository.JenkinsJobDto;
-import uk.dangrew.jttws.mvc.repository.JenkinsJobDtoRepository;
+import uk.dangrew.jttws.mvc.repository.JenkinsJobRepository;
+import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
 
 /**
  * The {@link JenkinsJobService} provides a {@link Service} for interacting with the {@link JenkinsJobDtoRepository}.
@@ -22,22 +22,22 @@ import uk.dangrew.jttws.mvc.repository.JenkinsJobDtoRepository;
 @Service
 public class JenkinsJobService {
 
-	private JenkinsJobDtoRepository repository;
+	private JenkinsJobRepository repository;
 	
 	/**
 	 * Constructs a new {@link JenkinsJobService}.
-	 * @param repository the {@link JenkinsJobDtoRepository} bean.
+	 * @param repository the {@link JenkinsJobRepository} bean.
 	 */
 	@Autowired
-	public JenkinsJobService( JenkinsJobDtoRepository repository ) {
+	public JenkinsJobService( JenkinsJobRepository repository ) {
 	   this.repository = repository;
    }//End Constructor
 	
 	/**
-	 * Getter the {@link JenkinsJobDto}s.
-	 * @return the {@link JenkinsJobDto}s.
+	 * Getter the {@link JwsJenkinsJob}s.
+	 * @return the {@link JwsJenkinsJob}s.
 	 */
-	public List< JenkinsJobDto > getJobs(){
+	public List< JwsJenkinsJob > getJobs(){
 	   return repository.getJenkinsJobs();
 	}//End Method
 

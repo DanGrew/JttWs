@@ -29,24 +29,24 @@ import org.springframework.stereotype.Repository;
 
 import uk.dangrew.jttws.core.feed.JenkinsConnection;
 
-public class JenkinsJobDtoRepositoryTest {
+public class JenkinsJobRepositoryTest {
 
    @Mock private JenkinsConnection connection;
    @Mock private Logger logger;
-   private JenkinsJobDtoRepository systemUnderTest;
+   private JenkinsJobRepository systemUnderTest;
 
    @Before public void initialiseSystemUnderTest() {
       MockitoAnnotations.initMocks( this );
-      systemUnderTest = new JenkinsJobDtoRepository( logger );
+      systemUnderTest = new JenkinsJobRepository( logger );
    }//End Method
 
    @Test public void shouldHaveRepoAnnotationForBoot() {
-      assertThat( JenkinsJobDtoRepository.class.getAnnotation( Repository.class ), is( notNullValue() ) );
+      assertThat( JenkinsJobRepository.class.getAnnotation( Repository.class ), is( notNullValue() ) );
    }//End Method
    
    @Test public void shouldReportNoConnectionAvailable(){
       assertThat( systemUnderTest.getJenkinsJobs(), is( new ArrayList<>() ) );
-      verify( logger ).error( JenkinsJobDtoRepository.CONNECTION_ERROR );
+      verify( logger ).error( JenkinsJobRepository.CONNECTION_ERROR );
    }//End Method
    
    @Test public void shouldRetrieveJenkinsConnectionAndUseForJobs(){
@@ -54,11 +54,11 @@ public class JenkinsJobDtoRepositoryTest {
       when( context.getBean( JenkinsConnection.class ) ).thenReturn( connection );
       
       @SuppressWarnings("unchecked") //mocking only 
-      List< JenkinsJobDto > list = mock( List.class );
+      List< JwsJenkinsJob > list = mock( List.class );
       when( connection.getJobs() ).thenReturn( list );
       
       systemUnderTest.setApplicationContext( context );
-      List< JenkinsJobDto > jobsRetrieved = systemUnderTest.getJenkinsJobs();
+      List< JwsJenkinsJob > jobsRetrieved = systemUnderTest.getJenkinsJobs();
       assertThat( jobsRetrieved, is( list ) );
       assertThat( jobsRetrieved, is( not( new ArrayList<>() ) ) );
    }//End Method

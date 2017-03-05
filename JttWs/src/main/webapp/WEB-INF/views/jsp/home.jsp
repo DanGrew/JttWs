@@ -1,18 +1,21 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<title>JttWs</title>
+<style media="all">
 
-<spring:url value="/resources/core/css/bootstrap.min.css" var="bootstrapCss" />
-<link href="${bootstrapCss}" rel="stylesheet" />
+h3 {display: inline;}
+
+</style>
+<head>
+	<title>JttWs</title>
 </head>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="#">JttWs</a>
+			<a class="navbar-brand" href="">JttWs</a>
 		</div>
 	</div>
 </nav>
@@ -24,46 +27,66 @@
 </div>
 
 <div class="container">
-
-	<table class="table table-striped">
+	<table class="table">
 		<colgroup>
-			<col span="1" style="width: 15%;">
-			<col span="1" style="width: 30%;">
-			<col span="1" style="width: 15%;">
-			<col span="1" style="width: 20%;">
-			<col span="1" style="width: 20%;">
+			<col span="1" style="width: 10%;">
 		</colgroup>
 		<thead>
 			<tr>
-				<th>Job Name</th>
-				<th>Progress</th>
-				<th>Status</th>
-				<th>Timestamp</th>
-				<th>Committers</th>
+				<th>Filter</th>
+				<th>Sort</th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${jobs}" var="job">
-				<tr>
-					<td><c:out value="${job.name()}"/></td>
-					<td>
-						<div class="progress">
-							<div class="progress-bar" style="width: ${job.progress()}%"></div>
-						</div>
-					</td>
-					<td><c:out value="${job.status()}"/></td>
-					<td><c:out value="${job.timestamp()}"/></td>
-					<td><c:out value="${job.committers()}"/></td>
-				</tr>
-			</c:forEach>
+			<tr>
+				<td><select class="selectpicker" id="jobFilter" multiple
+					data-live-search="true" onchange="filterAndRefreshJobs()">
+						<c:forEach items="${entries}" var="entry">
+							<c:if test="${entry.active}">
+								<option selected>${entry.name()}</option>
+							</c:if>
+							<c:if test="${not entry.active}">
+								<option>${entry.name()}</option>
+							</c:if>
+						</c:forEach>
+				</select></td>
+				<td><select class="selectpicker" id="jobSort"
+					data-live-search="true" onchange="sortAndRefreshJobs()">
+						<c:forEach items="${sort_options}" var="entry">
+							<c:if test="${entry.active}">
+								<option selected>${entry.name()}</option>
+							</c:if>
+							<c:if test="${not entry.active}">
+								<option>${entry.name()}</option>
+							</c:if>
+						</c:forEach>
+				</select></td>
+			</tr>
 		</tbody>
 	</table>
+</div>
+<div class="container">
 
-	<hr>
+	<jsp:include page="job-table.jsp" />
 	<footer>
 		<p>&copy; Dan Grew 2017</p>
 	</footer>
 </div>
+
+<script type="text/javascript" src="resources/core/js/table-submit.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="/webapp/resources/core/js/jquery-3.1.1.min/jx"></script>
+<script	src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+
+<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/i18n/defaults-*.min.js"></script>
 
 </body>
 </html>

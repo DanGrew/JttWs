@@ -20,11 +20,11 @@ import org.springframework.stereotype.Repository;
 import uk.dangrew.jttws.core.feed.JenkinsConnection;
 
 /**
- * The {@link JenkinsJobDtoRepository} provides a {@link Repository} for accessing the {@link uk.dangrew.jtt.storage.database.JenkinsDatabase}
+ * The {@link JenkinsJobRepository} provides a {@link Repository} for accessing the {@link uk.dangrew.jtt.storage.database.JenkinsDatabase}
  * that is being populated by a connection to jenkins.
  */
 @Repository 
-public class JenkinsJobDtoRepository implements ApplicationContextAware {
+public class JenkinsJobRepository implements ApplicationContextAware {
 
    static final String CONNECTION_ERROR = "JenkinsJobRepository not connected to JenkinsConnection.";
    
@@ -32,25 +32,25 @@ public class JenkinsJobDtoRepository implements ApplicationContextAware {
    private JenkinsConnection connection;
 
    /**
-    * Constructs a new {@link JenkinsJobDtoRepository}.
+    * Constructs a new {@link JenkinsJobRepository}.
     */
-   public JenkinsJobDtoRepository() {
-      this( LoggerFactory.getLogger( JenkinsJobDtoRepository.class ) );
+   public JenkinsJobRepository() {
+      this( LoggerFactory.getLogger( JenkinsJobRepository.class ) );
    }// End Constructor
    
    /**
-    * Constructs a new {@link JenkinsJobDtoRepository}.
+    * Constructs a new {@link JenkinsJobRepository}.
     * @param logger the {@link Logger} to report to.
     */
-   JenkinsJobDtoRepository( Logger logger ) {
+   JenkinsJobRepository( Logger logger ) {
       this.logger = logger;
    }// End Constructor
 
    /**
-    * Getter for the entire {@link List} of {@link JenkinsJobDto}s.
-    * @return the {@link JenkinsJobDto}s.
+    * Getter for the entire {@link List} of {@link JwsJenkinsJob}s.
+    * @return the {@link JwsJenkinsJob}s.
     */
-   public List< JenkinsJobDto > getJenkinsJobs() {
+   public List< JwsJenkinsJob > getJenkinsJobs() {
       if ( connection == null ) {
          logger.error( CONNECTION_ERROR );
          return new ArrayList<>();

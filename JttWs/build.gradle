@@ -1,5 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'war'
+apply plugin: 'eclipse'
 apply plugin: 'eclipse-wtp'
 apply plugin: 'jetty'
 
@@ -50,6 +51,9 @@ eclipse {
       //define context path, default to project folder name
       contextPath = 'jttws'
     }
+  }
+  classpath {
+     downloadSources=true
   }
 }
 
