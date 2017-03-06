@@ -23,7 +23,7 @@ public enum JobTableSorting {
    NameDecreasing( ( a, b ) -> NameIncreasing.comparator.compare( b, a ) ),
    ProgressIncreasing( ( a, b ) -> Integer.compare( a.progress(), b.progress() ) ),
    ProgressDecreasing( ( a, b ) -> ProgressIncreasing.comparator.compare( b, a ) ), 
-   StatusIncreasing( ( a, b ) -> a.status().name().compareTo( b.status().name() ) ),
+   StatusIncreasing( ( a, b ) -> SeverityComparator.get().compare( a.status(), b.status() ) ),
    StatusDecreasing( ( a, b ) -> StatusIncreasing.comparator.compare( b, a ) ),
    TimestampIncreasing( ( a, b ) -> a.timestampValue().compareTo( b.timestampValue() ) ),
    TimestampDecreasing( ( a, b ) -> TimestampIncreasing.comparator.compare( b, a ) ),

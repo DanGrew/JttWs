@@ -48,8 +48,8 @@ public class JobTableSortingTest {
       when( firstJws.progress() ).thenReturn( 45 );
       when( secondJws.progress() ).thenReturn( 67 );
       
-      when( firstJws.status() ).thenReturn( BuildResultStatus.FAILURE );
-      when( secondJws.status() ).thenReturn( BuildResultStatus.SUCCESS );
+      when( firstJws.status() ).thenReturn( BuildResultStatus.SUCCESS );
+      when( secondJws.status() ).thenReturn( BuildResultStatus.FAILURE );
       
       when( firstJws.timestampValue() ).thenReturn( 45L );
       when( secondJws.timestampValue() ).thenReturn( 67L );
