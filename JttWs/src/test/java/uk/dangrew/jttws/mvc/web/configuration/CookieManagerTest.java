@@ -6,7 +6,7 @@
  *                 2017
  * ----------------------------------------
  */
-package uk.dangrew.jttws.mvc.web;
+package uk.dangrew.jttws.mvc.web.configuration;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
@@ -24,6 +24,8 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
+import uk.dangrew.jttws.mvc.web.configuration.CookieManager;
 
 public class CookieManagerTest {
 

@@ -6,7 +6,7 @@
  *                 2017
  * ----------------------------------------
  */
-package uk.dangrew.jttws.mvc.web;
+package uk.dangrew.jttws.mvc.web.jobtable;
 
 /**
  * {@link JobTableColumns} provides the columns available in the 

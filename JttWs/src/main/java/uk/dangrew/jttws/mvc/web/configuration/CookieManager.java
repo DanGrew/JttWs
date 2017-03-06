@@ -6,7 +6,7 @@
  *                 2017
  * ----------------------------------------
  */
-package uk.dangrew.jttws.mvc.web;
+package uk.dangrew.jttws.mvc.web.configuration;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;

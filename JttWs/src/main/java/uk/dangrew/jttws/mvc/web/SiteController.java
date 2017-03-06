@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
 import uk.dangrew.jttws.mvc.service.JenkinsJobService;
+import uk.dangrew.jttws.mvc.web.jobtable.JobListHandler;
+import uk.dangrew.jttws.mvc.web.jobtable.JobTableColumns;
 
 /**
  * The {@link SiteController} provides a {@link Controller} for handling requests to load pages. 

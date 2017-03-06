@@ -6,7 +6,7 @@
  *                 2017
  * ----------------------------------------
  */
-package uk.dangrew.jttws.mvc.web;
+package uk.dangrew.jttws.mvc.web.configuration;
 
 /**
  * {@link ConfigurationEntry} provides a basic item that can be configured on or off.

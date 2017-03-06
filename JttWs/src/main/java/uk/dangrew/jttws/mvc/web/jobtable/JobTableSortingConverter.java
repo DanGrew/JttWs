@@ -6,7 +6,7 @@
  *                 2017
  * ----------------------------------------
  */
-package uk.dangrew.jttws.mvc.web;
+package uk.dangrew.jttws.mvc.web.jobtable;
 
 /**
  * The {@link JobTableSortingConverter} provides a conversion for the {@link JobTableSorting}

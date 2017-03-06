@@ -6,13 +6,16 @@
  *                 2017
  * ----------------------------------------
  */
-package uk.dangrew.jttws.mvc.web;
+package uk.dangrew.jttws.mvc.web.jobtable;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import uk.dangrew.jttws.mvc.web.jobtable.JobTableSorting;
+import uk.dangrew.jttws.mvc.web.jobtable.JobTableSortingConverter;
 
 public class JobTableSortingConverterTest {
 

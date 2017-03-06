@@ -6,7 +6,7 @@
  *                 2017
  * ----------------------------------------
  */
-package uk.dangrew.jttws.mvc.web;
+package uk.dangrew.jttws.mvc.web.jobtable;
 
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.hasSize;
@@ -35,6 +35,12 @@ import org.springframework.ui.Model;
 
 import uk.dangrew.jtt.model.jobs.JenkinsJobImpl;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.web.configuration.ConfigurationEntry;
+import uk.dangrew.jttws.mvc.web.configuration.ConfigurationProvider;
+import uk.dangrew.jttws.mvc.web.configuration.CookieManager;
+import uk.dangrew.jttws.mvc.web.jobtable.JobListHandler;
+import uk.dangrew.jttws.mvc.web.jobtable.JobTableSorting;
+import uk.dangrew.jttws.mvc.web.jobtable.JobTableSortingConverter;
 
 public class JobListHandlerTest {
 

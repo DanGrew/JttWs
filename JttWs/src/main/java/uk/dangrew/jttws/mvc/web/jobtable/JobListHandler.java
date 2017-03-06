@@ -6,7 +6,7 @@
  *                 2017
  * ----------------------------------------
  */
-package uk.dangrew.jttws.mvc.web;
+package uk.dangrew.jttws.mvc.web.jobtable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,6 +21,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.web.configuration.ConfigurationProvider;
+import uk.dangrew.jttws.mvc.web.configuration.CookieManager;
 
 /**
  * The {@link JobListHandler} is responsible for handling the operations performed on the list of

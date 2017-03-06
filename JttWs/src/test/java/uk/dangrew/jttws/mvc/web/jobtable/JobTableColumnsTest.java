@@ -6,7 +6,7 @@
  *                 2017
  * ----------------------------------------
  */
-package uk.dangrew.jttws.mvc.web;
+package uk.dangrew.jttws.mvc.web.jobtable;
 
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.is;
@@ -15,6 +15,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Test;
 
 import uk.dangrew.jtt.utility.TestCommon;
+import uk.dangrew.jttws.mvc.web.jobtable.JobTableColumns;
 
 public class JobTableColumnsTest {
 

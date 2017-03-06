@@ -6,7 +6,7 @@
  *                 2017
  * ----------------------------------------
  */
-package uk.dangrew.jttws.mvc.web;
+package uk.dangrew.jttws.mvc.web.jobtable;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -24,6 +24,7 @@ import org.mockito.MockitoAnnotations;
 import uk.dangrew.jtt.model.jobs.BuildResultStatus;
 import uk.dangrew.jtt.utility.TestCommon;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.web.jobtable.JobTableSorting;
 
 public class JobTableSortingTest {
 

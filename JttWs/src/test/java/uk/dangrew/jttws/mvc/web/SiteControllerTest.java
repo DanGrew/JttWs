@@ -38,6 +38,8 @@ import org.springframework.web.servlet.View;
 import uk.dangrew.jtt.model.jobs.JenkinsJobImpl;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
 import uk.dangrew.jttws.mvc.service.JenkinsJobService;
+import uk.dangrew.jttws.mvc.web.jobtable.JobListHandler;
+import uk.dangrew.jttws.mvc.web.jobtable.JobTableColumns;
 
 public class SiteControllerTest {
 

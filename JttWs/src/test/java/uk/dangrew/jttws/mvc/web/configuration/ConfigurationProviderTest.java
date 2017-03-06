@@ -6,7 +6,7 @@
  *                 2017
  * ----------------------------------------
  */
-package uk.dangrew.jttws.mvc.web;
+package uk.dangrew.jttws.mvc.web.configuration;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
@@ -29,6 +29,8 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.ui.Model;
 
 import javafx.util.Pair;
+import uk.dangrew.jttws.mvc.web.configuration.ConfigurationEntry;
+import uk.dangrew.jttws.mvc.web.configuration.ConfigurationProvider;
 
 public class ConfigurationProviderTest {
 
