@@ -29,24 +29,24 @@ import org.springframework.stereotype.Repository;
 
 import uk.dangrew.jttws.core.feed.JenkinsConnection;
 
-public class JenkinsJobRepositoryTest {
+public class JenkinsRepositoryTest {
 
    @Mock private JenkinsConnection connection;
    @Mock private Logger logger;
-   private JenkinsJobRepository systemUnderTest;
+   private JenkinsRepository systemUnderTest;
 
    @Before public void initialiseSystemUnderTest() {
       MockitoAnnotations.initMocks( this );
-      systemUnderTest = new JenkinsJobRepository( logger );
+      systemUnderTest = new JenkinsRepository( logger );
    }//End Method
 
    @Test public void shouldHaveRepoAnnotationForBoot() {
-      assertThat( JenkinsJobRepository.class.getAnnotation( Repository.class ), is( notNullValue() ) );
+      assertThat( JenkinsRepository.class.getAnnotation( Repository.class ), is( notNullValue() ) );
    }//End Method
    
    @Test public void shouldReportNoConnectionAvailable(){
       assertThat( systemUnderTest.getJenkinsJobs(), is( new ArrayList<>() ) );
-      verify( logger ).error( JenkinsJobRepository.CONNECTION_ERROR );
+      verify( logger ).error( JenkinsRepository.CONNECTION_ERROR );
    }//End Method
    
    @Test public void shouldRetrieveJenkinsConnectionAndUseForJobs(){

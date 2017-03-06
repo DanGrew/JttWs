@@ -23,25 +23,25 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import uk.dangrew.jttws.mvc.repository.JenkinsJobRepository;
+import uk.dangrew.jttws.mvc.repository.JenkinsRepository;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
 
-public class JenkinsJobServiceTest {
+public class JenkinsServiceTest {
 
-   @Mock private JenkinsJobRepository repository;
-   private JenkinsJobService systemUnderTest;
+   @Mock private JenkinsRepository repository;
+   private JenkinsService systemUnderTest;
 
    @Before public void initialiseSystemUnderTest() {
       MockitoAnnotations.initMocks( this );
-      systemUnderTest = new JenkinsJobService( repository );
+      systemUnderTest = new JenkinsService( repository );
    }//End Method
 
    @Test public void shouldBeSpringService(){
-      assertThat( JenkinsJobService.class.getAnnotation( Service.class ), is( notNullValue() ) );
+      assertThat( JenkinsService.class.getAnnotation( Service.class ), is( notNullValue() ) );
    }//End Method
    
    @Test public void shouldAutowireConstructorWithRepo() throws NoSuchMethodException, SecurityException {
-      assertThat( JenkinsJobService.class.getConstructor( JenkinsJobRepository.class ).getAnnotation( Autowired.class ), is( notNullValue() ) );
+      assertThat( JenkinsService.class.getConstructor( JenkinsRepository.class ).getAnnotation( Autowired.class ), is( notNullValue() ) );
    }//End Method
    
    @Test public void shouldRetrieveJobsFromRepository(){

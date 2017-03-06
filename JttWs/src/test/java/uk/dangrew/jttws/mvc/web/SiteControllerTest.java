@@ -37,7 +37,7 @@ import org.springframework.web.servlet.View;
 
 import uk.dangrew.jtt.model.jobs.JenkinsJobImpl;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
-import uk.dangrew.jttws.mvc.service.JenkinsJobService;
+import uk.dangrew.jttws.mvc.service.JenkinsService;
 import uk.dangrew.jttws.mvc.web.jobtable.JobListHandler;
 import uk.dangrew.jttws.mvc.web.jobtable.JobTableColumns;
 
@@ -48,7 +48,7 @@ public class SiteControllerTest {
    
    private List< JwsJenkinsJob > jobs;
    
-   @Mock private JenkinsJobService service;
+   @Mock private JenkinsService service;
    @Mock private JobListHandler handler;
    private SiteController systemUnderTest;
 
@@ -66,7 +66,7 @@ public class SiteControllerTest {
    }//End Method
    
    @Test public void shouldAutowireJobService() throws NoSuchMethodException, SecurityException{
-      assertThat( SiteController.class.getConstructor( JenkinsJobService.class, JobListHandler.class ).getAnnotation( Autowired.class ), is( notNullValue() ) );
+      assertThat( SiteController.class.getConstructor( JenkinsService.class, JobListHandler.class ).getAnnotation( Autowired.class ), is( notNullValue() ) );
    }//End Method
    
    @Test public void homeShouldProvideJobsFromService() throws Exception{

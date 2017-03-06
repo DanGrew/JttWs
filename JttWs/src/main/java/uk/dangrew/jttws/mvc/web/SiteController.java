@@ -19,7 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
-import uk.dangrew.jttws.mvc.service.JenkinsJobService;
+import uk.dangrew.jttws.mvc.service.JenkinsService;
 import uk.dangrew.jttws.mvc.web.jobtable.JobListHandler;
 import uk.dangrew.jttws.mvc.web.jobtable.JobTableColumns;
 
@@ -39,14 +39,14 @@ public class SiteController {
 	static final String JOB_COLUMNS = "columns";
 	
    private final JobListHandler jobListCookies;
-	private final JenkinsJobService jenkinsJobs;
+	private final JenkinsService jenkinsJobs;
 	
 	/**
 	 * Constructs a new {@link SiteController}.
-	 * @param jenkinsJobs the {@link JenkinsJobService}.
+	 * @param jenkinsJobs the {@link JenkinsService}.
 	 */
 	@Autowired
-	public SiteController(JenkinsJobService jenkinsJobs, JobListHandler jobListCookies) {
+	public SiteController(JenkinsService jenkinsJobs, JobListHandler jobListCookies) {
 		this.jenkinsJobs = jenkinsJobs;
 		this.jobListCookies = jobListCookies;
 	}//End Constructor

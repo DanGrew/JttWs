@@ -20,29 +20,29 @@ import org.springframework.stereotype.Repository;
 import uk.dangrew.jttws.core.feed.JenkinsConnection;
 
 /**
- * The {@link JenkinsJobRepository} provides a {@link Repository} for accessing the {@link uk.dangrew.jtt.storage.database.JenkinsDatabase}
+ * The {@link JenkinsRepository} provides a {@link Repository} for accessing the {@link uk.dangrew.jtt.storage.database.JenkinsDatabase}
  * that is being populated by a connection to jenkins.
  */
 @Repository 
-public class JenkinsJobRepository implements ApplicationContextAware {
+public class JenkinsRepository implements ApplicationContextAware {
 
-   static final String CONNECTION_ERROR = "JenkinsJobRepository not connected to JenkinsConnection.";
+   static final String CONNECTION_ERROR = "JenkinsRepository not connected to JenkinsConnection.";
    
    private final Logger logger;
    private JenkinsConnection connection;
 
    /**
-    * Constructs a new {@link JenkinsJobRepository}.
+    * Constructs a new {@link JenkinsRepository}.
     */
-   public JenkinsJobRepository() {
-      this( LoggerFactory.getLogger( JenkinsJobRepository.class ) );
+   public JenkinsRepository() {
+      this( LoggerFactory.getLogger( JenkinsRepository.class ) );
    }// End Constructor
    
    /**
-    * Constructs a new {@link JenkinsJobRepository}.
+    * Constructs a new {@link JenkinsRepository}.
     * @param logger the {@link Logger} to report to.
     */
-   JenkinsJobRepository( Logger logger ) {
+   JenkinsRepository( Logger logger ) {
       this.logger = logger;
    }// End Constructor
 
