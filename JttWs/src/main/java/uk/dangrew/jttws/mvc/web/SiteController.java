@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.repository.JwsJenkinsUser;
 import uk.dangrew.jttws.mvc.service.JenkinsService;
 import uk.dangrew.jttws.mvc.web.jobtable.JobListHandler;
 import uk.dangrew.jttws.mvc.web.jobtable.JobTableColumns;
@@ -82,8 +83,9 @@ public class SiteController {
             Model model 
    ) {
       List< JwsJenkinsJob > jobs = jenkinsJobs.getJobs();
+      List< JwsJenkinsUser > users = jenkinsJobs.getUsers();
       jobListCookies.handleSorting( request, response, jobs, model );
-      jobListCookies.handleFiltering( request, response, jobs, model );
+      jobListCookies.handleFiltering( request, response, jobs, users, model );
       model.addAttribute( JOB_COLUMNS, JobTableColumns.values() );
       return PAGE_TABLE;
    }// End Method

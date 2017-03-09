@@ -44,7 +44,7 @@ public class JenkinsRepositoryTest {
       assertThat( JenkinsRepository.class.getAnnotation( Repository.class ), is( notNullValue() ) );
    }//End Method
    
-   @Test public void shouldReportNoConnectionAvailable(){
+   @Test public void shouldReportNoConnectionAvailableForJobs(){
       assertThat( systemUnderTest.getJenkinsJobs(), is( new ArrayList<>() ) );
       verify( logger ).error( JenkinsRepository.CONNECTION_ERROR );
    }//End Method
@@ -61,6 +61,25 @@ public class JenkinsRepositoryTest {
       List< JwsJenkinsJob > jobsRetrieved = systemUnderTest.getJenkinsJobs();
       assertThat( jobsRetrieved, is( list ) );
       assertThat( jobsRetrieved, is( not( new ArrayList<>() ) ) );
+   }//End Method
+   
+   @Test public void shouldReportNoConnectionAvailableForUsers(){
+      assertThat( systemUnderTest.getJenkinsUsers(), is( new ArrayList<>() ) );
+      verify( logger ).error( JenkinsRepository.CONNECTION_ERROR );
+   }//End Method
+   
+   @Test public void shouldRetrieveJenkinsConnectionAndUseForUsers(){
+      ApplicationContext context = mock( ApplicationContext.class );
+      when( context.getBean( JenkinsConnection.class ) ).thenReturn( connection );
+      
+      @SuppressWarnings("unchecked") //mocking only 
+      List< JwsJenkinsUser > list = mock( List.class );
+      when( connection.getUsers() ).thenReturn( list );
+      
+      systemUnderTest.setApplicationContext( context );
+      List< JwsJenkinsUser > retrieved = systemUnderTest.getJenkinsUsers();
+      assertThat( retrieved, is( list ) );
+      assertThat( retrieved, is( not( new ArrayList<>() ) ) );
    }//End Method
 
 }//End Class

@@ -57,6 +57,18 @@ public class JenkinsRepository implements ApplicationContextAware {
       }
       return connection.getJobs();
    }// End Method
+   
+   /**
+    * Getter for the entire {@link List} of {@link JwsJenkinsUser}s.
+    * @return the {@link JwsJenkinsUser}s.
+    */
+   public List< JwsJenkinsUser > getJenkinsUsers() {
+      if ( connection == null ) {
+         logger.error( CONNECTION_ERROR );
+         return new ArrayList<>();
+      }
+      return connection.getUsers();
+   }// End Method
 
    /**
     * {@inheritDoc}

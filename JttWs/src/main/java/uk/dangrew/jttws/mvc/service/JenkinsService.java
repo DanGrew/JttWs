@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import uk.dangrew.jttws.mvc.repository.JenkinsRepository;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.repository.JwsJenkinsUser;
 
 /**
  * The {@link JenkinsService} provides a {@link Service} for interacting with the {@link JenkinsRepository}.
@@ -40,5 +41,13 @@ public class JenkinsService {
 	public List< JwsJenkinsJob > getJobs(){
 	   return repository.getJenkinsJobs();
 	}//End Method
+	
+	/**
+    * Getter the {@link JwsJenkinsUser}s.
+    * @return the {@link JwsJenkinsUser}s.
+    */
+   public List< JwsJenkinsUser > getUsers(){
+      return repository.getJenkinsUsers();
+   }//End Method
 
 }//End Class

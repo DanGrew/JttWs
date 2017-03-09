@@ -40,6 +40,14 @@ public class JwsJenkinsJob {
    }//End Constructor
    
    /**
+    * Access to the associated {@link JenkinsJob}.
+    * @return the {@link JenkinsJob}.
+    */
+   public JenkinsJob association(){
+      return job;
+   }//End Method
+   
+   /**
     * Access to the name of the {@link uk.dangrew.jtt.model.jobs.JenkinsJob}.
     * @return the name.
     */

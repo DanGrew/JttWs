@@ -35,18 +35,17 @@ import org.springframework.ui.Model;
 
 import uk.dangrew.jtt.model.jobs.JenkinsJobImpl;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.repository.JwsJenkinsUser;
 import uk.dangrew.jttws.mvc.web.configuration.ConfigurationEntry;
 import uk.dangrew.jttws.mvc.web.configuration.ConfigurationProvider;
 import uk.dangrew.jttws.mvc.web.configuration.CookieManager;
-import uk.dangrew.jttws.mvc.web.jobtable.JobListHandler;
-import uk.dangrew.jttws.mvc.web.jobtable.JobTableSorting;
-import uk.dangrew.jttws.mvc.web.jobtable.JobTableSortingConverter;
 
 public class JobListHandlerTest {
 
    @Mock private CookieManager cookies;
    @Mock private JobTableSortingConverter sortingConverter;
    private List< JwsJenkinsJob > jobs;
+   private List< JwsJenkinsUser > users;
    
    @Mock private HttpServletResponse response;
    @Mock private HttpServletRequest request;
@@ -64,6 +63,8 @@ public class JobListHandlerTest {
       jobs.add( new JwsJenkinsJob( new JenkinsJobImpl( "Job2" ) ) );
       jobs.add( new JwsJenkinsJob( new JenkinsJobImpl( "Job3" ) ) );
       jobs.add( new JwsJenkinsJob( new JenkinsJobImpl( "Job4" ) ) );
+      
+      users = new ArrayList<>();
       
       systemUnderTest = new JobListHandler( cookies, new ConfigurationProvider(), sortingConverter );
    }//End Method
@@ -107,9 +108,9 @@ public class JobListHandlerTest {
       }
    }//End Method
    
-   @Test public void shouldIncludeJobIfTicked(){
+   @Test public void shouldIncludeJobIfJobTicked(){
       when( cookies.retrieveCookie( JobListHandler.PARAMETER_FILTERED_JOBS, request, response ) ).thenReturn( jobs.get( 1 ).name() );
-      systemUnderTest.handleFiltering( request, response, jobs, model );
+      systemUnderTest.handleFiltering( request, response, jobs, users, model );
       
       verify( model ).addAttribute( eq( JobListHandler.ATTRIBUTE_JOBS ), jobCaptor.capture() );
       
@@ -118,9 +119,9 @@ public class JobListHandlerTest {
       assertThat( filtered, contains( jobs.get( 1 ) ) );
    }//End Method
    
-   @Test public void shouldHaveActiveEntryIfIncluded(){
+   @Test public void shouldHaveActiveEntryIfJobIncluded(){
       when( cookies.retrieveCookie( JobListHandler.PARAMETER_FILTERED_JOBS, request, response ) ).thenReturn( jobs.get( 1 ).name() );
-      systemUnderTest.handleFiltering( request, response, jobs, model );
+      systemUnderTest.handleFiltering( request, response, jobs, users, model );
       
       verify( model ).addAttribute( eq( JobListHandler.ATTRIBUTE_JOB_ENTRIES ), entryCaptor.capture() );
       
@@ -136,8 +137,8 @@ public class JobListHandlerTest {
       assertThat( entries.get( 3 ).isActive(), is( false ) );
    }//End Method
    
-   @Test public void shouldIncludeAllByDefault(){
-      systemUnderTest.handleFiltering( request, response, jobs, model );
+   @Test public void shouldIncludeAllJobsByDefault(){
+      systemUnderTest.handleFiltering( request, response, jobs, users, model );
       
       verify( model ).addAttribute( eq( JobListHandler.ATTRIBUTE_JOB_ENTRIES ), entryCaptor.capture() );
       verify( model ).addAttribute( eq( JobListHandler.ATTRIBUTE_JOBS ), jobCaptor.capture() );
@@ -154,11 +155,11 @@ public class JobListHandlerTest {
       }
    }//End Method
 
-   @Test public void shouldNotIncludeIfNotTickedAndWithinAnotherName(){
+   @Test public void shouldNotIncludeIfJobNotTickedAndWithinAnotherName(){
       jobs.add( new JwsJenkinsJob( new JenkinsJobImpl( "o" ) ) );
       
       when( cookies.retrieveCookie( JobListHandler.PARAMETER_FILTERED_JOBS, request, response ) ).thenReturn( jobs.get( 1 ).name() );
-      systemUnderTest.handleFiltering( request, response, jobs, model );
+      systemUnderTest.handleFiltering( request, response, jobs, users, model );
       
       verify( model ).addAttribute( eq( JobListHandler.ATTRIBUTE_JOB_ENTRIES ), entryCaptor.capture() );
       
@@ -176,6 +177,7 @@ public class JobListHandlerTest {
       when( cookies.retrieveCookie( JobListHandler.PARAMETER_FILTERED_JOBS, request, response ) ).thenReturn( 
                "Job1, Job2, Job3, Job4" 
       );
-      shouldIncludeAllByDefault();
+      shouldIncludeAllJobsByDefault();
    }//End Method
+
 }//End Class

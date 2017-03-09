@@ -35,6 +35,7 @@ import uk.dangrew.jttws.core.bean.JwsJenkinsDatabase;
 import uk.dangrew.jttws.core.login.JenkinsCredentials;
 import uk.dangrew.jttws.core.login.JenkinsLoginPrompt;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.repository.JwsJenkinsUser;
 
 /**
  * Working progress!!! The only part thats still prototype.
@@ -45,6 +46,7 @@ public class JenkinsConnection implements ApplicationContextAware {
    
    private static final Logger logger = LoggerFactory.getLogger( JenkinsConnection.class );
    private List< JwsJenkinsJob > jobs;
+   private List< JwsJenkinsUser > users;
    private Clock clock;
    
    @Autowired
@@ -53,6 +55,7 @@ public class JenkinsConnection implements ApplicationContextAware {
    
    @Override public void setApplicationContext( ApplicationContext applicationContext ) {
       this.jobs = new ArrayList<>();
+      this.users = new ArrayList<>();
       this.clock = Clock.systemUTC();
       
       logger.debug( "calling on: " + toString() );
@@ -84,11 +87,20 @@ public class JenkinsConnection implements ApplicationContextAware {
             jobs.add( dto );
          } );
          
+         database.jenkinsUsers().forEach( u -> {
+            JwsJenkinsUser dto = new JwsJenkinsUser( u );
+            users.add( dto );
+         } );
+         
          this.fetcher = fetcher;
    }
    
    public List< JwsJenkinsJob > getJobs() {
       return new ArrayList<>( jobs );
+   }
+   
+   public List< JwsJenkinsUser > getUsers() {
+      return new ArrayList<>( users );
    }
    
    @Scheduled( fixedRate = 5000 )

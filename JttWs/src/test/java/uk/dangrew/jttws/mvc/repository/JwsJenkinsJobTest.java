@@ -34,6 +34,10 @@ public class JwsJenkinsJobTest {
       new JwsJenkinsJob( null );
    }//End Method
    
+   @Test public void shouldProvideAssociation(){
+      assertThat( systemUnderTest.association(), is( job ) );
+   }//End Method
+   
    @Test public void shouldProvideName() {
       assertThat( systemUnderTest.name(), is( job.nameProperty().get() ) );
    }//End Method

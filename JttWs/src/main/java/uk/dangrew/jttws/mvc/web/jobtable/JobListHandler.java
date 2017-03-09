@@ -8,7 +8,6 @@
  */
 package uk.dangrew.jttws.mvc.web.jobtable;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -21,6 +20,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.repository.JwsJenkinsUser;
 import uk.dangrew.jttws.mvc.web.configuration.ConfigurationProvider;
 import uk.dangrew.jttws.mvc.web.configuration.CookieManager;
 
@@ -31,11 +31,13 @@ import uk.dangrew.jttws.mvc.web.configuration.CookieManager;
 @Component
 public class JobListHandler {
 
-   static final String ATTRIBUTE_JOB_ENTRIES = "entries";
+   static final String ATTRIBUTE_JOB_ENTRIES = "job_entries";
+   static final String ATTRIBUTE_USER_ENTRIES = "user_entries";
    static final String ATTRIBUTE_JOBS = "jobs";
    static final String ATTRIBUTE_SORT_OPTIONS = "sort_options";
    
    static final String PARAMETER_FILTERED_JOBS = "filteredJobsList";
+   static final String PARAMETER_FILTERED_USERS = "filteredUsersList";
    static final String PARAMETER_SORT = "sort";
    
    private final CookieManager cookieManager;
@@ -97,56 +99,54 @@ public class JobListHandler {
     * @param request the {@link HttpServletRequest}.
     * @param response the {@link HttpServletResponse}.
     * @param jobs the {@link JwsJenkinsJob} to filter.
+    * @param users the {@link JwsJenkinsUser}s available.
     * @param model the {@link Model} for updating attributes.
+    * 
+    * Not fully tested - in development of more general mechanism for multiple data columns
     */
    public void handleFiltering( 
             HttpServletRequest request, 
             HttpServletResponse response,
-            List< JwsJenkinsJob > jobs, 
+            List< JwsJenkinsJob > jobs,
+            List< JwsJenkinsUser > users,
             Model model
    ){
-      String includedJobs = cookieManager.retrieveCookie( PARAMETER_FILTERED_JOBS, request, response ); 
+      JobTableData data = new JobTableData();
+      data.provide( jobs );
       
-      Set< String > includedJobNames = new HashSet<>();
+      final String includedJobs = cookieManager.retrieveCookie( PARAMETER_FILTERED_JOBS, request, response );
+      Set< String > jobNamesSet = new HashSet<>();
       if ( includedJobs != null ) {
-         includedJobNames.addAll( Arrays.asList( includedJobs.replaceAll( ", ", "," ).split( "," ) ) );
+         String[] includedJobNames = includedJobs.replaceAll( ", ", "," ).split( "," );
+         jobNamesSet.addAll( Arrays.asList( includedJobNames ) );
+         data.filterJobName( includedJobNames );
       }
       
-      final List< JwsJenkinsJob > filteredJobs = new ArrayList<>();
+      final String includedUsers = cookieManager.retrieveCookie( PARAMETER_FILTERED_USERS, request, response );
+      Set< String > userNamesSet = new HashSet<>();
+      if ( includedUsers != null ) {
+         String[] includedUserNames = includedUsers.replaceAll( ", ", "," ).split( "," );
+         userNamesSet.addAll( Arrays.asList( includedUserNames ) );
+         data.filterForCommitters( includedUserNames );
+      }
+      
       configurationProvider.provideConfigurationEntries( 
             ATTRIBUTE_JOB_ENTRIES, 
             model, 
             jobs, 
-            job -> addToFilteredJobsIfIncluded( filteredJobs, includedJobNames, job ), 
+            job -> jobNamesSet.isEmpty() ? true : jobNamesSet.contains( job.name() ), 
             job -> job.name() 
       );
       
-      model.addAttribute( ATTRIBUTE_JOBS, filteredJobs );      
-   }//End Method
-   
-   /**
-    * Method to add the given {@link JwsJenkinsJob} to the filtered jobs if the name has been
-    * included.
-    * @param filteredJobs the {@link List} of {@link JwsJenkinsJob} that have been filtered.
-    * @param includedJobNames the {@link Set} of names included by being ticked.
-    * @param job the {@link JwsJenkinsJob} to check fro inclusion.
-    * @return true if the {@link JwsJenkinsJob} has been included, false otherwise.
-    */
-   private boolean addToFilteredJobsIfIncluded( 
-            List< JwsJenkinsJob > filteredJobs, 
-            Set< String > includedJobNames, 
-            JwsJenkinsJob job 
-   ) {
-      if ( !includedJobNames.isEmpty() ) {
-         if ( includedJobNames.contains( job.name() ) ) {
-            filteredJobs.add( job );
-         } else {
-            return false;
-         }
-      } else {
-         filteredJobs.add( job );
-      }
-      return true;
+      configurationProvider.provideConfigurationEntries( 
+            ATTRIBUTE_USER_ENTRIES, 
+            model, 
+            users, 
+            u -> userNamesSet.isEmpty() ? true : userNamesSet.contains( u.name() ), 
+            u -> u.name() 
+      );
+      
+      model.addAttribute( ATTRIBUTE_JOBS, data.getDisplayedJobs() );      
    }//End Method
    
 }//End Class

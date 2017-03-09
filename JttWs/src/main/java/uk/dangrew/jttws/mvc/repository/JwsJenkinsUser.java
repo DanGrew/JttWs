@@ -27,6 +27,14 @@ public class JwsJenkinsUser {
    }//End Constructor
 
    /**
+    * Access to the associated {@link JenkinsUser}.
+    * @return the {@link JenkinsUser}.
+    */
+   public JenkinsUser association(){
+      return user;
+   }//End Method
+   
+   /**
     * Access to the name of the {@link JenkinsUser}.
     * @return the name.
     */

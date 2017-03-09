@@ -26,6 +26,10 @@ public class JwsJenkinsUserTest {
       user = new JenkinsUserImpl( "User" );
       systemUnderTest = new JwsJenkinsUser( user );
    }//End Method
+   
+   @Test public void shouldProvideAssociation(){
+      assertThat( systemUnderTest.association(), is( user ) );
+   }//End Method
 
    @Test public void shouldProvideName() {
       assertThat( systemUnderTest.name(), is( user.nameProperty().get() ) );

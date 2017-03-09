@@ -30,10 +30,12 @@ h3 {display: inline;}
 	<table class="table">
 		<colgroup>
 			<col span="1" style="width: 10%;">
+			<col span="1" style="width: 10%;">
 		</colgroup>
 		<thead>
 			<tr>
-				<th>Filter</th>
+				<th>Job Filter</th>
+				<th>User Filter</th>
 				<th>Sort</th>
 			</tr>
 		</thead>
@@ -41,7 +43,7 @@ h3 {display: inline;}
 			<tr>
 				<td><select class="selectpicker" id="jobFilter" multiple
 					data-live-search="true" onchange="filterAndRefreshJobs()">
-						<c:forEach items="${entries}" var="entry">
+						<c:forEach items="${job_entries}" var="entry">
 							<c:if test="${entry.active}">
 								<option selected>${entry.name()}</option>
 							</c:if>
@@ -50,6 +52,19 @@ h3 {display: inline;}
 							</c:if>
 						</c:forEach>
 				</select></td>
+				
+				<td><select class="selectpicker" id="userFilter" multiple
+					data-live-search="true" onchange="filterAndRefreshJobs()">
+						<c:forEach items="${user_entries}" var="entry">
+							<c:if test="${entry.active}">
+								<option selected>${entry.name()}</option>
+							</c:if>
+							<c:if test="${not entry.active}">
+								<option>${entry.name()}</option>
+							</c:if>
+						</c:forEach>
+				</select></td>
+
 				<td><select class="selectpicker" id="jobSort"
 					data-live-search="true" onchange="sortAndRefreshJobs()">
 						<c:forEach items="${sort_options}" var="entry">
@@ -73,7 +88,10 @@ h3 {display: inline;}
 	</footer>
 </div>
 
+
+
 <script type="text/javascript" src="resources/core/js/table-submit.js"></script>
+
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="/webapp/resources/core/js/jquery-3.1.1.min/jx"></script>
 <script	src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
