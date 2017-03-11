@@ -36,7 +36,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.servlet.View;
 
 import uk.dangrew.jtt.model.jobs.JenkinsJobImpl;
+import uk.dangrew.jtt.model.users.JenkinsUserImpl;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.repository.JwsJenkinsUser;
 import uk.dangrew.jttws.mvc.service.JenkinsService;
 import uk.dangrew.jttws.mvc.web.jobtable.JobListHandler;
 import uk.dangrew.jttws.mvc.web.jobtable.JobTableColumns;
@@ -47,6 +49,7 @@ public class SiteControllerTest {
    @Mock private View view;
    
    private List< JwsJenkinsJob > jobs;
+   private List< JwsJenkinsUser > users;
    
    @Mock private JenkinsService service;
    @Mock private JobListHandler handler;
@@ -56,6 +59,8 @@ public class SiteControllerTest {
       MockitoAnnotations.initMocks( this );
       jobs = Arrays.asList( new JwsJenkinsJob( new JenkinsJobImpl( "anything" ) ) );
       when( service.getJobs() ).thenReturn( jobs );
+      users = Arrays.asList( new JwsJenkinsUser( new JenkinsUserImpl( "anyone" ) ) );
+      when( service.getUsers() ).thenReturn( users );
       
       systemUnderTest = new SiteController( service, handler );
       mvc = MockMvcBuilders.standaloneSetup( systemUnderTest ).setSingleView( view ).build();
@@ -106,7 +111,7 @@ public class SiteControllerTest {
       
       systemUnderTest.home( request, response, model );
       verify( handler ).handleSorting( request, response, jobs, model );
-      verify( handler ).handleFiltering( request, response, jobs, model );
+      verify( handler ).handleFiltering( request, response, jobs, users, model );
    }//End Method
    
    @Test public void refeshTableShouldUseJobHandler(){
@@ -116,7 +121,7 @@ public class SiteControllerTest {
       
       systemUnderTest.refreshTable( request, response, model );
       verify( handler ).handleSorting( request, response, jobs, model );
-      verify( handler ).handleFiltering( request, response, jobs, model );
+      verify( handler ).handleFiltering( request, response, jobs, users, model );
    }//End Method
 
 }//End Class
