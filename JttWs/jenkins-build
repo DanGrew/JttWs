@@ -1,0 +1,18 @@
+node {
+    stage 'Checkout'
+        git url: 'https://github.com/DanGrew/JttWs.git'
+
+    dir( 'JttWs' ) {
+        stage 'Clean'
+            sh "./gradlew clean"
+            
+        stage 'Compile Java'
+            sh "./gradlew compileJava"
+            
+        stage 'Compile Tests'
+            sh "./gradlew compileTestJava"
+            
+        stage 'Test'
+            sh "./gradlew test"
+    }
+}
