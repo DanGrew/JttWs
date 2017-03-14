@@ -27,7 +27,16 @@ public interface Column {
 
    /**
     * Method to sort the given {@link List} given the {@link JobTableParameters} provided.
+    * @param jobs the {@link List} of {@link JwsJenkinsJob}s to sort.
+    * @param parameters the {@link JobTableParameters} for configuring the sort.
     */
    public void sort( List< JwsJenkinsJob > jobs, JobTableParameters parameters );
+   
+   /**
+    * Method to filter the given {@link List} given the {@link JobTableParameters} provided.
+    * @param jobs the {@link List} of {@link JwsJenkinsJob}s to filter.
+    * @param parameters the {@link JobTableParameters} for configuring the filter.
+    */
+   public void filter( List< JwsJenkinsJob > jobs, JobTableParameters parameters );
 
 }//End Interface

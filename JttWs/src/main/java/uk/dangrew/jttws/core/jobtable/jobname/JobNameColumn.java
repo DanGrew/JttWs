@@ -28,6 +28,7 @@ public class JobNameColumn implements Column {
 
    static final String NAME = "Job Name";
    
+   private final JobNameFilter filter;
    private final Map< String, SortingFunction > sortingFunctions;
 
    /**
@@ -43,6 +44,7 @@ public class JobNameColumn implements Column {
     */
    JobNameColumn( SortingFunction... sortingFunctions ) {
       this.sortingFunctions = new HashMap<>();
+      this.filter = new JobNameFilter();
       
       for ( SortingFunction function : sortingFunctions ) {
          this.sortingFunctions.put( function.name(), function );
@@ -66,6 +68,14 @@ public class JobNameColumn implements Column {
       }
       
       Collections.sort( jobs, function );
+   }//End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public void filter( List< JwsJenkinsJob > jobs, JobTableParameters parameters ) {
+      List< JwsJenkinsJob > excludedJobs = filter.identifyExclusions( jobs, parameters.filterValueFor( name() ) );
+      jobs.removeAll( excludedJobs );
    }//End Method
 
 }//End Class

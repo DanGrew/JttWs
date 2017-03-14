@@ -34,6 +34,7 @@ public class JobNameColumnTest {
    
    private JobNameAlphabetical alphabetical;
    private SortingFunction reverseAlphabetical;
+   
    private JobNameColumn systemUnderTest;
 
    @Before public void initialiseSystemUnderTest() {
@@ -63,6 +64,30 @@ public class JobNameColumnTest {
    @Test( expected = IllegalArgumentException.class ) public void shouldNotAcceptSortJobsForInvalidName() {
       parameters.sortBy( "anything" );
       systemUnderTest.sort( jobs, parameters );
+   }//End Method
+   
+   @Test public void shouldApplySingleFilterToExcludeJob(){
+      parameters.filterBy( systemUnderTest.name(), job1.name() );
+      systemUnderTest.filter( jobs, parameters );
+      assertThat( jobs, is( Arrays.asList( job1 ) ) );
+   }//End Method
+   
+   @Test public void shouldApplyFilterToExcludeAllJobs(){
+      parameters.filterBy( systemUnderTest.name(), "" );
+      systemUnderTest.filter( jobs, parameters );
+      assertThat( jobs, is( new ArrayList<>() ) );
+   }//End Method
+   
+   @Test public void shouldHandleNoConfiguration(){
+      parameters.filterBy( systemUnderTest.name(), null );
+      systemUnderTest.filter( jobs, parameters );
+      assertThat( jobs, is( Arrays.asList( job1, job2 ) ) );
+   }//End Method
+   
+   @Test public void shouldApplyMultipleFiltersToIncludeAllJobs(){
+      parameters.filterBy( systemUnderTest.name(), job1.name() + ", " + job2.name() );
+      systemUnderTest.filter( jobs, parameters );
+      assertThat( jobs, is( Arrays.asList( job1, job2 ) ) );
    }//End Method
 
 }//End Class

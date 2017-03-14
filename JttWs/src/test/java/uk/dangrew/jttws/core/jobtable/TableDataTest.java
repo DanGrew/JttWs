@@ -60,4 +60,10 @@ public class TableDataTest {
       verify( jobNameColumn ).sort( jobs, parameters );
    }//End Method
    
+   @Test public void shouldFilterForAllColumns(){
+      systemUnderTest.filter( jobs, parameters );
+      verify( jobNameColumn ).filter( jobs, parameters );
+      verify( buildResultColumn ).filter( jobs, parameters );
+   }//End Method
+   
 }//End Class

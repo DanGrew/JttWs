@@ -8,6 +8,9 @@
  */
 package uk.dangrew.jttws.core.jobtable.parameters;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * The {@link JobTableParameters} provides a representation of the configuration made
  * by the user in the web interface.
@@ -16,6 +19,15 @@ public class JobTableParameters {
 
    private String columnToSortBy;
    private String sortingFunction;
+   
+   private final Map< String, String > columnFilters;
+   
+   /**
+    * Constructs a new {@link JobTableParameters}.
+    */
+   public JobTableParameters() {
+      this.columnFilters = new HashMap<>();
+   }//End Constructor
    
    /**
     * Method to set which column to sort by.
@@ -47,6 +59,24 @@ public class JobTableParameters {
     */
    public String sortingFunction() {
       return sortingFunction;
+   }//End Method
+
+   /**
+    * Method to filter by a specific column using the given value.
+    * @param column the column name.
+    * @param filterValue the configuration value for filtering.
+    */
+   public void filterBy( String column, String filterValue ) {
+      columnFilters.put( column, filterValue );
+   }//End Method
+
+   /**
+    * Access to the value configuring the filter associated with the given column.
+    * @param column the column filtered for.
+    * @return the configuration value for filtering.
+    */
+   public String filterValueFor( String column ) {
+      return columnFilters.get( column );
    }//End Method
 
 }//End Class

@@ -17,6 +17,8 @@ import org.junit.Test;
 
 public class JobTableParametersTest {
 
+   private static final String ANYTHING = "anything";
+   
    private JobTableParameters systemUnderTest;
 
    @Before public void initialiseSystemUnderTest() {
@@ -33,6 +35,12 @@ public class JobTableParametersTest {
       assertThat( systemUnderTest.sortingFunction(), is( nullValue() ) );
       systemUnderTest.sortBy( "anything" );
       assertThat( systemUnderTest.sortingFunction(), is( "anything" ) );
+   }//End Method
+   
+   @Test public void shouldHoldFiltersByColumn(){
+      assertThat( systemUnderTest.filterValueFor( ANYTHING ), is( nullValue() ) );
+      systemUnderTest.filterBy( ANYTHING, "something" );
+      assertThat( systemUnderTest.filterValueFor( ANYTHING ), is( "something" ) );
    }//End Method
 
 }//End Class

@@ -64,4 +64,16 @@ public class TableData {
       column.sort( jobs, parameters );
    }//End Method
 
+   /**
+    * Method to filter the given {@link JwsJenkinsJob}s given the {@link JobTableParameters}. This will
+    * apply {@link uk.dangrew.jttws.core.jobtable.structure.Filter}s for each {@link Column}. 
+    * @param jobs the {@link List} of {@link JwsJenkinsJob}s to filter.
+    * @param parameters the {@link JobTableParameters} providing the filtering configuration.
+    */
+   public void filter( List< JwsJenkinsJob > jobs, JobTableParameters parameters ) {
+      for ( Column column : orderedTableColumns ) {
+         column.filter( jobs, parameters );
+      }
+   }//End Method
+
 }//End Class
