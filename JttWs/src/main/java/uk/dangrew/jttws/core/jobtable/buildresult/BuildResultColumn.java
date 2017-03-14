@@ -32,5 +32,11 @@ public class BuildResultColumn implements Column {
     */
    @Override public void sort( List< JwsJenkinsJob > jobs, JobTableParameters parameters ) {
    }//End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public void filter( List< JwsJenkinsJob > jobs, JobTableParameters parameters ) {
+   }//End Method
 
 }//End Class
