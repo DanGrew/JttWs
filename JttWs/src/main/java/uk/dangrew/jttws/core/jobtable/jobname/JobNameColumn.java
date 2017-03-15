@@ -55,6 +55,14 @@ public class JobNameColumn implements Column {
     * {@inheritDoc}
     */
    @Override public final String name() {
+      return staticName();
+   }//End Method
+   
+   /**
+    * Provides static access to the name, if constant.
+    * @return the constant name of the {@link JobNameColumn}.
+    */
+   public static final String staticName(){
       return NAME;
    }//End Method
 

@@ -26,6 +26,14 @@ public class BuildResultColumn implements Column {
    @Override public String name() {
       return null;
    }//End Method
+   
+   /**
+    * Provides static access to the name, if constant.
+    * @return the constant name of the {@link BuildResultColumn}.
+    */
+   public static String staticName(){
+      return null;
+   }//End Method 
 
    /**
     * {@inheritDoc}

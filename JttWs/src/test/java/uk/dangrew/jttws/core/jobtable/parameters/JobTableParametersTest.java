@@ -15,6 +15,8 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
+import uk.dangrew.jttws.core.jobtable.jobname.JobNameColumn;
+
 public class JobTableParametersTest {
 
    private static final String ANYTHING = "anything";
@@ -41,6 +43,12 @@ public class JobTableParametersTest {
       assertThat( systemUnderTest.filterValueFor( ANYTHING ), is( nullValue() ) );
       systemUnderTest.filterBy( ANYTHING, "something" );
       assertThat( systemUnderTest.filterValueFor( ANYTHING ), is( "something" ) );
+   }//End Method
+   
+   @Test public void shouldHoldIncludedColumns(){
+      assertThat( systemUnderTest.includedColumns(), is( nullValue() ) );
+      systemUnderTest.includeColumns( JobNameColumn.staticName() );
+      assertThat( systemUnderTest.includedColumns(), is( JobNameColumn.staticName() ) );
    }//End Method
 
 }//End Class

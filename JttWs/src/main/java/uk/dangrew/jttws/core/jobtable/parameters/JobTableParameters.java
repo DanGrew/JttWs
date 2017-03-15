@@ -19,6 +19,7 @@ public class JobTableParameters {
 
    private String columnToSortBy;
    private String sortingFunction;
+   private String includedColumns;
    
    private final Map< String, String > columnFilters;
    
@@ -77,6 +78,22 @@ public class JobTableParameters {
     */
    public String filterValueFor( String column ) {
       return columnFilters.get( column );
+   }//End Method
+
+   /**
+    * Method to provide the included columns parameter.
+    * @param columns the parameter for the columns to include.
+    */
+   public void includeColumns( String columns ) {
+      includedColumns = columns;
+   }//End Method
+
+   /**
+    * Access to the included columns parameter.
+    * @return the parameter.
+    */
+   public String includedColumns() {
+      return includedColumns;
    }//End Method
 
 }//End Class

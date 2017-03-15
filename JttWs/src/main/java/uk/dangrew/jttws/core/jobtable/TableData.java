@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import uk.dangrew.jttws.core.jobtable.buildresult.BuildResultColumn;
+import uk.dangrew.jttws.core.jobtable.jobname.JobNameColumn;
 import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
 import uk.dangrew.jttws.core.jobtable.structure.Column;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
@@ -26,6 +28,13 @@ public class TableData {
 
    private final List< Column > orderedTableColumns;
    private final Map< String, Column > columns;
+   
+   /**
+    * Constructs a new {@link TableData}.
+    */
+   public TableData() {
+      this( new JobNameColumn(), new BuildResultColumn() );
+   }//End Constructor
    
    /**
     * Constructs a new {@link TableData}.

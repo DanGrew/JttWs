@@ -52,6 +52,7 @@ public class JobNameColumnTest {
 
    @Test public void shouldProvideName() {
       assertThat( systemUnderTest.name(), is( JobNameColumn.NAME ) );
+      assertThat( JobNameColumn.staticName(), is( JobNameColumn.NAME ) );
    }//End Method
    
    @Test public void shouldSortJobsUsingSortName() {
