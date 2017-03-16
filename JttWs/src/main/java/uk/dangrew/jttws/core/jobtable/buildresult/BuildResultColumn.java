@@ -38,6 +38,13 @@ public class BuildResultColumn implements Column {
    /**
     * {@inheritDoc}
     */
+   @Override public String valueForJob( JwsJenkinsJob job ) {
+      return null;
+   }//End Method
+   
+   /**
+    * {@inheritDoc}
+    */
    @Override public void sort( List< JwsJenkinsJob > jobs, JobTableParameters parameters ) {
    }//End Method
    

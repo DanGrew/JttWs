@@ -11,6 +11,7 @@ package uk.dangrew.jttws.core.jobtable;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,6 +22,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import uk.dangrew.jtt.model.jobs.JenkinsJobImpl;
 import uk.dangrew.jttws.core.jobtable.buildresult.BuildResultColumn;
 import uk.dangrew.jttws.core.jobtable.jobname.JobNameColumn;
 import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
@@ -28,6 +30,7 @@ import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
 
 public class TableDataTest {
 
+   private JwsJenkinsJob job;
    private List< JwsJenkinsJob > jobs;
    private JobTableParameters parameters;
 
@@ -39,6 +42,7 @@ public class TableDataTest {
       MockitoAnnotations.initMocks( this );
       
       jobs = new ArrayList<>();
+      job = new JwsJenkinsJob( new JenkinsJobImpl( "Badminton" ) );
       parameters = new JobTableParameters();
       
       systemUnderTest = new TableData( jobNameColumn, buildResultColumn );
@@ -64,6 +68,15 @@ public class TableDataTest {
       systemUnderTest.filter( jobs, parameters );
       verify( jobNameColumn ).filter( jobs, parameters );
       verify( buildResultColumn ).filter( jobs, parameters );
+   }//End Method
+   
+   @Test public void shouldProvideValueForColumn(){
+      when( buildResultColumn.valueForJob( job ) ).thenReturn( job.name() );
+      assertThat( systemUnderTest.valueForColumn( BuildResultColumn.staticName(), job ), is( job.name() ) );
+   }//End Method
+   
+   @Test public void shouldHandleInvalidColumnNameWhenValueRequested(){
+      assertThat( systemUnderTest.valueForColumn( "anything", job ), is( TableData.UNKNOWN_ENTRY ) );
    }//End Method
    
 }//End Class

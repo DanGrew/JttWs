@@ -65,6 +65,13 @@ public class JobNameColumn implements Column {
    public static final String staticName(){
       return NAME;
    }//End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public String valueForJob( JwsJenkinsJob job ) {
+      return job.name();
+   }//End Method
 
    /**
     * {@inheritDoc}

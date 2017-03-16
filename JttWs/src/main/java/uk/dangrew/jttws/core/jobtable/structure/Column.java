@@ -24,6 +24,13 @@ public interface Column {
     * @return the column name.
     */
    public String name();
+   
+   /**
+    * Method to provide the value to display in the table for the given job.
+    * @param job the {@link JwsJenkinsJob}.
+    * @return the {@link String} value to display in the table.
+    */
+   public String valueForJob( JwsJenkinsJob job );
 
    /**
     * Method to sort the given {@link List} given the {@link JobTableParameters} provided.

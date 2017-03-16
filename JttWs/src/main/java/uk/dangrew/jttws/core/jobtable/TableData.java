@@ -26,6 +26,8 @@ import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
  */
 public class TableData {
 
+   static final String UNKNOWN_ENTRY = "Unknown";
+   
    private final List< Column > orderedTableColumns;
    private final Map< String, Column > columns;
    
@@ -56,6 +58,21 @@ public class TableData {
     */
    public List< Column > columns() {
       return new ArrayList<>( orderedTableColumns );
+   }//End Method
+   
+   /**
+    * Method to provide the value to display in the table for the given column and job.
+    * @param columnName the name of the {@link Column}.
+    * @param job the {@link JwsJenkinsJob}.
+    * @return the {@link String} value to display in the table.
+    */
+   public String valueForColumn( String columnName, JwsJenkinsJob job ) {
+      Column column = columns.get( columnName );
+      if ( column == null ) {
+         return UNKNOWN_ENTRY;
+      }
+      
+      return column.valueForJob( job );
    }//End Method
 
    /**
