@@ -26,6 +26,7 @@ import uk.dangrew.jtt.model.jobs.JenkinsJobImpl;
 import uk.dangrew.jttws.core.jobtable.buildresult.BuildResultColumn;
 import uk.dangrew.jttws.core.jobtable.jobname.JobNameColumn;
 import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
+import uk.dangrew.jttws.core.jobtable.structure.ColumnType;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
 
 public class TableDataTest {
@@ -77,6 +78,15 @@ public class TableDataTest {
    
    @Test public void shouldHandleInvalidColumnNameWhenValueRequested(){
       assertThat( systemUnderTest.valueForColumn( "anything", job ), is( TableData.UNKNOWN_ENTRY ) );
+   }//End Method
+   
+   @Test public void shouldProvideTypeForColumn(){
+      when( buildResultColumn.type() ).thenReturn( ColumnType.ProgressBar );
+      assertThat( systemUnderTest.typeForColumn( BuildResultColumn.staticName() ), is( ColumnType.ProgressBar ) );
+   }//End Method
+   
+   @Test public void shouldHandleInvalidColumnNameWhenTypeRequested(){
+      assertThat( systemUnderTest.typeForColumn( "anything" ), is( ColumnType.String ) );
    }//End Method
    
 }//End Class

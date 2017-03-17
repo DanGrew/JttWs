@@ -18,6 +18,7 @@ import uk.dangrew.jttws.core.jobtable.buildresult.BuildResultColumn;
 import uk.dangrew.jttws.core.jobtable.jobname.JobNameColumn;
 import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
 import uk.dangrew.jttws.core.jobtable.structure.Column;
+import uk.dangrew.jttws.core.jobtable.structure.ColumnType;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
 
 /**
@@ -73,6 +74,20 @@ public class TableData {
       }
       
       return column.valueForJob( job );
+   }//End Method
+   
+   /**
+    * Method to provide the type to display for the given column.
+    * @param columnName the name of the {@link Column}.
+    * @return the {@link String} value to display in the table.
+    */
+   public ColumnType typeForColumn( String columnName ) {
+      Column column = columns.get( columnName );
+      if ( column == null ) {
+         return ColumnType.String;
+      }
+      
+      return column.type();
    }//End Method
 
    /**

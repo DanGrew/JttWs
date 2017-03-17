@@ -17,6 +17,7 @@ import java.util.Map;
 import uk.dangrew.jttws.core.jobtable.common.ReverseSorting;
 import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
 import uk.dangrew.jttws.core.jobtable.structure.Column;
+import uk.dangrew.jttws.core.jobtable.structure.ColumnType;
 import uk.dangrew.jttws.core.jobtable.structure.SortingFunction;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
 
@@ -64,6 +65,13 @@ public class JobNameColumn implements Column {
     */
    public static final String staticName(){
       return NAME;
+   }//End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public ColumnType type() {
+      return ColumnType.String;
    }//End Method
    
    /**

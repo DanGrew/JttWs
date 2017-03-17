@@ -9,14 +9,17 @@
 package uk.dangrew.jttws.core.jobtable.properties;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.ui.Model;
 
+import uk.dangrew.jtt.model.jobs.JenkinsJobImpl;
 import uk.dangrew.jttws.core.jobtable.TableData;
 import uk.dangrew.jttws.core.jobtable.common.WebUiParameterParsing;
 import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
 import uk.dangrew.jttws.core.jobtable.structure.Column;
+import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
 import uk.dangrew.jttws.mvc.web.configuration.ConfigurationEntry;
 
 /**
@@ -25,11 +28,12 @@ import uk.dangrew.jttws.mvc.web.configuration.ConfigurationEntry;
  */
 public class JobTableProperties {
 
-   public static final String COLUMNS = "columns";
+   static final String COLUMNS = "columns";
+   static final String DATA = "data";
    
    private final WebUiParameterParsing parsing;
    private final Model model;
-   private final TableData data;
+   private final TableData tableData;
    private final JobTableParameters parameters;
 
    /**
@@ -41,7 +45,7 @@ public class JobTableProperties {
    public JobTableProperties( Model model, TableData data, JobTableParameters parameters ) {
       this.parsing = new WebUiParameterParsing();
       this.model = model;
-      this.data = data;
+      this.tableData = data;
       this.parameters = parameters;
    }//End Constructor
 
@@ -50,6 +54,15 @@ public class JobTableProperties {
     */
    public void populate() {
       populateIncludedColumns();
+      populateData();
+      model.addAttribute( "jobs", Arrays.asList( new JwsJenkinsJob( new JenkinsJobImpl( "MyJob" ) ) ) );
+   }//End Method
+   
+   /**
+    * Method to populate the table data in the {@link Model}.
+    */
+   private void populateData(){
+      model.addAttribute( DATA, tableData );
    }//End Method
    
    /**
@@ -59,7 +72,7 @@ public class JobTableProperties {
       List< ConfigurationEntry > entries = new ArrayList<>();
       
       List< String > includedJobs = parsing.parseStringList( parameters.includedColumns() );
-      for ( Column column : data.columns() ) {
+      for ( Column column : tableData.columns() ) {
          ConfigurationEntry entry = new ConfigurationEntry( column.name() );
          if ( !includedJobs.contains( column.name() ) ) {
             entry.inactive();

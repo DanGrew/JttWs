@@ -22,6 +22,7 @@ import org.mockito.MockitoAnnotations;
 import uk.dangrew.jtt.model.jobs.JenkinsJobImpl;
 import uk.dangrew.jttws.core.jobtable.common.ReverseSorting;
 import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
+import uk.dangrew.jttws.core.jobtable.structure.ColumnType;
 import uk.dangrew.jttws.core.jobtable.structure.SortingFunction;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
 
@@ -53,6 +54,10 @@ public class JobNameColumnTest {
    @Test public void shouldProvideName() {
       assertThat( systemUnderTest.name(), is( JobNameColumn.NAME ) );
       assertThat( JobNameColumn.staticName(), is( JobNameColumn.NAME ) );
+   }//End Method
+   
+   @Test public void shouldProvideType() {
+      assertThat( systemUnderTest.type(), is( ColumnType.String ) );
    }//End Method
    
    @Test public void shouldProvideValueForJob(){

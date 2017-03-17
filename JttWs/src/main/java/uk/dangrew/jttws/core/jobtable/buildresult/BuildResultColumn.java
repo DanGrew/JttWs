@@ -12,6 +12,7 @@ import java.util.List;
 
 import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
 import uk.dangrew.jttws.core.jobtable.structure.Column;
+import uk.dangrew.jttws.core.jobtable.structure.ColumnType;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
 
 /**
@@ -34,6 +35,13 @@ public class BuildResultColumn implements Column {
    public static String staticName(){
       return null;
    }//End Method 
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public ColumnType type() {
+      return null;
+   }//End Method
 
    /**
     * {@inheritDoc}

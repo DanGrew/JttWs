@@ -59,5 +59,10 @@ public class JobTablePropertiesTest {
       assertThat( entries.get( 1 ).name(), is( BuildResultColumn.staticName() ) );
       assertThat( entries.get( 1 ).isActive(), is( false ) );
    }//End Method
+   
+   @Test public void shouldProvideTableData(){
+      systemUnderTest.populate();
+      verify( model ).addAttribute( JobTableProperties.DATA, data );
+   }//End Method
 
 }//End Class

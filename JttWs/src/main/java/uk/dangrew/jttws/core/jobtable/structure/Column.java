@@ -26,6 +26,12 @@ public interface Column {
    public String name();
    
    /**
+    * Access to the {@link ColumnType} associated with this {@link Column}.
+    * @return the {@link ColumnType}.
+    */
+   public ColumnType type();
+   
+   /**
     * Method to provide the value to display in the table for the given job.
     * @param job the {@link JwsJenkinsJob}.
     * @return the {@link String} value to display in the table.
