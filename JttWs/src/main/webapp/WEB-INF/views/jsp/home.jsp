@@ -40,16 +40,19 @@ h3 {display: inline;}
 			</colgroup>
 			<thead>
 				<tr>
-					<th>Job Filter</th>
+					<th>Columns</th>
+					<c:forEach items="${columns}" var="entry">
+						<th>${entry.name()} Filter</th>
+					</c:forEach>
 					<th>User Filter</th>
 					<th>Sort</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td><select class="selectpicker" id="jobFilter" multiple
-						data-live-search="true" onchange="filterAndRefreshJobs()">
-							<c:forEach items="${job_entries}" var="entry">
+					<td><select class="selectpicker" id="columnFilter" multiple
+						data-live-search="true" onchange="nothing">
+							<c:forEach items="${columns}" var="entry">
 								<c:if test="${entry.active}">
 									<option selected>${entry.name()}</option>
 								</c:if>
@@ -58,6 +61,20 @@ h3 {display: inline;}
 								</c:if>
 							</c:forEach>
 					</select></td>
+					
+					<c:forEach items="${columns}" var="column">
+						<td><select class="selectpicker" id="jobFilter" multiple
+							data-live-search="true" onchange="filterAndRefreshJobs()">
+								<c:forEach items="${filters.get( column.name() )}" var="entry">
+									<c:if test="${entry.active}">
+										<option selected>${entry.name()}</option>
+									</c:if>
+									<c:if test="${not entry.active}">
+										<option>${entry.name()}</option>
+									</c:if>
+								</c:forEach>
+						</select></td>
+					</c:forEach>
 					
 					<td><select class="selectpicker" id="userFilter" multiple
 						data-live-search="true" onchange="filterAndRefreshJobs()">

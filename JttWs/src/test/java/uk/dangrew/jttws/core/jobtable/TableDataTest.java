@@ -24,10 +24,12 @@ import org.mockito.MockitoAnnotations;
 
 import uk.dangrew.jtt.model.jobs.JenkinsJobImpl;
 import uk.dangrew.jttws.core.jobtable.buildresult.BuildResultColumn;
+import uk.dangrew.jttws.core.jobtable.jobname.JobNameAlphabetical;
 import uk.dangrew.jttws.core.jobtable.jobname.JobNameColumn;
 import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
 import uk.dangrew.jttws.core.jobtable.structure.ColumnType;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.web.configuration.ConfigurationEntry;
 
 public class TableDataTest {
 
@@ -35,12 +37,16 @@ public class TableDataTest {
    private List< JwsJenkinsJob > jobs;
    private JobTableParameters parameters;
 
+   @Mock private List< ConfigurationEntry > configuration;
    @Mock private JobNameColumn jobNameColumn;
    @Mock private BuildResultColumn buildResultColumn;
    private TableData systemUnderTest;
 
    @Before public void initialiseSystemUnderTest() {
       MockitoAnnotations.initMocks( this );
+      
+      when( jobNameColumn.name() ).thenReturn( JobNameColumn.staticName() );
+      when( buildResultColumn.name() ).thenReturn( BuildResultColumn.staticName() );
       
       jobs = new ArrayList<>();
       job = new JwsJenkinsJob( new JenkinsJobImpl( "Badminton" ) );
@@ -54,13 +60,13 @@ public class TableDataTest {
    }//End Method
    
    @Test public void shouldSortByColumn(){
-      parameters.sortColumn( jobNameColumn.name() );
+      parameters.sortBy( jobNameColumn.name(), JobNameAlphabetical.staticName() );
       systemUnderTest.sort( jobs, parameters );
       verify( jobNameColumn ).sort( jobs, parameters );
    }//End Method
    
    @Test( expected = IllegalArgumentException.class ) public void shouldNotAllowSortByInvalidColumnName(){
-      parameters.sortColumn( "anything" );
+      parameters.sortBy( "anything", JobNameAlphabetical.staticName() );
       systemUnderTest.sort( jobs, parameters );
       verify( jobNameColumn ).sort( jobs, parameters );
    }//End Method
@@ -87,6 +93,15 @@ public class TableDataTest {
    
    @Test public void shouldHandleInvalidColumnNameWhenTypeRequested(){
       assertThat( systemUnderTest.typeForColumn( "anything" ), is( ColumnType.String ) );
+   }//End Method
+   
+   @Test public void shouldProvideFilterConfigurationForColumn(){
+      when( jobNameColumn.filters( jobs, parameters ) ).thenReturn( configuration );
+      assertThat( systemUnderTest.filtersFor( jobNameColumn.name(), jobs, parameters ), is( configuration ) );
+   }//End Method
+   
+   @Test public void shouldProvideEmptyConfigurationForInvalidColumn(){
+      assertThat( systemUnderTest.filtersFor( "anything", jobs, parameters ), is( new ArrayList<>() ) );
    }//End Method
    
 }//End Class

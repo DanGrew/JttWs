@@ -15,6 +15,8 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
+import javafx.util.Pair;
+import uk.dangrew.jttws.core.jobtable.jobname.JobNameAlphabetical;
 import uk.dangrew.jttws.core.jobtable.jobname.JobNameColumn;
 
 public class JobTableParametersTest {
@@ -28,15 +30,9 @@ public class JobTableParametersTest {
    }//End Method
 
    @Test public void shouldHoldColumnToSortBy() {
-      assertThat( systemUnderTest.columnToSortBy(), is( nullValue() ) );
-      systemUnderTest.sortColumn( "anything" );
-      assertThat( systemUnderTest.columnToSortBy(), is( "anything" ) );
-   }//End Method
-   
-   @Test public void shouldHoldSortingFunction(){
-      assertThat( systemUnderTest.sortingFunction(), is( nullValue() ) );
-      systemUnderTest.sortBy( "anything" );
-      assertThat( systemUnderTest.sortingFunction(), is( "anything" ) );
+      assertThat( systemUnderTest.sorting(), is( new Pair<>( JobNameColumn.staticName(), JobNameAlphabetical.staticName() ) ) );
+      systemUnderTest.sortBy( ANYTHING, "something" );
+      assertThat( systemUnderTest.sorting(), is( new Pair<>( ANYTHING, "something" ) ) );
    }//End Method
    
    @Test public void shouldHoldFiltersByColumn(){

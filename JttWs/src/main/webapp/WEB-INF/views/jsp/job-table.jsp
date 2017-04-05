@@ -10,13 +10,13 @@
 	%>
 	<table class="table table-striped">
 		<colgroup>
-			<c:forEach items="${columns}" var="column">
+			<c:forEach items="${data.columns()}" var="column">
 				<col span="1" style="width: 20%;">
 			</c:forEach>
 		</colgroup>
 		<thead>
 			<tr>
-				<c:forEach items="${columns}" var="column">
+				<c:forEach items="${data.columns()}" var="column">
 					<th>${column.name()}</th>
 				</c:forEach>
 			</tr>
@@ -24,7 +24,7 @@
 		<tbody>
 			<c:forEach items="${jobs}" var="job">
 				<tr>
-					<c:forEach items="${columns}" var="column">
+					<c:forEach items="${data.columns()}" var="column">
 						<td>
 							<c:if test="${data.typeForColumn( column.name() ) eq 'String'}">
 								<c:out value="${data.valueForColumn( column.name(), job )}" />

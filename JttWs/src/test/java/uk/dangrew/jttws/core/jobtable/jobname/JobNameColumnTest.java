@@ -8,6 +8,7 @@
  */
 package uk.dangrew.jttws.core.jobtable.jobname;
 
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -25,6 +26,7 @@ import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
 import uk.dangrew.jttws.core.jobtable.structure.ColumnType;
 import uk.dangrew.jttws.core.jobtable.structure.SortingFunction;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.web.configuration.ConfigurationEntry;
 
 public class JobNameColumnTest {
 
@@ -66,14 +68,14 @@ public class JobNameColumnTest {
    }//End Method
    
    @Test public void shouldSortJobsUsingSortName() {
-      parameters.sortBy( reverseAlphabetical.name() );
+      parameters.sortBy( systemUnderTest.name(), reverseAlphabetical.name() );
       systemUnderTest.sort( jobs, parameters );
       
       assertThat( jobs, is( Arrays.asList( job2, job1 ) ) );
    }//End Method
    
    @Test( expected = IllegalArgumentException.class ) public void shouldNotAcceptSortJobsForInvalidName() {
-      parameters.sortBy( "anything" );
+      parameters.sortBy( systemUnderTest.name(), "anything" );
       systemUnderTest.sort( jobs, parameters );
    }//End Method
    
@@ -100,5 +102,24 @@ public class JobNameColumnTest {
       systemUnderTest.filter( jobs, parameters );
       assertThat( jobs, is( Arrays.asList( job1, job2 ) ) );
    }//End Method
-
+   
+   @Test public void shouldProvideFiltersAllActive(){
+      assertThat( systemUnderTest.filters( jobs, parameters ), is( new JobNameFilter().filterOptions( jobs, null ) ) );
+   }//End Method
+   
+   @Test public void shouldProvideFiltersGivenValue(){
+      parameters.filterBy( systemUnderTest.name(), "anything" );
+      assertThat( systemUnderTest.filters( jobs, parameters ), is( new JobNameFilter().filterOptions( jobs, "anything" ) ) );
+   }//End Method
+   
+   @Test public void shouldProvideSortOptionsAllInActive(){
+      List< ConfigurationEntry > entries = systemUnderTest.sortOptions();
+      assertThat( entries, hasSize( 2 ) );
+      
+      assertThat( entries.get( 0 ).name(), is( alphabetical.name() ) );
+      assertThat( entries.get( 0 ).isActive(), is( false ) );
+      assertThat( entries.get( 1 ).name(), is( reverseAlphabetical.name() ) );
+      assertThat( entries.get( 1 ).isActive(), is( false ) );
+   }//End Method
+   
 }//End Class

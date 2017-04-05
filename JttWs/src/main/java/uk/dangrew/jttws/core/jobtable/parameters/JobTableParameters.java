@@ -11,16 +11,19 @@ package uk.dangrew.jttws.core.jobtable.parameters;
 import java.util.HashMap;
 import java.util.Map;
 
+import javafx.util.Pair;
+import uk.dangrew.jttws.core.jobtable.jobname.JobNameAlphabetical;
+import uk.dangrew.jttws.core.jobtable.jobname.JobNameColumn;
+
 /**
  * The {@link JobTableParameters} provides a representation of the configuration made
  * by the user in the web interface.
  */
 public class JobTableParameters {
 
-   private String columnToSortBy;
-   private String sortingFunction;
    private String includedColumns;
-   
+   private Pair< String, String > columnSort;
+
    private final Map< String, String > columnFilters;
    
    /**
@@ -28,38 +31,24 @@ public class JobTableParameters {
     */
    public JobTableParameters() {
       this.columnFilters = new HashMap<>();
+      this.columnSort = new Pair<>( JobNameColumn.staticName(), JobNameAlphabetical.staticName() );
    }//End Constructor
    
    /**
     * Method to set which column to sort by.
     * @param columnName the name of the column to sort by.
-    */
-   public void sortColumn( String columnName ) {
-      this.columnToSortBy = columnName;
-   }//End Method
-
-   /**
-    * Method to set which function to use when sorting.
     * @param sortingFunction the name of the sorting function.
     */
-   public void sortBy( String sortingFunction ) {
-      this.sortingFunction = sortingFunction;
+   public void sortBy( String columnName, String sortingFunction ) {
+      columnSort = new Pair<>( columnName, sortingFunction );
    }//End Method
-
+   
    /**
-    * Access to the name of the column to sort by.
-    * @return the column name.
+    * Access to the value configuring the sort associated with the given column.
+    * @return the configuration values for sorting (column name, function).
     */
-   public String columnToSortBy() {
-      return columnToSortBy;
-   }//End Method
-
-   /**
-    * Access to the name of the sorting function to use.
-    * @return the name of the sorting function.
-    */
-   public String sortingFunction() {
-      return sortingFunction;
+   public Pair< String, String > sorting() {
+      return columnSort;
    }//End Method
 
    /**

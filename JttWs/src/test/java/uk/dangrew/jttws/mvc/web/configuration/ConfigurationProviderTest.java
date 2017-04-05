@@ -56,6 +56,29 @@ public class ConfigurationProviderTest {
       systemUnderTest = new ConfigurationProvider();
    }//End Method
 
+   @Test public void shouldConstructItemsCorrectly() {
+      when( includer.test( collection.get( 0 ) ) ).thenReturn( true );
+      when( includer.test( collection.get( 1 ) ) ).thenReturn( true );
+      when( includer.test( collection.get( 2 ) ) ).thenReturn( false );
+      when( includer.test( collection.get( 3 ) ) ).thenReturn( true );
+      
+      when( representer.apply( collection.get( 0 ) ) ).thenReturn( collection.get( 0 ) );
+      when( representer.apply( collection.get( 1 ) ) ).thenReturn( collection.get( 1 ) );
+      when( representer.apply( collection.get( 2 ) ) ).thenReturn( collection.get( 2 ) );
+      when( representer.apply( collection.get( 3 ) ) ).thenReturn( collection.get( 3 ) );
+      
+      List< ConfigurationEntry > entries = systemUnderTest.provideConfigurationEntries( collection, includer, representer );
+      
+      assertThat( entries.get( 0 ).name(), is( collection.get( 0 ) ) );
+      assertThat( entries.get( 0 ).isActive(), is( true ) );
+      assertThat( entries.get( 1 ).name(), is( collection.get( 1 ) ) );
+      assertThat( entries.get( 1 ).isActive(), is( true ) );
+      assertThat( entries.get( 2 ).name(), is( collection.get( 2 ) ) );
+      assertThat( entries.get( 2 ).isActive(), is( false ) );
+      assertThat( entries.get( 3 ).name(), is( collection.get( 3 ) ) );
+      assertThat( entries.get( 3 ).isActive(), is( true ) );
+   }//End Method
+   
    @Test public void shouldIncludeAndExcludeItemsCorrectly() {
       when( includer.test( collection.get( 0 ) ) ).thenReturn( true );
       when( includer.test( collection.get( 1 ) ) ).thenReturn( true );

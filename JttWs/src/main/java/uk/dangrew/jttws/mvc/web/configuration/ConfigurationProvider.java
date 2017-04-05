@@ -26,15 +26,12 @@ public class ConfigurationProvider {
     * Method to provide {@link ConfigurationEntry}s for the given items, representing them using their
     * representation {@link Function}, and including them using the include {@link Predicate}.
     * @param <ItemT> the type of item {@link ConfigurationEntry}s are for.
-    * @param attribute the attribute being added to the {@link Model}.
-    * @param model the {@link Model} to add the {@link ConfigurationEntry}s to.
     * @param items the {@link Collection} of items to make {@link ConfigurationEntry}s for.
     * @param includer the {@link Predicate} for determining which to include.
     * @param representer the {@link Function} determining how to represent the item.
+    * @return {@link List} of {@link ConfigurationEntry}s.
     */
-   public < ItemT > void provideConfigurationEntries( 
-            String attribute, 
-            Model model,
+   public < ItemT > List< ConfigurationEntry > provideConfigurationEntries( 
             Collection< ItemT > items, 
             Predicate< ItemT > includer,
             Function< ItemT, String > representer
@@ -48,6 +45,28 @@ public class ConfigurationProvider {
             entry.inactive();
          }
       }
+      
+      return entries;
+   }//End Method
+   
+   /**
+    * Method to provide {@link ConfigurationEntry}s for the given items, representing them using their
+    * representation {@link Function}, and including them using the include {@link Predicate}.
+    * @param <ItemT> the type of item {@link ConfigurationEntry}s are for.
+    * @param attribute the attribute being added to the {@link Model}.
+    * @param model the {@link Model} to add the {@link ConfigurationEntry}s to.
+    * @param items the {@link Collection} of items to make {@link ConfigurationEntry}s for.
+    * @param includer the {@link Predicate} for determining which to include.
+    * @param representer the {@link Function} determining how to represent the item.
+    */
+   public < ItemT > void provideConfigurationEntries( 
+            String attribute, 
+            Model model,
+            Collection< ItemT > items, 
+            Predicate< ItemT > includer,
+            Function< ItemT, String > representer
+   ){
+      List< ConfigurationEntry > entries = provideConfigurationEntries( items, includer, representer );
       model.addAttribute( attribute, entries );
    }//End Method
    

@@ -8,11 +8,13 @@
  */
 package uk.dangrew.jttws.core.jobtable.jobname;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import uk.dangrew.jttws.core.jobtable.common.ReverseSorting;
 import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
@@ -20,6 +22,7 @@ import uk.dangrew.jttws.core.jobtable.structure.Column;
 import uk.dangrew.jttws.core.jobtable.structure.ColumnType;
 import uk.dangrew.jttws.core.jobtable.structure.SortingFunction;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.web.configuration.ConfigurationEntry;
 
 /**
  * The {@link JobNameColumn} provides a {@link Column} to display the job name in the job
@@ -55,7 +58,7 @@ public class JobNameColumn implements Column {
    /**
     * {@inheritDoc}
     */
-   @Override public final String name() {
+   @Override public String name() {
       return staticName();
    }//End Method
    
@@ -85,9 +88,9 @@ public class JobNameColumn implements Column {
     * {@inheritDoc}
     */
    @Override public void sort( List< JwsJenkinsJob > jobs, JobTableParameters parameters ) {
-      Comparator< JwsJenkinsJob > function = sortingFunctions.get( parameters.sortingFunction() );
+      Comparator< JwsJenkinsJob > function = sortingFunctions.get( parameters.sorting().getValue() );
       if ( function == null ) {
-         throw new IllegalArgumentException( "Invalid sorting function applied: " + parameters.sortingFunction() );
+         throw new IllegalArgumentException( "Invalid sorting function applied: " + parameters.sorting().getValue() );
       }
       
       Collections.sort( jobs, function );
@@ -96,9 +99,30 @@ public class JobNameColumn implements Column {
    /**
     * {@inheritDoc}
     */
+   @Override public List< ConfigurationEntry > sortOptions() {
+      List< ConfigurationEntry > entries = new ArrayList<>();
+      for ( Entry< String, SortingFunction > entry : sortingFunctions.entrySet() ) {
+         ConfigurationEntry config = new ConfigurationEntry( entry.getKey() );
+         config.inactive();
+         entries.add( config );
+      }
+      
+      return entries;
+   }//End Method
+   
+   /**
+    * {@inheritDoc}
+    */
    @Override public void filter( List< JwsJenkinsJob > jobs, JobTableParameters parameters ) {
       List< JwsJenkinsJob > excludedJobs = filter.identifyExclusions( jobs, parameters.filterValueFor( name() ) );
       jobs.removeAll( excludedJobs );
+   }//End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public List< ConfigurationEntry > filters( List< JwsJenkinsJob > jobs, JobTableParameters parameters ) {
+      return filter.filterOptions( jobs, parameters.filterValueFor( name() ) );
    }//End Method
 
 }//End Class

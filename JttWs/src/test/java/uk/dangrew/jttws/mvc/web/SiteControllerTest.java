@@ -11,7 +11,7 @@ package uk.dangrew.jttws.mvc.web;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -27,6 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,22 +38,25 @@ import org.springframework.web.servlet.View;
 
 import uk.dangrew.jtt.model.jobs.JenkinsJobImpl;
 import uk.dangrew.jtt.model.users.JenkinsUserImpl;
+import uk.dangrew.jttws.core.jobtable.properties.JobTableProperties;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsUser;
 import uk.dangrew.jttws.mvc.service.JenkinsService;
-import uk.dangrew.jttws.mvc.web.jobtable.JobListHandler;
 import uk.dangrew.jttws.mvc.web.jobtable.JobTableColumns;
 
 public class SiteControllerTest {
 
    private MockMvc mvc;
    @Mock private View view;
+   @Mock private Model model;
+   @Mock private HttpServletRequest request;
+   @Mock private HttpServletResponse response;
    
    private List< JwsJenkinsJob > jobs;
    private List< JwsJenkinsUser > users;
    
+   @Mock private JobTableProperties properties;
    @Mock private JenkinsService service;
-   @Mock private JobListHandler handler;
    private SiteController systemUnderTest;
 
    @Before public void initialiseSystemUnderTest() {
@@ -62,7 +66,7 @@ public class SiteControllerTest {
       users = Arrays.asList( new JwsJenkinsUser( new JenkinsUserImpl( "anyone" ) ) );
       when( service.getUsers() ).thenReturn( users );
       
-      systemUnderTest = new SiteController( service, handler );
+      systemUnderTest = new SiteController( service, properties );
       mvc = MockMvcBuilders.standaloneSetup( systemUnderTest ).setSingleView( view ).build();
    }//End Method
 
@@ -71,7 +75,7 @@ public class SiteControllerTest {
    }//End Method
    
    @Test public void shouldAutowireJobService() throws NoSuchMethodException, SecurityException{
-      assertThat( SiteController.class.getConstructor( JenkinsService.class, JobListHandler.class ).getAnnotation( Autowired.class ), is( notNullValue() ) );
+      assertThat( SiteController.class.getConstructor( JenkinsService.class, JobTableProperties.class ).getAnnotation( Autowired.class ), is( notNullValue() ) );
    }//End Method
    
    @Test public void homeShouldProvideJobsFromService() throws Exception{
@@ -90,38 +94,19 @@ public class SiteControllerTest {
    
    @Test public void shouldProvideHomePage(){
       assertThat( systemUnderTest.home( 
-               mock( HttpServletRequest.class ), 
-               mock( HttpServletResponse.class ), 
-               mock( Model.class ) 
+               request, response, model 
       ), is( SiteController.PAGE_HOME ) );
    }//End Method
    
    @Test public void shouldProvideTableRefreshPage(){
       assertThat( systemUnderTest.refreshTable( 
-               mock( HttpServletRequest.class ), 
-               mock( HttpServletResponse.class ), 
-               mock( Model.class ) 
+               request, response, model 
       ), is( SiteController.PAGE_TABLE ) );
    }//End Method
    
-   @Test public void homeShouldUseJobHandler(){
-      HttpServletRequest request = mock( HttpServletRequest.class ); 
-      HttpServletResponse response = mock( HttpServletResponse.class ); 
-      Model model = mock( Model.class );
-      
-      systemUnderTest.home( request, response, model );
-      verify( handler ).handleSorting( request, response, jobs, model );
-      verify( handler ).handleFiltering( request, response, jobs, users, model );
+   @Test public void shouldPropulateProperties(){
+      systemUnderTest.refreshTable( request, response, model );
+      verify( properties ).populate( eq( model ), Mockito.any(), Mockito.any(), eq( jobs ), eq( users ) );
    }//End Method
    
-   @Test public void refeshTableShouldUseJobHandler(){
-      HttpServletRequest request = mock( HttpServletRequest.class ); 
-      HttpServletResponse response = mock( HttpServletResponse.class ); 
-      Model model = mock( Model.class );
-      
-      systemUnderTest.refreshTable( request, response, model );
-      verify( handler ).handleSorting( request, response, jobs, model );
-      verify( handler ).handleFiltering( request, response, jobs, users, model );
-   }//End Method
-
 }//End Class

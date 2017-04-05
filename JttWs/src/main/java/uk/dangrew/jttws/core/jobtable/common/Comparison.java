@@ -15,7 +15,7 @@ public enum Comparison {
 
    Equal( 0 ),
    LessThan( -1 ),
-   GreatherThan( 1 );
+   GreaterThan( 1 );
    
    private final int value;
    

@@ -18,10 +18,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import uk.dangrew.jttws.core.jobtable.TableData;
+import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
+import uk.dangrew.jttws.core.jobtable.properties.JobTableProperties;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsUser;
 import uk.dangrew.jttws.mvc.service.JenkinsService;
-import uk.dangrew.jttws.mvc.web.jobtable.JobListHandler;
 import uk.dangrew.jttws.mvc.web.jobtable.JobTableColumns;
 
 /**
@@ -39,17 +41,18 @@ public class SiteController {
 	
 	static final String JOB_COLUMNS = "columns";
 	
-   private final JobListHandler jobListCookies;
 	private final JenkinsService jenkinsJobs;
+	private final JobTableProperties properties;
 	
 	/**
 	 * Constructs a new {@link SiteController}.
 	 * @param jenkinsJobs the {@link JenkinsService}.
+	 * @param properties the {@link JobTableProperties}.
 	 */
 	@Autowired
-	public SiteController(JenkinsService jenkinsJobs, JobListHandler jobListCookies) {
+	public SiteController(JenkinsService jenkinsJobs, JobTableProperties properties) {
 		this.jenkinsJobs = jenkinsJobs;
-		this.jobListCookies = jobListCookies;
+		this.properties = properties;
 	}//End Constructor
 
 	/**
@@ -84,9 +87,10 @@ public class SiteController {
    ) {
       List< JwsJenkinsJob > jobs = jenkinsJobs.getJobs();
       List< JwsJenkinsUser > users = jenkinsJobs.getUsers();
-      jobListCookies.handleSorting( request, response, jobs, model );
-      jobListCookies.handleFiltering( request, response, jobs, users, model );
+      
       model.addAttribute( JOB_COLUMNS, JobTableColumns.values() );
+      
+      properties.populate( model, new TableData(), new JobTableParameters(), jobs, users );
       return PAGE_TABLE;
    }// End Method
 

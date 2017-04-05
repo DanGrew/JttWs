@@ -6,18 +6,18 @@
  *                 2017
  * ----------------------------------------
  */
-package uk.dangrew.jttws.core.jobtable.jobname;
+package uk.dangrew.jttws.core.jobtable.buildresult;
 
 import uk.dangrew.jttws.core.jobtable.structure.SortingFunction;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
 
 /**
- * {@link JobNameAlphabetical} is a {@link SortingFunction} for the job name, ordering 
- * jobs alphabetically.
+ * {@link BuildResultAlphabetical} is a {@link SortingFunction} for the {@link uk.dangrew.jtt.model.jobs.BuildResultStatus}, ordering 
+ * jobs by their status alphabetically.
  */
-public class JobNameAlphabetical implements SortingFunction {
+public class BuildResultAlphabetical implements SortingFunction {
 
-   static final String NAME = "Job Name Aphabetical";
+   static final String NAME = "Result Aphabetical";
    
    /**
     * {@inheritDoc}
@@ -27,7 +27,7 @@ public class JobNameAlphabetical implements SortingFunction {
    }//End Method
    
    /**
-    * Access to the static name.
+    * Access to the static name of the {@link SortingFunction}.
     * @return the name.
     */
    public static String staticName(){
@@ -38,7 +38,7 @@ public class JobNameAlphabetical implements SortingFunction {
     * {@inheritDoc}
     */
    @Override public int compare( JwsJenkinsJob o1, JwsJenkinsJob o2 ) {
-      return o1.name().compareTo( o2.name() );
+      return o1.status().compareTo( o2.status() );
    }//End Method
 
 }//End Class

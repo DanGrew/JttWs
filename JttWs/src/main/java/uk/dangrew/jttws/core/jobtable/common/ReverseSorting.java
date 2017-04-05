@@ -31,7 +31,16 @@ public class ReverseSorting implements SortingFunction {
     * {@inheritDoc}
     */
    @Override public String name() {
-      return function.name() + REVERSE_SUFFIX;
+      return staticName( function.name() );
+   }//End Method
+   
+   /**
+    * Method to deduce the static name of the {@link SortingFunction} from the given name.
+    * @param sortingName the {@link SortingFunction} name.
+    * @return the static name of the reversed sorting.
+    */
+   public static String staticName( String sortingName ) {
+      return sortingName + REVERSE_SUFFIX;
    }//End Method
    
    /**

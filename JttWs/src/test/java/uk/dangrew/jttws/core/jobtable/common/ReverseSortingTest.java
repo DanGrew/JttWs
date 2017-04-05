@@ -38,6 +38,10 @@ public class ReverseSortingTest {
       when( sort.name() ).thenReturn( "anything" );
       assertThat( systemUnderTest.name(), is( "anything (Reverse)" ) );
    }//End Method
+   
+   @Test public void shouldProvideReverseStaticName(){
+      assertThat( ReverseSorting.staticName( "anything" ), is( "anything (Reverse)" ) );
+   }//End Method
 
    @Test public void shouldReverseArguments() {
       when( sort.compare( job2, job1 ) ).thenReturn( UNQIUE_ANSWER );

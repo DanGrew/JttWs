@@ -20,6 +20,7 @@ import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
 import uk.dangrew.jttws.core.jobtable.structure.Column;
 import uk.dangrew.jttws.core.jobtable.structure.ColumnType;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.web.configuration.ConfigurationEntry;
 
 /**
  * The {@link TableData} represents the available information and operations associated
@@ -62,6 +63,23 @@ public class TableData {
    }//End Method
    
    /**
+    * Method to provide the {@link ConfigurationEntry}s for the {@link uk.dangrew.jttws.core.jobtable.structure.Filter}s available for the 
+    * given {@link Column}.
+    * @param columnName the name of the {@link Column}.
+    * @param jobs the {@link JwsJenkinsJob}s the filters are relevant to.
+    * @param parameters the {@link JobTableParameters} for existing filters.
+    * @return the {@link ConfigurationEntry}s.
+    */
+   public List< ConfigurationEntry > filtersFor( String columnName, List< JwsJenkinsJob > jobs, JobTableParameters parameters ) {
+      Column column = columns.get( columnName );
+      if ( column == null ) {
+         return new ArrayList<>();
+      }
+      
+      return column.filters( jobs, parameters );
+   }//End Method
+   
+   /**
     * Method to provide the value to display in the table for the given column and job.
     * @param columnName the name of the {@link Column}.
     * @param job the {@link JwsJenkinsJob}.
@@ -97,9 +115,9 @@ public class TableData {
     * @param parameters the {@link JobTableParameters} providing the sorting method.
     */
    public void sort( List< JwsJenkinsJob > jobs, JobTableParameters parameters ) {
-      Column column = columns.get( parameters.columnToSortBy() );
+      Column column = columns.get( parameters.sorting().getKey() );
       if ( column == null ) {
-         throw new IllegalArgumentException( "Invalid column to sort by: " + parameters.columnToSortBy() );
+         throw new IllegalArgumentException( "Invalid column to sort by: " + parameters.sorting().getKey() );
       }
       
       column.sort( jobs, parameters );
