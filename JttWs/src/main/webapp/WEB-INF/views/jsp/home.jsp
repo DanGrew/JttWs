@@ -63,8 +63,8 @@ h3 {display: inline;}
 					</select></td>
 					
 					<c:forEach items="${columns}" var="column">
-						<td><select class="selectpicker" id="jobFilter" multiple
-							data-live-search="true" onchange="filterAndRefreshJobs()">
+						<td><select class="selectpicker" id="${data.idForColumn( column.name() )}" multiple
+							data-live-search="true" onchange="filterAndRefreshJobs( this )">
 								<c:forEach items="${filters.get( column.name() )}" var="entry">
 									<c:if test="${entry.active}">
 										<option selected>${entry.name()}</option>
@@ -111,7 +111,6 @@ h3 {display: inline;}
 		<p>&copy; Dan Grew 2017</p>
 	</footer>
 </div>
-
 
 
 <script type="text/javascript" src="resources/core/js/table-submit.js"></script>

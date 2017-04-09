@@ -31,7 +31,7 @@ public class CookieManager {
    public String retrieveCookie( String parameter, HttpServletRequest request, HttpServletResponse response ) {
       String parameterValue = request.getParameter( parameter );
       if ( parameterValue != null ) {
-         response.addCookie( new Cookie( parameter, parameterValue ) );
+         saveCookie( parameter, parameterValue, response );
          return parameterValue;
       } else {
          Cookie cookie = WebUtils.getCookie( request, parameter );
@@ -41,6 +41,16 @@ public class CookieManager {
             return cookie.getValue();
          }
       }
+   }//End Method
+   
+   /**
+    * Method to save a parameter and value as a {@link Cookie}.
+    * @param parameter the parameter name.
+    * @param value the parameter value.
+    * @param response the {@link HttpServletResponse} to add the {@link Cookie} to.
+    */
+   public void saveCookie( String parameter, String value, HttpServletResponse response ) {
+      response.addCookie( new Cookie( parameter, value ) );
    }//End Method
    
 }//End Class

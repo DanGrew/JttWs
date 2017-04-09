@@ -1,15 +1,14 @@
-function filterAndRefreshJobs() {
-    var j_value = $('#jobFilter').val();
-    var u_value = $('#userFilter').val();
+function filterAndRefreshJobs( filter ) {
+    var name = '#' + filter.id
+    var value = $(name).val();
     
-    var jobs = j_value == null ? "" : j_value.toString();
-    var users = u_value == null ? "" : u_value.toString();
+    var parameter = value == null ? "" : value.toString();
     $.ajax({
         type : "GET",
         url : "jobs-table",
         data : {
-            "filteredJobsList" : jobs,
-            "filteredUsersList" : users
+            "id" : filter.id,
+            "value" : parameter
         },
         success : function(result) {
             $('#job-table').html(result);

@@ -9,7 +9,9 @@
 package uk.dangrew.jttws.core.jobtable;
 
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.doCallRealMethod;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -27,6 +29,7 @@ import uk.dangrew.jttws.core.jobtable.buildresult.BuildResultColumn;
 import uk.dangrew.jttws.core.jobtable.jobname.JobNameAlphabetical;
 import uk.dangrew.jttws.core.jobtable.jobname.JobNameColumn;
 import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
+import uk.dangrew.jttws.core.jobtable.structure.Column;
 import uk.dangrew.jttws.core.jobtable.structure.ColumnType;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
 import uk.dangrew.jttws.mvc.web.configuration.ConfigurationEntry;
@@ -102,6 +105,24 @@ public class TableDataTest {
    
    @Test public void shouldProvideEmptyConfigurationForInvalidColumn(){
       assertThat( systemUnderTest.filtersFor( "anything", jobs, parameters ), is( new ArrayList<>() ) );
+   }//End Method
+   
+   @Test public void shouldProvideIdForColumn(){
+      doCallRealMethod().when( jobNameColumn ).id();
+      assertThat( systemUnderTest.idForColumn( jobNameColumn.name() ), is( jobNameColumn.id() ) );
+   }//End Method
+   
+   @Test public void shouldNotAcceptInvalidColumnForId(){
+      assertThat( systemUnderTest.idForColumn( "anything" ), is( TableData.UNKNOWN_ENTRY ) );
+   }//End Method
+   
+   @Test public void shouldProvideColumnForId(){
+      systemUnderTest = new TableData();
+      for ( Column column : systemUnderTest.columns() ) {
+         assertThat( systemUnderTest.columnForId( column.id() ), is( column ) );
+      }
+      
+      assertThat( systemUnderTest.columnForId( "anything" ), is( nullValue() ) );
    }//End Method
    
 }//End Class

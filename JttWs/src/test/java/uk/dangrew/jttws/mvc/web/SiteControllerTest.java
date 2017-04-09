@@ -38,6 +38,8 @@ import org.springframework.web.servlet.View;
 
 import uk.dangrew.jtt.model.jobs.JenkinsJobImpl;
 import uk.dangrew.jtt.model.users.JenkinsUserImpl;
+import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
+import uk.dangrew.jttws.core.jobtable.parameters.ParametersPopulator;
 import uk.dangrew.jttws.core.jobtable.properties.JobTableProperties;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsUser;
@@ -52,21 +54,27 @@ public class SiteControllerTest {
    @Mock private HttpServletRequest request;
    @Mock private HttpServletResponse response;
    
+   private JobTableParameters parameters;
    private List< JwsJenkinsJob > jobs;
    private List< JwsJenkinsUser > users;
    
    @Mock private JobTableProperties properties;
+   @Mock private ParametersPopulator paramsPopulator;
    @Mock private JenkinsService service;
    private SiteController systemUnderTest;
 
    @Before public void initialiseSystemUnderTest() {
       MockitoAnnotations.initMocks( this );
+      
+      parameters = new JobTableParameters();
+      when( paramsPopulator.construct( Mockito.any(), eq( request ), eq( response ) ) ).thenReturn( parameters );
+      
       jobs = Arrays.asList( new JwsJenkinsJob( new JenkinsJobImpl( "anything" ) ) );
       when( service.getJobs() ).thenReturn( jobs );
       users = Arrays.asList( new JwsJenkinsUser( new JenkinsUserImpl( "anyone" ) ) );
       when( service.getUsers() ).thenReturn( users );
       
-      systemUnderTest = new SiteController( service, properties );
+      systemUnderTest = new SiteController( service, properties, paramsPopulator );
       mvc = MockMvcBuilders.standaloneSetup( systemUnderTest ).setSingleView( view ).build();
    }//End Method
 
@@ -75,7 +83,9 @@ public class SiteControllerTest {
    }//End Method
    
    @Test public void shouldAutowireJobService() throws NoSuchMethodException, SecurityException{
-      assertThat( SiteController.class.getConstructor( JenkinsService.class, JobTableProperties.class ).getAnnotation( Autowired.class ), is( notNullValue() ) );
+      assertThat( SiteController.class.getConstructor( 
+               JenkinsService.class, JobTableProperties.class, ParametersPopulator.class 
+      ).getAnnotation( Autowired.class ), is( notNullValue() ) );
    }//End Method
    
    @Test public void homeShouldProvideJobsFromService() throws Exception{
@@ -104,9 +114,14 @@ public class SiteControllerTest {
       ), is( SiteController.PAGE_TABLE ) );
    }//End Method
    
-   @Test public void shouldPropulateProperties(){
+   @Test public void shouldPopulateProperties(){
       systemUnderTest.refreshTable( request, response, model );
-      verify( properties ).populate( eq( model ), Mockito.any(), Mockito.any(), eq( jobs ), eq( users ) );
+      verify( properties ).populate( eq( model ), Mockito.any(), eq( parameters ), eq( jobs ), eq( users ) );
+   }//End Method
+   
+   @Test public void shouldPopulateParameters(){
+      systemUnderTest.refreshTable( request, response, model );
+      verify( paramsPopulator ).construct( Mockito.any(), eq( request ), eq( response ) );
    }//End Method
    
 }//End Class

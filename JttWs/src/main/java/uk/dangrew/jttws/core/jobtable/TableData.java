@@ -32,6 +32,7 @@ public class TableData {
    
    private final List< Column > orderedTableColumns;
    private final Map< String, Column > columns;
+   private final Map< String, Column > ids;
    
    /**
     * Constructs a new {@link TableData}.
@@ -46,11 +47,13 @@ public class TableData {
     */
    TableData( Column... columns ) {
       this.columns = new HashMap<>();
+      this.ids = new HashMap<>();
       this.orderedTableColumns = new ArrayList<>();
       
       this.orderedTableColumns.addAll( Arrays.asList( columns ) );
       for ( Column column : columns ) {
          this.columns.put( column.name(), column );
+         this.ids.put( column.id(), column );
       }
    }//End Constructor
    
@@ -92,6 +95,29 @@ public class TableData {
       }
       
       return column.valueForJob( job );
+   }//End Method
+   
+   /**
+    * Method to provide the id to use for the given column.
+    * @param columnName the name of the {@link Column}.
+    * @return the {@link String} id.
+    */
+   public String idForColumn( String columnName ) {
+      Column column = columns.get( columnName );
+      if ( column == null ) {
+         return UNKNOWN_ENTRY;
+      }
+      
+      return column.id();
+   }//End Method
+   
+   /**
+    * Method to provide the id to use for the given column.
+    * @param id the id of the {@link Column}.
+    * @return the {@link Column} found, or null.
+    */
+   public Column columnForId( String id ) {
+      return ids.get( id );
    }//End Method
    
    /**

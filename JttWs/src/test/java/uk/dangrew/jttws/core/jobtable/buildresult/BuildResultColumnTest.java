@@ -167,4 +167,8 @@ public class BuildResultColumnTest {
       assertThat( entries.get( 3 ).isActive(), is( false ) );
    }//End Method
    
+   @Test public void shouldProvideId(){
+      assertThat( systemUnderTest.id(), is( BuildResultColumn.ID ) );
+   }//End Method
+   
 }//End Class

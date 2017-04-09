@@ -33,6 +33,13 @@ public interface Column {
    public ColumnType type();
    
    /**
+    * Access to a unique id for the {@link Column} that may be different to the name, and 
+    * compatible with jsp and html fsyntax.
+    * @return the id.
+    */
+   public String id();
+   
+   /**
     * Method to construct the {@link ConfigurationEntry}s for sorting options.
     * @return the {@link ConfigurationEntry}s for the possible sorting options on the {@link Column}.
     */

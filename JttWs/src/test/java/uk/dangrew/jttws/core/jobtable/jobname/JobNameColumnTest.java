@@ -122,4 +122,9 @@ public class JobNameColumnTest {
       assertThat( entries.get( 1 ).isActive(), is( false ) );
    }//End Method
    
+   @Test public void shouldProvideId(){
+      assertThat( systemUnderTest.id(), is( JobNameColumn.ID ) );
+      assertThat( JobNameColumn.staticId(), is( JobNameColumn.ID ) );
+   }//End Method
+   
 }//End Class

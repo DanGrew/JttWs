@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 
 import uk.dangrew.jttws.core.jobtable.TableData;
@@ -28,6 +29,7 @@ import uk.dangrew.jttws.mvc.web.configuration.ConfigurationProvider;
  * The {@link JobTableProperties} provides a method of converting {@link TableData} into the relevant
  * properties using the {@link Model} for the web ui.
  */
+@Component
 public class JobTableProperties {
 
    static final String COLUMNS = "columns";

@@ -8,6 +8,7 @@
  */
 package uk.dangrew.jttws.core.jobtable.properties;
 
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.Matchers.hasKey;
 import static org.hamcrest.Matchers.hasSize;
@@ -28,6 +29,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 
 import uk.dangrew.jttws.core.jobtable.TableData;
@@ -112,6 +114,10 @@ public class JobTablePropertiesTest {
       assertThat( filters.get( JobNameColumn.staticName() ), is( entries ) );
       
       assertThat( filters.get( BuildResultColumn.staticName() ), is( nullValue() ) );
+   }//End Method
+   
+   @Test public void shouldBeSpringComponent(){
+      assertThat( JobTableProperties.class.getAnnotation( Component.class ), is( notNullValue() ) );
    }//End Method
    
 }//End Class

@@ -74,4 +74,13 @@ public class CookieManagerTest {
       assertThat( cookie.getName(), is( PARAMETER ) );
       assertThat( cookie.getValue(), is( PARAMETER_VALUE ) );
    }//End Method
+   
+   @Test public void shouldSaveCookie(){
+      systemUnderTest.saveCookie( PARAMETER, PARAMETER_VALUE, response );
+      verify( response ).addCookie( cookieCaptor.capture() );
+      
+      Cookie cookie = cookieCaptor.getValue();
+      assertThat( cookie.getName(), is( PARAMETER ) );
+      assertThat( cookie.getValue(), is( PARAMETER_VALUE ) );
+   }//End Method
 }//End Class

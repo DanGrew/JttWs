@@ -31,6 +31,7 @@ import uk.dangrew.jttws.mvc.web.configuration.ConfigurationEntry;
 public class JobNameColumn implements Column {
 
    static final String NAME = "Job Name";
+   static final String ID = "job_name";
    
    private final JobNameFilter filter;
    private final Map< String, SortingFunction > sortingFunctions;
@@ -68,6 +69,21 @@ public class JobNameColumn implements Column {
     */
    public static final String staticName(){
       return NAME;
+   }//End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public String id() {
+      return staticId();
+   }//End Method
+   
+   /**
+    * Provides static access to the id, if constant.
+    * @return the id of the {@link JobNameColumn}.
+    */
+   public static String staticId(){
+      return ID;
    }//End Method
    
    /**

@@ -30,6 +30,7 @@ import uk.dangrew.jttws.mvc.web.configuration.ConfigurationEntry;
 public class BuildResultColumn implements Column {
    
    static final String NAME = "Result";
+   static final String ID = "build_result";
    
    private final Map< String, SortingFunction > sortings;
    private final BuildResultFilter filter;
@@ -65,6 +66,13 @@ public class BuildResultColumn implements Column {
    public static String staticName(){
       return NAME;
    }//End Method 
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public String id() {
+      return ID;
+   }//End Method
    
    /**
     * {@inheritDoc}

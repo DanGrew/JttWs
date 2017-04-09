@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import uk.dangrew.jttws.core.jobtable.TableData;
 import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
+import uk.dangrew.jttws.core.jobtable.parameters.ParametersPopulator;
 import uk.dangrew.jttws.core.jobtable.properties.JobTableProperties;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsUser;
@@ -43,16 +44,23 @@ public class SiteController {
 	
 	private final JenkinsService jenkinsJobs;
 	private final JobTableProperties properties;
+	private final ParametersPopulator paramsPopulator;
 	
 	/**
 	 * Constructs a new {@link SiteController}.
 	 * @param jenkinsJobs the {@link JenkinsService}.
 	 * @param properties the {@link JobTableProperties}.
+	 * @param paramsPopulator the {@link ParametersPopulator}.
 	 */
 	@Autowired
-	public SiteController(JenkinsService jenkinsJobs, JobTableProperties properties) {
+	public SiteController(
+	         JenkinsService jenkinsJobs, 
+	         JobTableProperties properties,
+	         ParametersPopulator paramsPopulator 
+   ) {
 		this.jenkinsJobs = jenkinsJobs;
 		this.properties = properties;
+		this.paramsPopulator = paramsPopulator;
 	}//End Constructor
 
 	/**
@@ -90,7 +98,10 @@ public class SiteController {
       
       model.addAttribute( JOB_COLUMNS, JobTableColumns.values() );
       
-      properties.populate( model, new TableData(), new JobTableParameters(), jobs, users );
+      TableData data = new TableData();
+      JobTableParameters parameters = paramsPopulator.construct( data, request, response );
+      
+      properties.populate( model, data, parameters, jobs, users );
       return PAGE_TABLE;
    }// End Method
 
