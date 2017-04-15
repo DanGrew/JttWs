@@ -22,7 +22,7 @@ import uk.dangrew.jttws.core.jobtable.jobname.JobNameColumn;
 public class JobTableParameters {
 
    private String includedColumns;
-   private Pair< String, String > columnSort;
+   private String columnSort;
 
    private final Map< String, String > columnFilters;
    
@@ -31,23 +31,22 @@ public class JobTableParameters {
     */
    public JobTableParameters() {
       this.columnFilters = new HashMap<>();
-      this.columnSort = new Pair<>( JobNameColumn.staticName(), JobNameAlphabetical.staticName() );
+      this.columnSort = JobNameAlphabetical.staticName();
    }//End Constructor
    
    /**
     * Method to set which column to sort by.
-    * @param columnName the name of the column to sort by.
     * @param sortingFunction the name of the sorting function.
     */
-   public void sortBy( String columnName, String sortingFunction ) {
-      columnSort = new Pair<>( columnName, sortingFunction );
+   public void sortBy( String sortingFunction ) {
+      columnSort = sortingFunction;
    }//End Method
    
    /**
-    * Access to the value configuring the sort associated with the given column.
-    * @return the configuration values for sorting (column name, function).
+    * Access to the value configuring the sort associated with a column.
+    * @return the sorting function.
     */
-   public Pair< String, String > sorting() {
+   public String sorting() {
       return columnSort;
    }//End Method
 

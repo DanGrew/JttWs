@@ -26,6 +26,7 @@ public class ParametersPopulator {
    
    static final String VALUE = "value";
    static final String ID = "id";
+   static final String SORT = "sort";
    
    private final CookieManager cookies;
    
@@ -54,24 +55,63 @@ public class ParametersPopulator {
    public JobTableParameters construct( TableData tableData, HttpServletRequest request, HttpServletResponse response ){
       JobTableParameters parameters = new JobTableParameters();
       
+      populateFilters( parameters, tableData, request, response );
+      populateSorting( parameters, tableData, request, response );
+      
+      return parameters;
+   }//End Method
+   
+   /**
+    * Method to populate the filters information for the page from the given parameters.
+    * @param parameters the {@link JobTableParameters}.
+    * @param tableData the {@link TableData}.
+    * @param request the {@link HttpServletRequest}.
+    * @param response the {@link HttpServletResponse}.
+    */
+   private void populateFilters( 
+            JobTableParameters parameters, 
+            TableData tableData, 
+            HttpServletRequest request, 
+            HttpServletResponse response 
+   ){
       for ( Column column : tableData.columns() ) {
          parameters.filterBy( column.name(), cookies.retrieveCookie( column.id(), request, response ) );
       }
       
       String id = cookies.retrieveCookie( ID, request, response );
       if ( id == null ) {
-         return parameters;
+         return;
       }
       
       Column column = tableData.columnForId( id );
       if ( column == null ) {
-         return parameters;
+         return;
       }
        
       String filter = cookies.retrieveCookie( VALUE, request, response );
       cookies.saveCookie( column.id(), filter, response );
       parameters.filterBy( column.name(), filter );
-      return parameters;
+   }//End Method
+   
+   /**
+    * Method to populate the sorting information for the page from the given parameters.
+    * @param parameters the {@link JobTableParameters}.
+    * @param tableData the {@link TableData}.
+    * @param request the {@link HttpServletRequest}.
+    * @param response the {@link HttpServletResponse}.
+    */
+   private void populateSorting( 
+            JobTableParameters parameters, 
+            TableData tableData, 
+            HttpServletRequest request, 
+            HttpServletResponse response 
+   ){
+      String sort = cookies.retrieveCookie( SORT, request, response );
+      if ( sort == null ) {
+         return;
+      }
+      
+      parameters.sortBy( sort );
    }//End Method
 
 }//End Class

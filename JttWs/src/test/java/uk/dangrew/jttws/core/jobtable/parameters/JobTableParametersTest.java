@@ -30,9 +30,9 @@ public class JobTableParametersTest {
    }//End Method
 
    @Test public void shouldHoldColumnToSortBy() {
-      assertThat( systemUnderTest.sorting(), is( new Pair<>( JobNameColumn.staticName(), JobNameAlphabetical.staticName() ) ) );
-      systemUnderTest.sortBy( ANYTHING, "something" );
-      assertThat( systemUnderTest.sorting(), is( new Pair<>( ANYTHING, "something" ) ) );
+      assertThat( systemUnderTest.sorting(), is( JobNameAlphabetical.staticName() ) );
+      systemUnderTest.sortBy( "something" );
+      assertThat( systemUnderTest.sorting(), is( "something" ) );
    }//End Method
    
    @Test public void shouldHoldFiltersByColumn(){

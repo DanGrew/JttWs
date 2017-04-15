@@ -27,6 +27,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.stereotype.Component;
 
 import uk.dangrew.jttws.core.jobtable.TableData;
+import uk.dangrew.jttws.core.jobtable.jobname.JobNameAlphabetical;
 import uk.dangrew.jttws.core.jobtable.jobname.JobNameColumn;
 import uk.dangrew.jttws.core.jobtable.structure.Column;
 import uk.dangrew.jttws.mvc.web.configuration.CookieManager;
@@ -105,6 +106,17 @@ public class ParametersPopulatorTest {
       when( cookies.retrieveCookie( ParametersPopulator.VALUE, request, response ) ).thenReturn( ANOTHER_ANYTHING );
       systemUnderTest.construct( tableData, request, response );
       verify( cookies ).saveCookie( JobNameColumn.staticId(), ANOTHER_ANYTHING, response );
+   }//End Method
+   
+   @Test public void shouldPopulateSortingConfiguration(){
+      when( cookies.retrieveCookie( ParametersPopulator.SORT, request, response ) ).thenReturn( ANOTHER_ANYTHING );
+      JobTableParameters parameters = systemUnderTest.construct( tableData, request, response );
+      assertThat( parameters.sorting(), is( ANOTHER_ANYTHING ) );
+   }//End Method
+   
+   @Test public void shouldIgnoreMissingSortingConfiguration(){
+      JobTableParameters parameters = systemUnderTest.construct( tableData, request, response );
+      assertThat( parameters.sorting(), is( JobNameAlphabetical.staticName() ) );
    }//End Method
 
 }//End Class

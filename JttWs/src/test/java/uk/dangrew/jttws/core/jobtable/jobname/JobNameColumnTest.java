@@ -68,14 +68,14 @@ public class JobNameColumnTest {
    }//End Method
    
    @Test public void shouldSortJobsUsingSortName() {
-      parameters.sortBy( systemUnderTest.name(), reverseAlphabetical.name() );
+      parameters.sortBy( reverseAlphabetical.name() );
       systemUnderTest.sort( jobs, parameters );
       
       assertThat( jobs, is( Arrays.asList( job2, job1 ) ) );
    }//End Method
    
    @Test( expected = IllegalArgumentException.class ) public void shouldNotAcceptSortJobsForInvalidName() {
-      parameters.sortBy( systemUnderTest.name(), "anything" );
+      parameters.sortBy( "anything" );
       systemUnderTest.sort( jobs, parameters );
    }//End Method
    

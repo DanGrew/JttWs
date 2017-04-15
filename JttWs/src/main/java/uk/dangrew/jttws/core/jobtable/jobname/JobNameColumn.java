@@ -104,9 +104,9 @@ public class JobNameColumn implements Column {
     * {@inheritDoc}
     */
    @Override public void sort( List< JwsJenkinsJob > jobs, JobTableParameters parameters ) {
-      Comparator< JwsJenkinsJob > function = sortingFunctions.get( parameters.sorting().getValue() );
+      Comparator< JwsJenkinsJob > function = sortingFunctions.get( parameters.sorting() );
       if ( function == null ) {
-         throw new IllegalArgumentException( "Invalid sorting function applied: " + parameters.sorting().getValue() );
+         throw new IllegalArgumentException( "Invalid sorting function applied: " + parameters.sorting() );
       }
       
       Collections.sort( jobs, function );
