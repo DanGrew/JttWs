@@ -22,16 +22,16 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${jobs}" var="job">
+			<c:forEach items="${data.jobs()}" var="job">
 				<tr>
 					<c:forEach items="${data.columns()}" var="column">
 						<td>
-							<c:if test="${data.typeForColumn( column.name() ) eq 'String'}">
-								<c:out value="${data.valueForColumn( column.name(), job )}" />
+							<c:if test="${column.type() eq 'String'}">
+								<c:out value="${column.valueFor( job )}" />
 							</c:if>
-							<c:if test="${data.typeForColumn( column.name() ) eq 'ProgressBar'}">
+							<c:if test="${column.type() eq 'ProgressBar'}">
 								<div class="progress">
-									<div class="progress-bar" style="width: ${data.valueForColumn( column.name(), job )}%"></div>
+									<div class="progress-bar" style="width: ${column.valueFor( job )}%"></div>
 								</div>
 							</c:if>
 						</td>

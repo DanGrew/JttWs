@@ -41,7 +41,7 @@ h3 {display: inline;}
 			<thead>
 				<tr>
 					<th>Columns</th>
-					<c:forEach items="${columns}" var="entry">
+					<c:forEach items="${data.columns()}" var="entry">
 						<th>${entry.name()} Filter</th>
 					</c:forEach>
 					<th>User Filter</th>
@@ -52,24 +52,24 @@ h3 {display: inline;}
 				<tr>
 					<td><select class="selectpicker" id="columnFilter" multiple
 						data-live-search="true" onchange="nothing">
-							<c:forEach items="${columns}" var="entry">
-								<c:if test="${entry.active}">
+							<c:forEach items="${data.columns()}" var="entry">
+								<c:if test="${entry.isActive()}">
 									<option selected>${entry.name()}</option>
 								</c:if>
-								<c:if test="${not entry.active}">
+								<c:if test="${not entry.isActive()}">
 									<option>${entry.name()}</option>
 								</c:if>
 							</c:forEach>
 					</select></td>
 					
-					<c:forEach items="${columns}" var="column">
-						<td><select class="selectpicker" id="${data.idForColumn( column.name() )}" multiple
+					<c:forEach items="${data.columns()}" var="column">
+						<td><select class="selectpicker" id="${column.id()}" multiple
 							data-live-search="true" onchange="filterAndRefreshJobs( this )">
-								<c:forEach items="${filters.get( column.name() )}" var="entry">
-									<c:if test="${entry.active}">
+								<c:forEach items="${data.filtersFor( column )}" var="entry">
+									<c:if test="${entry.isActive()}">
 										<option selected>${entry.name()}</option>
 									</c:if>
-									<c:if test="${not entry.active}">
+									<c:if test="${not entry.isActive()}">
 										<option>${entry.name()}</option>
 									</c:if>
 								</c:forEach>
@@ -79,10 +79,10 @@ h3 {display: inline;}
 					<td><select class="selectpicker" id="userFilter" multiple
 						data-live-search="true" onchange="filterAndRefreshJobs()">
 							<c:forEach items="${user_entries}" var="entry">
-								<c:if test="${entry.active}">
+								<c:if test="${entry.isActive()}">
 									<option selected>${entry.name()}</option>
 								</c:if>
-								<c:if test="${not entry.active}">
+								<c:if test="${not entry.isActive()}">
 									<option>${entry.name()}</option>
 								</c:if>
 							</c:forEach>
@@ -90,11 +90,11 @@ h3 {display: inline;}
 	
 					<td><select class="selectpicker" id="jobSort"
 						data-live-search="true" onchange="sortAndRefreshJobs()">
-							<c:forEach items="${sort_options}" var="entry">
-								<c:if test="${entry.active}">
+							<c:forEach items="${data.sortings()}" var="entry">
+								<c:if test="${entry.isActive()}">
 									<option selected>${entry.name()}</option>
 								</c:if>
-								<c:if test="${not entry.active}">
+								<c:if test="${not entry.isActive()}">
 									<option>${entry.name()}</option>
 								</c:if>
 							</c:forEach>
