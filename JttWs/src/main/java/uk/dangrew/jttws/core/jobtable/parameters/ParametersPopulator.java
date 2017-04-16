@@ -52,11 +52,11 @@ public class ParametersPopulator {
     * @param response the {@link HttpServletResponse}.
     * @return the constructed {@link JobTableParameters}.
     */
-   public JobTableParameters construct( TableSpecification tableData, HttpServletRequest request, HttpServletResponse response ){
+   public JobTableParameters construct( TableSpecification tableSpec, HttpServletRequest request, HttpServletResponse response ){
       JobTableParameters parameters = new JobTableParameters();
       
-      populateFilters( parameters, tableData, request, response );
-      populateSorting( parameters, tableData, request, response );
+      populateFilters( parameters, tableSpec, request, response );
+      populateSorting( parameters, request, response );
       
       return parameters;
    }//End Method
@@ -70,11 +70,11 @@ public class ParametersPopulator {
     */
    private void populateFilters( 
             JobTableParameters parameters, 
-            TableSpecification tableData, 
+            TableSpecification tableSpec, 
             HttpServletRequest request, 
             HttpServletResponse response 
    ){
-      for ( Column column : tableData.columns() ) {
+      for ( Column column : tableSpec.columns() ) {
          parameters.filterBy( column.name(), cookies.retrieveCookie( column.id(), request, response ) );
       }
       
@@ -83,7 +83,7 @@ public class ParametersPopulator {
          return;
       }
       
-      Column column = tableData.columnForId( id );
+      Column column = tableSpec.columnForId( id );
       if ( column == null ) {
          return;
       }
@@ -102,7 +102,6 @@ public class ParametersPopulator {
     */
    private void populateSorting( 
             JobTableParameters parameters, 
-            TableSpecification tableData, 
             HttpServletRequest request, 
             HttpServletResponse response 
    ){

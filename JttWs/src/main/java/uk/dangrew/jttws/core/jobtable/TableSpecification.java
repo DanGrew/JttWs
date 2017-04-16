@@ -18,8 +18,6 @@ import uk.dangrew.jttws.core.jobtable.buildresult.BuildResultColumn;
 import uk.dangrew.jttws.core.jobtable.jobname.JobNameColumn;
 import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
 import uk.dangrew.jttws.core.jobtable.structure.Column;
-import uk.dangrew.jttws.core.jobtable.web.PageFilter;
-import uk.dangrew.jttws.core.jobtable.web.PageSorting;
 import uk.dangrew.jttws.mvc.repository.PageJob;
 import uk.dangrew.jttws.mvc.web.configuration.ConfigurationEntry;
 
