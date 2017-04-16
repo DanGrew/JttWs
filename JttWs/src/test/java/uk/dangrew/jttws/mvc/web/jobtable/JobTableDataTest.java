@@ -21,14 +21,14 @@ import org.junit.Test;
 import uk.dangrew.jtt.model.jobs.JenkinsJobImpl;
 import uk.dangrew.jtt.model.users.JenkinsUserImpl;
 import uk.dangrew.jttws.mvc.repository.PageJob;
-import uk.dangrew.jttws.mvc.repository.JwsJenkinsUser;
+import uk.dangrew.jttws.mvc.repository.PageUser;
 
 public class JobTableDataTest {
 
-   private JwsJenkinsUser oliver;
-   private JwsJenkinsUser felicity;
-   private JwsJenkinsUser diggle;
-   private List< JwsJenkinsUser > users;
+   private PageUser oliver;
+   private PageUser felicity;
+   private PageUser diggle;
+   private List< PageUser > users;
    
    private PageJob city;
    private PageJob thea;
@@ -40,9 +40,9 @@ public class JobTableDataTest {
       systemUnderTest = new JobTableData();
       
       users = new ArrayList<>();
-      users.add( oliver = new JwsJenkinsUser( new JenkinsUserImpl( "Oliver" ) ) );
-      users.add( felicity = new JwsJenkinsUser( new JenkinsUserImpl( "Felicity" ) ) );
-      users.add( diggle = new JwsJenkinsUser( new JenkinsUserImpl( "Diggle" ) ) );
+      users.add( oliver = new PageUser( new JenkinsUserImpl( "Oliver" ) ) );
+      users.add( felicity = new PageUser( new JenkinsUserImpl( "Felicity" ) ) );
+      users.add( diggle = new PageUser( new JenkinsUserImpl( "Diggle" ) ) );
       
       jobs = new ArrayList<>();
       jobs.add( city = new PageJob( new JenkinsJobImpl( "Save City" ) ) );

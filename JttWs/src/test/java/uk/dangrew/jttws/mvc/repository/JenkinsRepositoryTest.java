@@ -73,11 +73,11 @@ public class JenkinsRepositoryTest {
       when( context.getBean( JenkinsConnection.class ) ).thenReturn( connection );
       
       @SuppressWarnings("unchecked") //mocking only 
-      List< JwsJenkinsUser > list = mock( List.class );
+      List< PageUser > list = mock( List.class );
       when( connection.getUsers() ).thenReturn( list );
       
       systemUnderTest.setApplicationContext( context );
-      List< JwsJenkinsUser > retrieved = systemUnderTest.getJenkinsUsers();
+      List< PageUser > retrieved = systemUnderTest.getJenkinsUsers();
       assertThat( retrieved, is( list ) );
       assertThat( retrieved, is( not( new ArrayList<>() ) ) );
    }//End Method

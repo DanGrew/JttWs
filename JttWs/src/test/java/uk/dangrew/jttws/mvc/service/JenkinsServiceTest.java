@@ -25,7 +25,7 @@ import org.springframework.stereotype.Service;
 
 import uk.dangrew.jttws.mvc.repository.JenkinsRepository;
 import uk.dangrew.jttws.mvc.repository.PageJob;
-import uk.dangrew.jttws.mvc.repository.JwsJenkinsUser;
+import uk.dangrew.jttws.mvc.repository.PageUser;
 
 public class JenkinsServiceTest {
 
@@ -55,7 +55,7 @@ public class JenkinsServiceTest {
    
    @Test public void shouldRetrieveUsersFromRepository(){
       @SuppressWarnings("unchecked") //mocking only 
-      List< JwsJenkinsUser > list = mock( List.class );
+      List< PageUser > list = mock( List.class );
       when( repository.getJenkinsUsers() ).thenReturn( list );
       
       assertThat( systemUnderTest.getUsers(), is( list ) );

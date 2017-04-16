@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 
 import uk.dangrew.jttws.mvc.repository.JenkinsRepository;
 import uk.dangrew.jttws.mvc.repository.PageJob;
-import uk.dangrew.jttws.mvc.repository.JwsJenkinsUser;
+import uk.dangrew.jttws.mvc.repository.PageUser;
 
 /**
  * The {@link JenkinsService} provides a {@link Service} for interacting with the {@link JenkinsRepository}.
@@ -43,10 +43,10 @@ public class JenkinsService {
 	}//End Method
 	
 	/**
-    * Getter the {@link JwsJenkinsUser}s.
-    * @return the {@link JwsJenkinsUser}s.
+    * Getter the {@link PageUser}s.
+    * @return the {@link PageUser}s.
     */
-   public List< JwsJenkinsUser > getUsers(){
+   public List< PageUser > getUsers(){
       return repository.getJenkinsUsers();
    }//End Method
 

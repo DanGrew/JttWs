@@ -17,14 +17,14 @@ import org.junit.Test;
 import uk.dangrew.jtt.model.users.JenkinsUser;
 import uk.dangrew.jtt.model.users.JenkinsUserImpl;
 
-public class JwsJenkinsUserTest {
+public class PageUserTest {
 
    private JenkinsUser user;
-   private JwsJenkinsUser systemUnderTest;
+   private PageUser systemUnderTest;
 
    @Before public void initialiseSystemUnderTest() {
       user = new JenkinsUserImpl( "User" );
-      systemUnderTest = new JwsJenkinsUser( user );
+      systemUnderTest = new PageUser( user );
    }//End Method
    
    @Test public void shouldProvideAssociation(){

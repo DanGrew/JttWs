@@ -22,7 +22,7 @@ import uk.dangrew.jttws.core.jobtable.web.PageColumn;
 import uk.dangrew.jttws.core.jobtable.web.PageFilter;
 import uk.dangrew.jttws.core.jobtable.web.PageTable;
 import uk.dangrew.jttws.mvc.repository.PageJob;
-import uk.dangrew.jttws.mvc.repository.JwsJenkinsUser;
+import uk.dangrew.jttws.mvc.repository.PageUser;
 
 /**
  * The {@link JobTableProperties} provides a method of converting {@link TableSpecification} into the relevant
@@ -42,7 +42,7 @@ public class JobTableProperties {
    private PageTable table;
    private JobTableParameters parameters;
    private List< PageJob > jobs;
-   private List< JwsJenkinsUser > users;
+   private List< PageUser > users;
 
    /**
     * Constructs a new {@link JobTableProperties}.
@@ -57,14 +57,14 @@ public class JobTableProperties {
     * @param data the {@link TableSpecification}.
     * @param parameters the {@link JobTableParameters}.
     * @param jobs the {@link List} of {@link PageJob}s available.
-    * @param users the {@link List} of {@link JwsJenkinsUser}s available.
+    * @param users the {@link List} of {@link PageUser}s available.
     */
    public void populateTable( 
             PageTable table,
             TableSpecification data, 
             JobTableParameters parameters, 
             List< PageJob > jobs, 
-            List< JwsJenkinsUser > users
+            List< PageUser > users
    ) {
       this.table = table;
       this.tableData = data;

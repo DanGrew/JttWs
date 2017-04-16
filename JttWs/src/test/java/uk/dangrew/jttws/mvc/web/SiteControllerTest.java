@@ -42,7 +42,7 @@ import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
 import uk.dangrew.jttws.core.jobtable.parameters.ParametersPopulator;
 import uk.dangrew.jttws.core.jobtable.properties.JobTableProperties;
 import uk.dangrew.jttws.mvc.repository.PageJob;
-import uk.dangrew.jttws.mvc.repository.JwsJenkinsUser;
+import uk.dangrew.jttws.mvc.repository.PageUser;
 import uk.dangrew.jttws.mvc.service.JenkinsService;
 import uk.dangrew.jttws.mvc.web.jobtable.JobTableColumns;
 
@@ -56,7 +56,7 @@ public class SiteControllerTest {
    
    private JobTableParameters parameters;
    private List< PageJob > jobs;
-   private List< JwsJenkinsUser > users;
+   private List< PageUser > users;
    
    @Mock private JobTableProperties properties;
    @Mock private ParametersPopulator paramsPopulator;
@@ -71,7 +71,7 @@ public class SiteControllerTest {
       
       jobs = Arrays.asList( new PageJob( new JenkinsJobImpl( "anything" ) ) );
       when( service.getJobs() ).thenReturn( jobs );
-      users = Arrays.asList( new JwsJenkinsUser( new JenkinsUserImpl( "anyone" ) ) );
+      users = Arrays.asList( new PageUser( new JenkinsUserImpl( "anyone" ) ) );
       when( service.getUsers() ).thenReturn( users );
       
       systemUnderTest = new SiteController( service, properties, paramsPopulator );

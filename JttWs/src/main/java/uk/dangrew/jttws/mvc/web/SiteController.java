@@ -24,7 +24,7 @@ import uk.dangrew.jttws.core.jobtable.parameters.ParametersPopulator;
 import uk.dangrew.jttws.core.jobtable.properties.JobTableProperties;
 import uk.dangrew.jttws.core.jobtable.web.PageTable;
 import uk.dangrew.jttws.mvc.repository.PageJob;
-import uk.dangrew.jttws.mvc.repository.JwsJenkinsUser;
+import uk.dangrew.jttws.mvc.repository.PageUser;
 import uk.dangrew.jttws.mvc.service.JenkinsService;
 import uk.dangrew.jttws.mvc.web.jobtable.JobTableColumns;
 
@@ -95,7 +95,7 @@ public class SiteController {
             Model model 
    ) {
       List< PageJob > jobs = jenkinsJobs.getJobs();
-      List< JwsJenkinsUser > users = jenkinsJobs.getUsers();
+      List< PageUser > users = jenkinsJobs.getUsers();
       
       model.addAttribute( JOB_COLUMNS, JobTableColumns.values() );
       

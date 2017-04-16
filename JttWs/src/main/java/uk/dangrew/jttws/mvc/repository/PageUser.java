@@ -11,18 +11,18 @@ package uk.dangrew.jttws.mvc.repository;
 import uk.dangrew.jtt.model.users.JenkinsUser;
 
 /**
- * The {@link JwsJenkinsUser} provides a wrapper for the {@link JenkinsUser} for communicating
+ * The {@link PageUser} provides a wrapper for the {@link JenkinsUser} for communicating
  * with web pages.
  */
-public class JwsJenkinsUser {
+public class PageUser {
 
    private final JenkinsUser user;
    
    /**
-    * Constructs a new {@link JwsJenkinsUser}.
+    * Constructs a new {@link PageUser}.
     * @param user the {@link JenkinsUser} associated.
     */
-   public JwsJenkinsUser( JenkinsUser user ) {
+   public PageUser( JenkinsUser user ) {
       this.user = user;
    }//End Constructor
 
