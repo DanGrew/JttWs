@@ -25,8 +25,8 @@ import uk.dangrew.jttws.core.jobtable.common.ReverseSorting;
 import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
 import uk.dangrew.jttws.core.jobtable.structure.ColumnType;
 import uk.dangrew.jttws.core.jobtable.structure.SortingFunction;
+import uk.dangrew.jttws.core.jobtable.web.PageSorting;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
-import uk.dangrew.jttws.mvc.web.configuration.ConfigurationEntry;
 
 public class JobNameColumnTest {
 
@@ -113,7 +113,7 @@ public class JobNameColumnTest {
    }//End Method
    
    @Test public void shouldProvideSortOptionsAllInActive(){
-      List< ConfigurationEntry > entries = systemUnderTest.sortOptions();
+      List< PageSorting > entries = systemUnderTest.sortOptions();
       assertThat( entries, hasSize( 2 ) );
       
       assertThat( entries.get( 0 ).name(), is( alphabetical.name() ) );

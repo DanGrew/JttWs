@@ -16,8 +16,8 @@ import java.util.Set;
 
 import uk.dangrew.jttws.core.jobtable.common.WebUiParameterParsing;
 import uk.dangrew.jttws.core.jobtable.structure.Filter;
+import uk.dangrew.jttws.core.jobtable.web.PageFilter;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
-import uk.dangrew.jttws.mvc.web.configuration.ConfigurationEntry;
 
 /**
  * The {@link JobNameFilter} is a {@link Filter} for filtering {@link JwsJenkinsJob}s by name.
@@ -36,13 +36,13 @@ public class JobNameFilter implements Filter {
    /**
     * {@inheritDoc}
     */
-   @Override public List< ConfigurationEntry > filterOptions( List< JwsJenkinsJob > jobs, String existingFilters ) {
+   @Override public List< PageFilter > filterOptions( List< JwsJenkinsJob > jobs, String existingFilters ) {
       Set< String > individualFilters = new LinkedHashSet<>( webParsing.parseStringList( existingFilters ) );
       
-      List< ConfigurationEntry > entries = new ArrayList<>();
+      List< PageFilter > entries = new ArrayList<>();
       for ( JwsJenkinsJob job : jobs ) {
          if ( !individualFilters.contains( job.name() ) ) {
-            ConfigurationEntry entry = new ConfigurationEntry( job.name() );
+            PageFilter entry = new PageFilter( job.name() );
             if ( !individualFilters.isEmpty() ) {
                entry.inactive();
             }
@@ -51,7 +51,7 @@ public class JobNameFilter implements Filter {
       }
       
       for ( String existing : individualFilters ) {
-         entries.add( new ConfigurationEntry( existing ) );
+         entries.add( new PageFilter( existing ) );
       }
       
       Collections.sort( entries );

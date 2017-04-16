@@ -9,9 +9,7 @@
 package uk.dangrew.jttws.core.jobtable.properties;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
@@ -20,9 +18,11 @@ import uk.dangrew.jttws.core.jobtable.TableData;
 import uk.dangrew.jttws.core.jobtable.common.WebUiParameterParsing;
 import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
 import uk.dangrew.jttws.core.jobtable.structure.Column;
+import uk.dangrew.jttws.core.jobtable.web.PageColumn;
+import uk.dangrew.jttws.core.jobtable.web.PageFilter;
+import uk.dangrew.jttws.core.jobtable.web.PageTable;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsUser;
-import uk.dangrew.jttws.mvc.web.configuration.ConfigurationEntry;
 import uk.dangrew.jttws.mvc.web.configuration.ConfigurationProvider;
 
 /**
@@ -40,8 +40,8 @@ public class JobTableProperties {
    private final WebUiParameterParsing parsing;
    private final ConfigurationProvider configuration;
    
-   private Model model;
    private TableData tableData;
+   private PageTable table;
    private JobTableParameters parameters;
    private List< JwsJenkinsJob > jobs;
    private List< JwsJenkinsUser > users;
@@ -56,27 +56,26 @@ public class JobTableProperties {
 
    /**
     * Method to populate the properties in the {@link Model}.
-    * @param model the {@link Model} to populate.
+    * @param table the {@link PageTable} to populate.
     * @param data the {@link TableData}.
     * @param parameters the {@link JobTableParameters}.
     * @param jobs the {@link List} of {@link JwsJenkinsJob}s available.
     * @param users the {@link List} of {@link JwsJenkinsUser}s available.
     */
-   public void populate( 
-            Model model, 
+   public void populateTable( 
+            PageTable table,
             TableData data, 
             JobTableParameters parameters, 
             List< JwsJenkinsJob > jobs, 
             List< JwsJenkinsUser > users
    ) {
-      this.model = model;
+      this.table = table;
       this.tableData = data;
       this.parameters = parameters;
       this.jobs = new ArrayList<>( jobs );
       this.users = new ArrayList<>( users );
       
       populateIncludedColumns();
-      populateData();
       populateFilteredJobs();
       
       //populate sorting config
@@ -85,31 +84,25 @@ public class JobTableProperties {
    /**
     * Method to populate the table data in the {@link Model}.
     */
-   private void populateData(){
-      model.addAttribute( DATA, tableData );
+   public void populateAttributes( Model model, PageTable table ){
+      model.addAttribute( DATA, table );
    }//End Method
    
    /**
     * Method to populate the {@link Column}s and whether they are in use or not.
     */
    private void populateIncludedColumns(){
-      List< ConfigurationEntry > entries = new ArrayList<>();
-      Map< String, List< ConfigurationEntry > > filters = new HashMap<>();
-      
       List< String > includedJobs = parsing.parseStringList( parameters.includedColumns() );
       
       for ( Column column : tableData.columns() ) {
-         ConfigurationEntry entry = new ConfigurationEntry( column.name() );
-         if ( !includedJobs.isEmpty() && !includedJobs.contains( column.name() ) ) {
-            entry.inactive();
-         } else {
-            filters.put( column.name(), tableData.filtersFor( column.name(), jobs, parameters ) );
+         boolean inactive = !includedJobs.isEmpty() && !includedJobs.contains( column.name() );
+         PageColumn pageColumn = new PageColumn( column, !inactive );
+         table.addColumn( pageColumn );
+         if ( !inactive ) {
+            List< PageFilter > columnFilters = tableData.filtersFor( column.name(), jobs, parameters );
+            columnFilters.forEach( e -> table.addFilter( pageColumn, e ) );
          }
-         entries.add( entry );
       }
-      
-      model.addAttribute( COLUMNS, entries );
-      model.addAttribute( FILTERS, filters );
    }//End Method
    
    /**
@@ -117,7 +110,20 @@ public class JobTableProperties {
     */
    private void populateFilteredJobs(){
       tableData.filter( jobs, parameters );
-      model.addAttribute( JOBS, jobs );
+      jobs.forEach( table::addJob );
+   }//End Method
+   
+   private void populateSortOptions(){
+      //remove id fields
+      //refactor 'jws' to 'page'
+      //tidy up impl in here
+      //tidy up test for this
+      //refactor calls in pages for new interface
+      //tidy up table data interface
+      //rename table data to table spec
+      //implement populating sortings
+      //remove config provider
+      //refactor inactive()
    }//End Method
    
 }//End Class

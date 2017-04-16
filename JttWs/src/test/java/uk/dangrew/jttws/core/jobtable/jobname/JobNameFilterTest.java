@@ -20,8 +20,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import uk.dangrew.jtt.model.jobs.JenkinsJobImpl;
+import uk.dangrew.jttws.core.jobtable.web.PageFilter;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
-import uk.dangrew.jttws.mvc.web.configuration.ConfigurationEntry;
 
 public class JobNameFilterTest {
 
@@ -51,7 +51,7 @@ public class JobNameFilterTest {
    }//End Method
    
    @Test public void shouldProvideFilterOptionPerJobActiveWhenNotConfigured(){
-      List< ConfigurationEntry > entries = systemUnderTest.filterOptions( jobs, null );
+      List< PageFilter > entries = systemUnderTest.filterOptions( jobs, null );
       assertThat( entries, hasSize( jobs.size() ) );
       
       for ( int i = 0; i < jobs.size(); i++ ) {
@@ -62,7 +62,7 @@ public class JobNameFilterTest {
    
    //Efficient to test alphabetical order here too.
    @Test public void shouldProvideFilterOptionForExistingFiltersAndInAlphabeticalOrder(){
-      List< ConfigurationEntry > entries = systemUnderTest.filterOptions( jobs, "aaaa" );
+      List< PageFilter > entries = systemUnderTest.filterOptions( jobs, "aaaa" );
       assertThat( entries, hasSize( jobs.size() + 1 ) );
       
       assertThat( entries.get( 0 ).name(), is( "aaaa" ) );
@@ -75,7 +75,7 @@ public class JobNameFilterTest {
    }//End Method
    
    @Test public void shouldProvideFilterOptionForExistingFiltersOfValidJob(){
-      List< ConfigurationEntry > entries = systemUnderTest.filterOptions( jobs, job1.name() );
+      List< PageFilter > entries = systemUnderTest.filterOptions( jobs, job1.name() );
       assertThat( entries, hasSize( 2 ) );
       
       assertThat( entries.get( 0 ).name(), is( jobs.get( 0 ).name() ) );

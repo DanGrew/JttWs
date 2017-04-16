@@ -10,8 +10,8 @@ package uk.dangrew.jttws.core.jobtable.structure;
 
 import java.util.List;
 
+import uk.dangrew.jttws.core.jobtable.web.PageFilter;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
-import uk.dangrew.jttws.mvc.web.configuration.ConfigurationEntry;
 
 /**
  * The {@link Filter} provides an interface for filtering {@link JwsJenkinsJob}s in the job table.
@@ -19,13 +19,13 @@ import uk.dangrew.jttws.mvc.web.configuration.ConfigurationEntry;
 public interface Filter {
 
    /**
-    * Method to provide the {@link ConfigurationEntry}s for the possible filters for the given {@link JwsJenkinsJob}s
+    * Method to provide the {@link PageFilter}s for the possible filters for the given {@link JwsJenkinsJob}s
     * and existing filters.
     * @param jobs the {@link JwsJenkinsJob}s the filters are relevant for.
     * @param existingFilters the existing filter applied.
-    * @return the {@link ConfigurationEntry}s.
+    * @return the {@link PageFilter}s.
     */
-   public List< ConfigurationEntry > filterOptions( List< JwsJenkinsJob > jobs, String existingFilters );
+   public List< PageFilter > filterOptions( List< JwsJenkinsJob > jobs, String existingFilters );
    
    /**
     * Method to identify the exclusions from the given {@link JwsJenkinsJob}, without modifying the jobs.

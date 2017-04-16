@@ -25,8 +25,8 @@ import uk.dangrew.jtt.model.jobs.JenkinsJobImpl;
 import uk.dangrew.jttws.core.jobtable.common.ReverseSorting;
 import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
 import uk.dangrew.jttws.core.jobtable.structure.ColumnType;
+import uk.dangrew.jttws.core.jobtable.web.PageSorting;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
-import uk.dangrew.jttws.mvc.web.configuration.ConfigurationEntry;
 
 public class BuildResultColumnTest {
 
@@ -65,13 +65,8 @@ public class BuildResultColumnTest {
       assertThat( systemUnderTest.valueForJob( jwsJob ), is( BuildResultStatus.SUCCESS.displayName() ) );
    }//End Method
    
-   @Test( expected = IllegalArgumentException.class ) public void shouldNotAcceptSortForAnotherColumn(){
-      parameters.sortBy( "anything", BuildResultAlphabetical.staticName() );
-      systemUnderTest.sort( jobs, parameters );
-   }//End Method
-   
    @Test( expected = IllegalArgumentException.class ) public void shouldNotAcceptSortForInvalidSorting(){
-      parameters.sortBy( BuildResultColumn.staticName(), "anything" );
+      parameters.sortBy( "anything" );
       systemUnderTest.sort( jobs, parameters );
    }//End Method
    
@@ -79,7 +74,7 @@ public class BuildResultColumnTest {
       job.setBuildStatus( BuildResultStatus.NOT_BUILT );
       job2.setBuildStatus( BuildResultStatus.FAILURE );
       
-      parameters.sortBy( BuildResultColumn.staticName(), BuildResultAlphabetical.staticName() );
+      parameters.sortBy( BuildResultAlphabetical.staticName() );
       systemUnderTest.sort( jobs, parameters );
       
       assertThat( jobs, is( Arrays.asList( jwsJob2, jwsJob ) ) );
@@ -89,17 +84,17 @@ public class BuildResultColumnTest {
       job.setBuildStatus( BuildResultStatus.FAILURE );
       job2.setBuildStatus( BuildResultStatus.NOT_BUILT );
       
-      parameters.sortBy( BuildResultColumn.staticName(), ReverseSorting.staticName( BuildResultAlphabetical.staticName() ) );
+      parameters.sortBy( ReverseSorting.staticName( BuildResultAlphabetical.staticName() ) );
       systemUnderTest.sort( jobs, parameters );
       
       assertThat( jobs, is( Arrays.asList( jwsJob2, jwsJob ) ) );
    }//End Method
    
    @Test public void shouldSortBySeverity(){
-      job.setBuildStatus( BuildResultStatus.NOT_BUILT );
-      job2.setBuildStatus( BuildResultStatus.FAILURE );
+      job.setBuildStatus( BuildResultStatus.FAILURE );
+      job2.setBuildStatus( BuildResultStatus.NOT_BUILT );
       
-      parameters.sortBy( BuildResultColumn.staticName(), BuildResultAlphabetical.staticName() );
+      parameters.sortBy( BuildResultSeverity.staticName() );
       systemUnderTest.sort( jobs, parameters );
       
       assertThat( jobs, is( Arrays.asList( jwsJob2, jwsJob ) ) );
@@ -109,10 +104,10 @@ public class BuildResultColumnTest {
       job.setBuildStatus( BuildResultStatus.FAILURE );
       job2.setBuildStatus( BuildResultStatus.NOT_BUILT );
       
-      parameters.sortBy( BuildResultColumn.staticName(), ReverseSorting.staticName( BuildResultAlphabetical.staticName() ) );
+      parameters.sortBy( ReverseSorting.staticName( BuildResultSeverity.staticName() ) );
       systemUnderTest.sort( jobs, parameters );
       
-      assertThat( jobs, is( Arrays.asList( jwsJob2, jwsJob ) ) );
+      assertThat( jobs, is( Arrays.asList( jwsJob, jwsJob2 ) ) );
    }//End Method
 
    @Test public void shouldApplySingleFilterToExcludeJob(){
@@ -154,7 +149,7 @@ public class BuildResultColumnTest {
    }//End Method
    
    @Test public void shouldProvideSortOptionsAllInActive(){
-      List< ConfigurationEntry > entries = systemUnderTest.sortOptions();
+      List< PageSorting > entries = systemUnderTest.sortOptions();
       assertThat( entries, hasSize( 4 ) );
       
       assertThat( entries.get( 0 ).name(), is( BuildResultAlphabetical.staticName() ) );

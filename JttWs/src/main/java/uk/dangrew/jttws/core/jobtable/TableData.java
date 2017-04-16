@@ -19,6 +19,8 @@ import uk.dangrew.jttws.core.jobtable.jobname.JobNameColumn;
 import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
 import uk.dangrew.jttws.core.jobtable.structure.Column;
 import uk.dangrew.jttws.core.jobtable.structure.ColumnType;
+import uk.dangrew.jttws.core.jobtable.web.PageFilter;
+import uk.dangrew.jttws.core.jobtable.web.PageSorting;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
 import uk.dangrew.jttws.mvc.web.configuration.ConfigurationEntry;
 
@@ -33,6 +35,7 @@ public class TableData {
    private final List< Column > orderedTableColumns;
    private final Map< String, Column > columns;
    private final Map< String, Column > ids;
+   private final Map< String, Column > sortings;
    
    /**
     * Constructs a new {@link TableData}.
@@ -49,11 +52,19 @@ public class TableData {
       this.columns = new HashMap<>();
       this.ids = new HashMap<>();
       this.orderedTableColumns = new ArrayList<>();
+      this.sortings = new HashMap<>();
       
       this.orderedTableColumns.addAll( Arrays.asList( columns ) );
       for ( Column column : columns ) {
          this.columns.put( column.name(), column );
          this.ids.put( column.id(), column );
+         
+         for ( ConfigurationEntry sort : column.sortOptions() ) {
+            if ( this.sortings.containsKey( sort.name() ) ) {
+               throw new IllegalArgumentException( "Sorting already exists: " + sort.name() );
+            }
+            this.sortings.put( sort.name(), column );
+         }
       }
    }//End Constructor
    
@@ -73,13 +84,30 @@ public class TableData {
     * @param parameters the {@link JobTableParameters} for existing filters.
     * @return the {@link ConfigurationEntry}s.
     */
-   public List< ConfigurationEntry > filtersFor( String columnName, List< JwsJenkinsJob > jobs, JobTableParameters parameters ) {
+   public List< PageFilter > filtersFor( String columnName, List< JwsJenkinsJob > jobs, JobTableParameters parameters ) {
       Column column = columns.get( columnName );
       if ( column == null ) {
          return new ArrayList<>();
       }
       
       return column.filters( jobs, parameters );
+   }//End Method
+   
+   /**
+    * Method to provide the {@link PageSorting}s for the {@link uk.dangrew.jttws.core.jobtable.structure.Filter}s available for the 
+    * given {@link Column}.
+    * @param columnName the name of the {@link Column}.
+    * @param jobs the {@link JwsJenkinsJob}s the filters are relevant to.
+    * @param parameters the {@link JobTableParameters} for existing filters.
+    * @return the {@link PageSorting}s.
+    */
+   public List< PageSorting > sortingOptionsFor( String columnName, JobTableParameters parameters ) {
+      Column column = columns.get( columnName );
+      if ( column == null ) {
+         return new ArrayList<>();
+      }
+      
+      return column.sortOptions();
    }//End Method
    
    /**
@@ -141,9 +169,9 @@ public class TableData {
     * @param parameters the {@link JobTableParameters} providing the sorting method.
     */
    public void sort( List< JwsJenkinsJob > jobs, JobTableParameters parameters ) {
-      Column column = columns.get( parameters.sorting().getKey() );
+      Column column = sortings.get( parameters.sorting() );
       if ( column == null ) {
-         throw new IllegalArgumentException( "Invalid column to sort by: " + parameters.sorting().getKey() );
+         throw new IllegalArgumentException( "Invalid column sort to apply: " + parameters.sorting() );
       }
       
       column.sort( jobs, parameters );

@@ -11,7 +11,6 @@ package uk.dangrew.jttws.core.jobtable.buildresult;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,8 +21,8 @@ import org.junit.Test;
 
 import uk.dangrew.jtt.model.jobs.BuildResultStatus;
 import uk.dangrew.jtt.model.jobs.JenkinsJobImpl;
+import uk.dangrew.jttws.core.jobtable.web.PageFilter;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
-import uk.dangrew.jttws.mvc.web.configuration.ConfigurationEntry;
 
 public class BuildResultFilterTest {
 
@@ -60,7 +59,7 @@ public class BuildResultFilterTest {
    }//End Method
    
    @Test public void shouldProvideFiltersForEachResultSortedActiveWhenNotConfigured(){
-      List< ConfigurationEntry > entries = systemUnderTest.filterOptions( jobs, null );
+      List< PageFilter > entries = systemUnderTest.filterOptions( jobs, null );
       assertThat( entries, hasSize( BuildResultStatus.values().length ) );
       
       assertThat( entries.get( 0 ).name(), is( BuildResultStatus.ABORTED.displayName() ) );
@@ -78,7 +77,7 @@ public class BuildResultFilterTest {
    }//End Method
    
    @Test public void shouldIgnoreFiltersForExistingConfiguration(){
-      List< ConfigurationEntry > entries = systemUnderTest.filterOptions( jobs, "anything" );
+      List< PageFilter > entries = systemUnderTest.filterOptions( jobs, "anything" );
       assertThat( entries, hasSize( BuildResultStatus.values().length ) );
       
       assertThat( entries.get( 0 ).name(), is( BuildResultStatus.ABORTED.displayName() ) );
@@ -96,7 +95,7 @@ public class BuildResultFilterTest {
    }//End Method
    
    @Test public void shouldMakeUnusedFiltersInactive(){
-      List< ConfigurationEntry > entries = systemUnderTest.filterOptions( jobs, "Failure, Not Built" );
+      List< PageFilter > entries = systemUnderTest.filterOptions( jobs, "Failure, Not Built" );
       assertThat( entries, hasSize( BuildResultStatus.values().length ) );
       
       assertThat( entries.get( 0 ).name(), is( BuildResultStatus.ABORTED.displayName() ) );

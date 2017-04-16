@@ -20,8 +20,9 @@ import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
 import uk.dangrew.jttws.core.jobtable.structure.Column;
 import uk.dangrew.jttws.core.jobtable.structure.ColumnType;
 import uk.dangrew.jttws.core.jobtable.structure.SortingFunction;
+import uk.dangrew.jttws.core.jobtable.web.PageFilter;
+import uk.dangrew.jttws.core.jobtable.web.PageSorting;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
-import uk.dangrew.jttws.mvc.web.configuration.ConfigurationEntry;
 
 /**
  * The {@link BuildResultColumn} represents the column of data holding the {@link uk.dangrew.jtt.model.jobs.BuildResultStatus}
@@ -92,13 +93,9 @@ public class BuildResultColumn implements Column {
     * {@inheritDoc}
     */
    @Override public void sort( List< JwsJenkinsJob > jobs, JobTableParameters parameters ) {
-      if ( !parameters.sorting().getKey().equals( name() ) ) {
-         throw new IllegalArgumentException( "Sorting on " + name() + " instead of " + parameters.sorting().getKey() );
-      }
-      
-      SortingFunction sorting = sortings.get( parameters.sorting().getValue() );
+      SortingFunction sorting = sortings.get( parameters.sorting() );
       if ( sorting == null ) {
-         throw new IllegalArgumentException( "No sorting defined on " + name() + " for " + parameters.sorting().getValue() );
+         throw new IllegalArgumentException( "No sorting defined on " + name() + " for " + parameters.sorting() );
       }
       
       Collections.sort( jobs, sorting );
@@ -107,10 +104,10 @@ public class BuildResultColumn implements Column {
    /**
     * {@inheritDoc}
     */
-   @Override public List< ConfigurationEntry > sortOptions() {
-      List< ConfigurationEntry > entries = new ArrayList<>();
+   @Override public List< PageSorting > sortOptions() {
+      List< PageSorting > entries = new ArrayList<>();
       for ( Entry< String, SortingFunction > entry : sortings.entrySet() ) {
-         ConfigurationEntry config = new ConfigurationEntry( entry.getKey() );
+         PageSorting config = new PageSorting( entry.getKey() );
          config.inactive();
          entries.add( config );
       }
@@ -129,7 +126,7 @@ public class BuildResultColumn implements Column {
    /**
     * {@inheritDoc}
     */
-   @Override public List< ConfigurationEntry > filters( List< JwsJenkinsJob > jobs, JobTableParameters parameters ) {
+   @Override public List< PageFilter > filters( List< JwsJenkinsJob > jobs, JobTableParameters parameters ) {
       return filter.filterOptions( jobs, parameters.filterValueFor( name() ) );
    }//End Method
 

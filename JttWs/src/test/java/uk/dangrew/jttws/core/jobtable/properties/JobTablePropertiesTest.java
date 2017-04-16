@@ -32,10 +32,13 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 
+import uk.dangrew.jtt.model.jobs.JenkinsJobImpl;
 import uk.dangrew.jttws.core.jobtable.TableData;
 import uk.dangrew.jttws.core.jobtable.buildresult.BuildResultColumn;
 import uk.dangrew.jttws.core.jobtable.jobname.JobNameColumn;
 import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
+import uk.dangrew.jttws.core.jobtable.web.PageFilter;
+import uk.dangrew.jttws.core.jobtable.web.PageTable;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsUser;
 import uk.dangrew.jttws.mvc.web.configuration.ConfigurationEntry;
@@ -48,6 +51,7 @@ public class JobTablePropertiesTest {
    
    private JobTableParameters parameters;
    @Mock private TableData data;
+   private PageTable table;
    private List< JwsJenkinsJob > jobs;
    private List< JwsJenkinsUser > users;
    private JobTableProperties systemUnderTest;
@@ -55,65 +59,63 @@ public class JobTablePropertiesTest {
    @Before public void initialiseSystemUnderTest() {
       MockitoAnnotations.initMocks( this );
       when( data.columns() ).thenReturn( Arrays.asList( new JobNameColumn(), new BuildResultColumn() ) );
-      
+
+      table = new PageTable();
       parameters = new JobTableParameters();
-      jobs = new ArrayList<>();
+      jobs = Arrays.asList(
+               new JwsJenkinsJob( new JenkinsJobImpl( "My Job" ) ),
+               new JwsJenkinsJob( new JenkinsJobImpl( "Your Job" ) ),
+               new JwsJenkinsJob( new JenkinsJobImpl( "Their Job" ) )
+      );
       users = new ArrayList<>();
       systemUnderTest = new JobTableProperties();
    }//End Method
 
    @Test public void shouldPopulateColumnsInParameters() {
       parameters.includeColumns( JobNameColumn.staticName() );
-      systemUnderTest.populate( model, data, parameters, jobs, users );
+      systemUnderTest.populateTable( table, data, parameters, jobs, users );
       
-      verify( model ).addAttribute( eq( JobTableProperties.COLUMNS ), entryCaptor.capture() );
-      
-      List< ConfigurationEntry > entries = entryCaptor.getValue();
-      assertThat( entries, hasSize( 2 ) );
-      assertThat( entries.get( 0 ).name(), is( JobNameColumn.staticName() ) );
-      assertThat( entries.get( 0 ).isActive(), is( true ) );
-      assertThat( entries.get( 1 ).name(), is( BuildResultColumn.staticName() ) );
-      assertThat( entries.get( 1 ).isActive(), is( false ) );
+      assertThat( table.columns(), hasSize( 2 ) );
+      assertThat( table.columns().get( 0 ).name(), is( JobNameColumn.staticName() ) );
+      assertThat( table.columns().get( 0 ).isActive(), is( true ) );
+      assertThat( table.columns().get( 1 ).name(), is( BuildResultColumn.staticName() ) );
+      assertThat( table.columns().get( 1 ).isActive(), is( false ) );
    }//End Method
    
    @Test public void shouldPopulateColumnsInParametersWhenNothingConfigured() {
-      systemUnderTest.populate( model, data, parameters, jobs, users );
+      systemUnderTest.populateTable( table, data, parameters, jobs, users );
       
-      verify( model ).addAttribute( eq( JobTableProperties.COLUMNS ), entryCaptor.capture() );
-      
-      List< ConfigurationEntry > entries = entryCaptor.getValue();
-      assertThat( entries, hasSize( 2 ) );
-      assertThat( entries.get( 0 ).name(), is( JobNameColumn.staticName() ) );
-      assertThat( entries.get( 0 ).isActive(), is( true ) );
-      assertThat( entries.get( 1 ).name(), is( BuildResultColumn.staticName() ) );
-      assertThat( entries.get( 1 ).isActive(), is( true ) );
+      assertThat( table.columns(), hasSize( 2 ) );
+      assertThat( table.columns().get( 0 ).name(), is( JobNameColumn.staticName() ) );
+      assertThat( table.columns().get( 0 ).isActive(), is( true ) );
+      assertThat( table.columns().get( 1 ).name(), is( BuildResultColumn.staticName() ) );
+      assertThat( table.columns().get( 1 ).isActive(), is( true ) );
    }//End Method
    
    @Test public void shouldProvideTableData(){
-      systemUnderTest.populate( model, data, parameters, jobs, users );
-      verify( model ).addAttribute( JobTableProperties.DATA, data );
+      systemUnderTest.populateAttributes( model, table );
+      verify( model ).addAttribute( JobTableProperties.DATA, table );
    }//End Method
    
    @Test public void shouldFilterJobsAndAddToModel(){
-      systemUnderTest.populate( model, data, parameters, jobs, users );
+      systemUnderTest.populateTable( table, data, parameters, jobs, users );
       verify( data ).filter( jobs, parameters );
-      verify( model ).addAttribute( JobTableProperties.JOBS, jobs );
+      
+      assertThat( table.jobs(), hasSize( jobs.size() ) );
+      for( int i = 0; i < jobs.size(); i++ ) {
+         assertThat( table.jobs().get( i ), is( jobs.get( i ) ) );
+      }
    }//End Method
    
    @Test public void shouldAddFilterForColumnIncluded(){
-      List< ConfigurationEntry > entries = new ArrayList<>();
+      List< PageFilter > entries = Arrays.asList( new PageFilter( "anything" ) );
       when( data.filtersFor( JobNameColumn.staticName(), jobs, parameters ) ).thenReturn( entries );
       
       parameters.includeColumns( JobNameColumn.staticName() );
-      systemUnderTest.populate( model, data, parameters, jobs, users );
+      systemUnderTest.populateTable( table, data, parameters, jobs, users );
       
-      verify( model ).addAttribute( eq( JobTableProperties.FILTERS ), filtersCaptor.capture() );
-      
-      Map< String, List< ConfigurationEntry > > filters = filtersCaptor.getValue();
-      assertThat( filters, hasKey( JobNameColumn.staticName() ) );
-      assertThat( filters.get( JobNameColumn.staticName() ), is( entries ) );
-      
-      assertThat( filters.get( BuildResultColumn.staticName() ), is( nullValue() ) );
+      assertThat( table.filtersFor( table.columns().get( 0 ) ), is( entries ) );
+      assertThat( table.filtersFor( table.columns().get( 1 ) ), is( new ArrayList<>() ) );
    }//End Method
    
    @Test public void shouldBeSpringComponent(){

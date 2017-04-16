@@ -21,6 +21,8 @@ import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
 import uk.dangrew.jttws.core.jobtable.structure.Column;
 import uk.dangrew.jttws.core.jobtable.structure.ColumnType;
 import uk.dangrew.jttws.core.jobtable.structure.SortingFunction;
+import uk.dangrew.jttws.core.jobtable.web.PageFilter;
+import uk.dangrew.jttws.core.jobtable.web.PageSorting;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
 import uk.dangrew.jttws.mvc.web.configuration.ConfigurationEntry;
 
@@ -115,10 +117,10 @@ public class JobNameColumn implements Column {
    /**
     * {@inheritDoc}
     */
-   @Override public List< ConfigurationEntry > sortOptions() {
-      List< ConfigurationEntry > entries = new ArrayList<>();
+   @Override public List< PageSorting > sortOptions() {
+      List< PageSorting > entries = new ArrayList<>();
       for ( Entry< String, SortingFunction > entry : sortingFunctions.entrySet() ) {
-         ConfigurationEntry config = new ConfigurationEntry( entry.getKey() );
+         PageSorting config = new PageSorting( entry.getKey() );
          config.inactive();
          entries.add( config );
       }
@@ -137,7 +139,7 @@ public class JobNameColumn implements Column {
    /**
     * {@inheritDoc}
     */
-   @Override public List< ConfigurationEntry > filters( List< JwsJenkinsJob > jobs, JobTableParameters parameters ) {
+   @Override public List< PageFilter > filters( List< JwsJenkinsJob > jobs, JobTableParameters parameters ) {
       return filter.filterOptions( jobs, parameters.filterValueFor( name() ) );
    }//End Method
 

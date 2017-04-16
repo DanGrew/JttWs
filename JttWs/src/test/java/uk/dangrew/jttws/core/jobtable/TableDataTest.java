@@ -23,6 +23,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 
 import uk.dangrew.jtt.model.jobs.JenkinsJobImpl;
 import uk.dangrew.jttws.core.jobtable.buildresult.BuildResultColumn;
@@ -31,8 +32,8 @@ import uk.dangrew.jttws.core.jobtable.jobname.JobNameColumn;
 import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
 import uk.dangrew.jttws.core.jobtable.structure.Column;
 import uk.dangrew.jttws.core.jobtable.structure.ColumnType;
+import uk.dangrew.jttws.core.jobtable.web.PageFilter;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
-import uk.dangrew.jttws.mvc.web.configuration.ConfigurationEntry;
 
 public class TableDataTest {
 
@@ -40,9 +41,9 @@ public class TableDataTest {
    private List< JwsJenkinsJob > jobs;
    private JobTableParameters parameters;
 
-   @Mock private List< ConfigurationEntry > configuration;
-   @Mock private JobNameColumn jobNameColumn;
-   @Mock private BuildResultColumn buildResultColumn;
+   @Mock private List< PageFilter > filters;
+   @Spy private JobNameColumn jobNameColumn;
+   @Spy private BuildResultColumn buildResultColumn;
    private TableData systemUnderTest;
 
    @Before public void initialiseSystemUnderTest() {
@@ -63,13 +64,13 @@ public class TableDataTest {
    }//End Method
    
    @Test public void shouldSortByColumn(){
-      parameters.sortBy( jobNameColumn.name(), JobNameAlphabetical.staticName() );
+      parameters.sortBy( JobNameAlphabetical.staticName() );
       systemUnderTest.sort( jobs, parameters );
       verify( jobNameColumn ).sort( jobs, parameters );
    }//End Method
    
-   @Test( expected = IllegalArgumentException.class ) public void shouldNotAllowSortByInvalidColumnName(){
-      parameters.sortBy( "anything", JobNameAlphabetical.staticName() );
+   @Test( expected = IllegalArgumentException.class ) public void shouldNotAllowSortByInvalidSortingFunction(){
+      parameters.sortBy( "anything" );
       systemUnderTest.sort( jobs, parameters );
       verify( jobNameColumn ).sort( jobs, parameters );
    }//End Method
@@ -99,8 +100,8 @@ public class TableDataTest {
    }//End Method
    
    @Test public void shouldProvideFilterConfigurationForColumn(){
-      when( jobNameColumn.filters( jobs, parameters ) ).thenReturn( configuration );
-      assertThat( systemUnderTest.filtersFor( jobNameColumn.name(), jobs, parameters ), is( configuration ) );
+      when( jobNameColumn.filters( jobs, parameters ) ).thenReturn( filters );
+      assertThat( systemUnderTest.filtersFor( jobNameColumn.name(), jobs, parameters ), is( filters ) );
    }//End Method
    
    @Test public void shouldProvideEmptyConfigurationForInvalidColumn(){
@@ -123,6 +124,18 @@ public class TableDataTest {
       }
       
       assertThat( systemUnderTest.columnForId( "anything" ), is( nullValue() ) );
+   }//End Method
+   
+   @Test( expected = IllegalArgumentException.class ) public void shouldNotAcceptDuplicateSortingFunctions(){
+      new TableData( new JobNameColumn(), new JobNameColumn() );
+   }//End Method
+   
+   @Test public void shouldProvideSortingOptions(){
+      assertThat( systemUnderTest.sortingOptionsFor( jobNameColumn.name(), parameters ), is( jobNameColumn.sortOptions() ) );
+   }//End Method
+   
+   @Test public void shouldProvideEmptySortingOptionsForInvalidColumn(){
+      assertThat( systemUnderTest.sortingOptionsFor( "anything", parameters ), is( new ArrayList<>() ) );
    }//End Method
    
 }//End Class
