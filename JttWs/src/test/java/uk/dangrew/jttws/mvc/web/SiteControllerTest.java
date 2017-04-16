@@ -116,7 +116,8 @@ public class SiteControllerTest {
    
    @Test public void shouldPopulateProperties(){
       systemUnderTest.refreshTable( request, response, model );
-      verify( properties ).populate( eq( model ), Mockito.any(), eq( parameters ), eq( jobs ), eq( users ) );
+      verify( properties ).populateTable( Mockito.any(), Mockito.any(), eq( parameters ), eq( jobs ), eq( users ) );
+      verify( properties ).populateAttributes( eq( model ), Mockito.any() );
    }//End Method
    
    @Test public void shouldPopulateParameters(){

@@ -22,6 +22,7 @@ import uk.dangrew.jttws.core.jobtable.TableData;
 import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
 import uk.dangrew.jttws.core.jobtable.parameters.ParametersPopulator;
 import uk.dangrew.jttws.core.jobtable.properties.JobTableProperties;
+import uk.dangrew.jttws.core.jobtable.web.PageTable;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsUser;
 import uk.dangrew.jttws.mvc.service.JenkinsService;
@@ -101,7 +102,9 @@ public class SiteController {
       TableData data = new TableData();
       JobTableParameters parameters = paramsPopulator.construct( data, request, response );
       
-      properties.populate( model, data, parameters, jobs, users );
+      PageTable table = new PageTable();
+      properties.populateTable( table, data, parameters, jobs, users );
+      properties.populateAttributes( model, table );
       return PAGE_TABLE;
    }// End Method
 
