@@ -37,9 +37,10 @@ public class ConfigurationEntry implements Comparable< ConfigurationEntry >{
    
    /**
     * Method to make the entry inactive.
+    * @param active whether it is active or not.
     */
-   public void setInactive(){
-      this.isActive = false;
+   public void setActive( boolean active ){
+      this.isActive = active;
    }//End Method
 
    /**

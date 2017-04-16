@@ -108,7 +108,7 @@ public class BuildResultColumn implements Column {
       List< PageSorting > entries = new ArrayList<>();
       for ( Entry< String, SortingFunction > entry : sortings.entrySet() ) {
          PageSorting config = new PageSorting( entry.getKey() );
-         config.setInactive();
+         config.setActive( false );
          entries.add( config );
       }
       

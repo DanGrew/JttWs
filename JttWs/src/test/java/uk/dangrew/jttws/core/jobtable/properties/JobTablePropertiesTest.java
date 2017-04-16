@@ -54,7 +54,10 @@ public class JobTablePropertiesTest {
    @Captor private ArgumentCaptor< Map< String, List< ConfigurationEntry > > > filtersCaptor;
    
    private JobTableParameters parameters;
+   private JobNameColumn jobNameColumn;
+   private BuildResultColumn buildResultColumn;
    @Mock private TableSpecification data;
+   
    @Spy private PageTable table;
    private List< PageJob > jobs;
    private List< PageUser > users;
@@ -62,7 +65,10 @@ public class JobTablePropertiesTest {
 
    @Before public void initialiseSystemUnderTest() {
       MockitoAnnotations.initMocks( this );
-      when( data.columns() ).thenReturn( Arrays.asList( new JobNameColumn(), new BuildResultColumn() ) );
+      when( data.columns() ).thenReturn( Arrays.asList( 
+               jobNameColumn = new JobNameColumn(), 
+               buildResultColumn = new BuildResultColumn() 
+      ) );
 
       parameters = new JobTableParameters();
       jobs = Arrays.asList(
@@ -111,13 +117,10 @@ public class JobTablePropertiesTest {
    }//End Method
    
    @Test public void shouldAddFilterForColumnIncluded(){
-      List< PageFilter > entries = Arrays.asList( new PageFilter( "anything" ) );
-      when( data.filtersFor( JobNameColumn.staticName(), jobs, parameters ) ).thenReturn( entries );
-      
       parameters.includeColumns( JobNameColumn.staticName() );
       systemUnderTest.populateTable( table, data, parameters, jobs, users );
       
-      assertThat( table.filtersFor( table.columns().get( 0 ) ), is( entries ) );
+      assertThat( table.filtersFor( table.columns().get( 0 ) ), is( jobNameColumn.filters( jobs, parameters ) ) );
       assertThat( table.filtersFor( table.columns().get( 1 ) ), is( new ArrayList<>() ) );
    }//End Method
    
@@ -126,21 +129,13 @@ public class JobTablePropertiesTest {
    }//End Method
    
    @Test public void shouldHaveSingleSortingActive(){
-      List< PageSorting > entries = Arrays.asList( 
-               new PageSorting( "anything" ), 
-               new PageSorting( JobNameAlphabetical.staticName() ), 
-               new PageSorting( "something" ) 
-      );
-      when( data.sortingOptionsFor( JobNameColumn.staticName(), parameters ) ).thenReturn( entries );
-      
       systemUnderTest.populateTable( table, data, parameters, jobs, users );
       
-      assertThat( table.sortings(), hasSize( 3 ) );
-      assertThat( table.sortings().get( 0 ).name(), is( entries.get( 0 ).name() ) );
-      assertThat( table.sortings().get( 0 ).isActive(), is( false ) );
-      assertThat( table.sortings().get( 1 ).name(), is( entries.get( 1 ).name() ) );
-      assertThat( table.sortings().get( 1 ).isActive(), is( true ) );
-      assertThat( table.sortings().get( 2 ).name(), is( entries.get( 2 ).name() ) );
+      assertThat( table.sortings().get( 0 ).name(), is( jobNameColumn.sortOptions().get( 0 ).name() ) );
+      assertThat( table.sortings().get( 0 ).isActive(), is( true ) );
+      assertThat( table.sortings().get( 1 ).name(), is( jobNameColumn.sortOptions().get( 1 ).name() ) );
+      assertThat( table.sortings().get( 1 ).isActive(), is( false ) );
+      assertThat( table.sortings().get( 2 ).name(), is( buildResultColumn.sortOptions().get( 0 ).name() ) );
       assertThat( table.sortings().get( 2 ).isActive(), is( false ) );
    }//End Method
    

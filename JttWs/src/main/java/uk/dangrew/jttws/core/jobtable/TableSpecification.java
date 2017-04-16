@@ -76,40 +76,6 @@ public class TableSpecification {
    }//End Method
    
    /**
-    * Method to provide the {@link ConfigurationEntry}s for the {@link uk.dangrew.jttws.core.jobtable.structure.Filter}s available for the 
-    * given {@link Column}.
-    * @param columnName the name of the {@link Column}.
-    * @param jobs the {@link PageJob}s the filters are relevant to.
-    * @param parameters the {@link JobTableParameters} for existing filters.
-    * @return the {@link ConfigurationEntry}s.
-    */
-   public List< PageFilter > filtersFor( String columnName, List< PageJob > jobs, JobTableParameters parameters ) {
-      Column column = columns.get( columnName );
-      if ( column == null ) {
-         return new ArrayList<>();
-      }
-      
-      return column.filters( jobs, parameters );
-   }//End Method
-   
-   /**
-    * Method to provide the {@link PageSorting}s for the {@link uk.dangrew.jttws.core.jobtable.structure.Filter}s available for the 
-    * given {@link Column}.
-    * @param columnName the name of the {@link Column}.
-    * @param jobs the {@link PageJob}s the filters are relevant to.
-    * @param parameters the {@link JobTableParameters} for existing filters.
-    * @return the {@link PageSorting}s.
-    */
-   public List< PageSorting > sortingOptionsFor( String columnName, JobTableParameters parameters ) {
-      Column column = columns.get( columnName );
-      if ( column == null ) {
-         return new ArrayList<>();
-      }
-      
-      return column.sortOptions();
-   }//End Method
-   
-   /**
     * Method to provide the id to use for the given column.
     * @param id the id of the {@link Column}.
     * @return the {@link Column} found, or null.

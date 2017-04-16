@@ -96,7 +96,7 @@ public class JobTableProperties {
          PageColumn pageColumn = new PageColumn( column, !inactive );
          table.addColumn( pageColumn );
          if ( !inactive ) {
-            List< PageFilter > columnFilters = tableSpec.filtersFor( column.name(), jobs, parameters );
+            List< PageFilter > columnFilters = column.filters( jobs, parameters );
             columnFilters.forEach( e -> table.addFilter( pageColumn, e ) );
          }
       }
@@ -116,11 +116,9 @@ public class JobTableProperties {
     */
    private void populateSortOptions(){
       for ( Column column : tableSpec.columns() ) {
-         for ( PageSorting sorting : tableSpec.sortingOptionsFor( column.name(), parameters ) ) {
+         for ( PageSorting sorting : column.sortOptions() ) {
             boolean active = sorting.name().equals( parameters.sorting() );
-            if ( !active ) {
-               sorting.setInactive();
-            }
+            sorting.setActive( active );
             table.addSorting( sorting );
          }
       }

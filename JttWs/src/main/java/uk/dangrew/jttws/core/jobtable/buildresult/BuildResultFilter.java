@@ -46,7 +46,7 @@ public class BuildResultFilter implements Filter {
          filters.add( entry );
          
          if ( !filtered.isEmpty() && !filtered.contains( status.displayName() ) ) {
-            entry.setInactive();
+            entry.setActive( false );
          }
       }
       

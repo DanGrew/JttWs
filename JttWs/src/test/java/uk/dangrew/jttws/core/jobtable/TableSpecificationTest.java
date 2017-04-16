@@ -81,15 +81,6 @@ public class TableSpecificationTest {
       verify( buildResultColumn ).filter( jobs, parameters );
    }//End Method
    
-   @Test public void shouldProvideFilterConfigurationForColumn(){
-      when( jobNameColumn.filters( jobs, parameters ) ).thenReturn( filters );
-      assertThat( systemUnderTest.filtersFor( jobNameColumn.name(), jobs, parameters ), is( filters ) );
-   }//End Method
-   
-   @Test public void shouldProvideEmptyConfigurationForInvalidColumn(){
-      assertThat( systemUnderTest.filtersFor( "anything", jobs, parameters ), is( new ArrayList<>() ) );
-   }//End Method
-   
    @Test public void shouldProvideColumnForId(){
       systemUnderTest = new TableSpecification();
       for ( Column column : systemUnderTest.columns() ) {
@@ -101,14 +92,6 @@ public class TableSpecificationTest {
    
    @Test( expected = IllegalArgumentException.class ) public void shouldNotAcceptDuplicateSortingFunctions(){
       new TableSpecification( new JobNameColumn(), new JobNameColumn() );
-   }//End Method
-   
-   @Test public void shouldProvideSortingOptions(){
-      assertThat( systemUnderTest.sortingOptionsFor( jobNameColumn.name(), parameters ), is( jobNameColumn.sortOptions() ) );
-   }//End Method
-   
-   @Test public void shouldProvideEmptySortingOptionsForInvalidColumn(){
-      assertThat( systemUnderTest.sortingOptionsFor( "anything", parameters ), is( new ArrayList<>() ) );
    }//End Method
    
 }//End Class
