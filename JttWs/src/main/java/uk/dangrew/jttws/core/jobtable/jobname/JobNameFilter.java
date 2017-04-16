@@ -44,7 +44,7 @@ public class JobNameFilter implements Filter {
          if ( !individualFilters.contains( job.name() ) ) {
             PageFilter entry = new PageFilter( job.name() );
             if ( !individualFilters.isEmpty() ) {
-               entry.inactive();
+               entry.setInactive();
             }
             entries.add( entry );
          }

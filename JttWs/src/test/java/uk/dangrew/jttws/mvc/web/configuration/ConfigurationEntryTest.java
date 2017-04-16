@@ -36,7 +36,7 @@ public class ConfigurationEntryTest {
    }//End Method
    
    @Test public void shouldBeDeactivated() {
-      systemUnderTest.inactive();
+      systemUnderTest.setInactive();
       assertThat( systemUnderTest.isActive(), is( false ) );
    }//End Method
    
@@ -65,7 +65,7 @@ public class ConfigurationEntryTest {
       assertThat( systemUnderTest.hashCode(), is( not( new Object().hashCode() ) ) );
       assertThat( systemUnderTest.compareTo( new ConfigurationEntry( "nothing" ) ), is( not( 0 ) ) );
       
-      systemUnderTest.inactive();
+      systemUnderTest.setInactive();
       assertThat( systemUnderTest, is( not( new ConfigurationEntry( "anything" ) ) ) );
       assertThat( systemUnderTest.hashCode(), is( not( new ConfigurationEntry( "anything" ).hashCode() ) ) );
       assertThat( systemUnderTest.compareTo( new ConfigurationEntry( "anything" ) ), is( not( 0 ) ) );
@@ -76,7 +76,7 @@ public class ConfigurationEntryTest {
       assertThat( systemUnderTest.compareTo( new ConfigurationEntry( "zzz" ) ), is( lessThanOrEqualTo( Comparison.LessThan.value() ) ) );
       assertThat( new ConfigurationEntry( "zzz" ).compareTo( new ConfigurationEntry( "AAA" ) ), is( greaterThanOrEqualTo( Comparison.GreaterThan.value() ) ) );
       
-      systemUnderTest.inactive();
+      systemUnderTest.setInactive();
       assertThat( systemUnderTest.compareTo( new ConfigurationEntry( "anything" ) ), is( Comparison.LessThan.value() ) );
    }//End Method
 

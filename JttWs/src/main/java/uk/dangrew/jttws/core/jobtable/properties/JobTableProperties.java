@@ -115,7 +115,6 @@ public class JobTableProperties {
       //refactor 'jws' to 'page'
       //refactor calls in pages for new interface
       //tidy up table data interface
-      //rename table data to table spec
       //implement populating sortings
       //refactor inactive()
    }//End Method

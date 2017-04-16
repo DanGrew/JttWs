@@ -121,7 +121,7 @@ public class JobNameColumn implements Column {
       List< PageSorting > entries = new ArrayList<>();
       for ( Entry< String, SortingFunction > entry : sortingFunctions.entrySet() ) {
          PageSorting config = new PageSorting( entry.getKey() );
-         config.inactive();
+         config.setInactive();
          entries.add( config );
       }
       

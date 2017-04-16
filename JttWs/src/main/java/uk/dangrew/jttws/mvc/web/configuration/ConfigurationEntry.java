@@ -38,7 +38,7 @@ public class ConfigurationEntry implements Comparable< ConfigurationEntry >{
    /**
     * Method to make the entry inactive.
     */
-   public void inactive(){
+   public void setInactive(){
       this.isActive = false;
    }//End Method
 
