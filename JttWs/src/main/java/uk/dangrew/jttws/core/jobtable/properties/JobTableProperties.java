@@ -14,7 +14,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 
-import uk.dangrew.jttws.core.jobtable.TableData;
+import uk.dangrew.jttws.core.jobtable.TableSpecification;
 import uk.dangrew.jttws.core.jobtable.common.WebUiParameterParsing;
 import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
 import uk.dangrew.jttws.core.jobtable.structure.Column;
@@ -25,7 +25,7 @@ import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsUser;
 
 /**
- * The {@link JobTableProperties} provides a method of converting {@link TableData} into the relevant
+ * The {@link JobTableProperties} provides a method of converting {@link TableSpecification} into the relevant
  * properties using the {@link Model} for the web ui.
  */
 @Component
@@ -38,7 +38,7 @@ public class JobTableProperties {
    
    private final WebUiParameterParsing parsing;
    
-   private TableData tableData;
+   private TableSpecification tableData;
    private PageTable table;
    private JobTableParameters parameters;
    private List< JwsJenkinsJob > jobs;
@@ -54,14 +54,14 @@ public class JobTableProperties {
    /**
     * Method to populate the properties in the {@link Model}.
     * @param table the {@link PageTable} to populate.
-    * @param data the {@link TableData}.
+    * @param data the {@link TableSpecification}.
     * @param parameters the {@link JobTableParameters}.
     * @param jobs the {@link List} of {@link JwsJenkinsJob}s available.
     * @param users the {@link List} of {@link JwsJenkinsUser}s available.
     */
    public void populateTable( 
             PageTable table,
-            TableData data, 
+            TableSpecification data, 
             JobTableParameters parameters, 
             List< JwsJenkinsJob > jobs, 
             List< JwsJenkinsUser > users

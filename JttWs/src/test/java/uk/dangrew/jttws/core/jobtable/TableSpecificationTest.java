@@ -35,7 +35,7 @@ import uk.dangrew.jttws.core.jobtable.structure.ColumnType;
 import uk.dangrew.jttws.core.jobtable.web.PageFilter;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
 
-public class TableDataTest {
+public class TableSpecificationTest {
 
    private JwsJenkinsJob job;
    private List< JwsJenkinsJob > jobs;
@@ -44,7 +44,7 @@ public class TableDataTest {
    @Mock private List< PageFilter > filters;
    @Spy private JobNameColumn jobNameColumn;
    @Spy private BuildResultColumn buildResultColumn;
-   private TableData systemUnderTest;
+   private TableSpecification systemUnderTest;
 
    @Before public void initialiseSystemUnderTest() {
       MockitoAnnotations.initMocks( this );
@@ -56,7 +56,7 @@ public class TableDataTest {
       job = new JwsJenkinsJob( new JenkinsJobImpl( "Badminton" ) );
       parameters = new JobTableParameters();
       
-      systemUnderTest = new TableData( jobNameColumn, buildResultColumn );
+      systemUnderTest = new TableSpecification( jobNameColumn, buildResultColumn );
    }//End Method
 
    @Test public void shouldProvideColumns() {
@@ -87,7 +87,7 @@ public class TableDataTest {
    }//End Method
    
    @Test public void shouldHandleInvalidColumnNameWhenValueRequested(){
-      assertThat( systemUnderTest.valueForColumn( "anything", job ), is( TableData.UNKNOWN_ENTRY ) );
+      assertThat( systemUnderTest.valueForColumn( "anything", job ), is( TableSpecification.UNKNOWN_ENTRY ) );
    }//End Method
    
    @Test public void shouldProvideTypeForColumn(){
@@ -114,11 +114,11 @@ public class TableDataTest {
    }//End Method
    
    @Test public void shouldNotAcceptInvalidColumnForId(){
-      assertThat( systemUnderTest.idForColumn( "anything" ), is( TableData.UNKNOWN_ENTRY ) );
+      assertThat( systemUnderTest.idForColumn( "anything" ), is( TableSpecification.UNKNOWN_ENTRY ) );
    }//End Method
    
    @Test public void shouldProvideColumnForId(){
-      systemUnderTest = new TableData();
+      systemUnderTest = new TableSpecification();
       for ( Column column : systemUnderTest.columns() ) {
          assertThat( systemUnderTest.columnForId( column.id() ), is( column ) );
       }
@@ -127,7 +127,7 @@ public class TableDataTest {
    }//End Method
    
    @Test( expected = IllegalArgumentException.class ) public void shouldNotAcceptDuplicateSortingFunctions(){
-      new TableData( new JobNameColumn(), new JobNameColumn() );
+      new TableSpecification( new JobNameColumn(), new JobNameColumn() );
    }//End Method
    
    @Test public void shouldProvideSortingOptions(){

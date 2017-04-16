@@ -25,10 +25,10 @@ import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
 import uk.dangrew.jttws.mvc.web.configuration.ConfigurationEntry;
 
 /**
- * The {@link TableData} represents the available information and operations associated
+ * The {@link TableSpecification} represents the available information and operations associated
  * with the job table in the web interface.
  */
-public class TableData {
+public class TableSpecification {
 
    static final String UNKNOWN_ENTRY = "Unknown";
    
@@ -38,17 +38,17 @@ public class TableData {
    private final Map< String, Column > sortings;
    
    /**
-    * Constructs a new {@link TableData}.
+    * Constructs a new {@link TableSpecification}.
     */
-   public TableData() {
+   public TableSpecification() {
       this( new JobNameColumn(), new BuildResultColumn() );
    }//End Constructor
    
    /**
-    * Constructs a new {@link TableData}.
+    * Constructs a new {@link TableSpecification}.
     * @param columns the {@link Column}s that are available.
     */
-   TableData( Column... columns ) {
+   TableSpecification( Column... columns ) {
       this.columns = new HashMap<>();
       this.ids = new HashMap<>();
       this.orderedTableColumns = new ArrayList<>();

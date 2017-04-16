@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Component;
 
-import uk.dangrew.jttws.core.jobtable.TableData;
+import uk.dangrew.jttws.core.jobtable.TableSpecification;
 import uk.dangrew.jttws.core.jobtable.structure.Column;
 import uk.dangrew.jttws.mvc.web.configuration.CookieManager;
 
@@ -47,12 +47,12 @@ public class ParametersPopulator {
 
    /**
     * Method to construct the {@link JobTableParameters} for handling by the server, saving any newly applied configuration.
-    * @param tableData the {@link TableData} being configured.
+    * @param tableData the {@link TableSpecification} being configured.
     * @param request the {@link HttpServletRequest}.
     * @param response the {@link HttpServletResponse}.
     * @return the constructed {@link JobTableParameters}.
     */
-   public JobTableParameters construct( TableData tableData, HttpServletRequest request, HttpServletResponse response ){
+   public JobTableParameters construct( TableSpecification tableData, HttpServletRequest request, HttpServletResponse response ){
       JobTableParameters parameters = new JobTableParameters();
       
       populateFilters( parameters, tableData, request, response );
@@ -64,13 +64,13 @@ public class ParametersPopulator {
    /**
     * Method to populate the filters information for the page from the given parameters.
     * @param parameters the {@link JobTableParameters}.
-    * @param tableData the {@link TableData}.
+    * @param tableData the {@link TableSpecification}.
     * @param request the {@link HttpServletRequest}.
     * @param response the {@link HttpServletResponse}.
     */
    private void populateFilters( 
             JobTableParameters parameters, 
-            TableData tableData, 
+            TableSpecification tableData, 
             HttpServletRequest request, 
             HttpServletResponse response 
    ){
@@ -96,13 +96,13 @@ public class ParametersPopulator {
    /**
     * Method to populate the sorting information for the page from the given parameters.
     * @param parameters the {@link JobTableParameters}.
-    * @param tableData the {@link TableData}.
+    * @param tableData the {@link TableSpecification}.
     * @param request the {@link HttpServletRequest}.
     * @param response the {@link HttpServletResponse}.
     */
    private void populateSorting( 
             JobTableParameters parameters, 
-            TableData tableData, 
+            TableSpecification tableData, 
             HttpServletRequest request, 
             HttpServletResponse response 
    ){

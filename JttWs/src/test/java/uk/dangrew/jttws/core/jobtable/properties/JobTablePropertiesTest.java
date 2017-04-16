@@ -33,7 +33,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 
 import uk.dangrew.jtt.model.jobs.JenkinsJobImpl;
-import uk.dangrew.jttws.core.jobtable.TableData;
+import uk.dangrew.jttws.core.jobtable.TableSpecification;
 import uk.dangrew.jttws.core.jobtable.buildresult.BuildResultColumn;
 import uk.dangrew.jttws.core.jobtable.jobname.JobNameColumn;
 import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
@@ -50,7 +50,7 @@ public class JobTablePropertiesTest {
    @Captor private ArgumentCaptor< Map< String, List< ConfigurationEntry > > > filtersCaptor;
    
    private JobTableParameters parameters;
-   @Mock private TableData data;
+   @Mock private TableSpecification data;
    private PageTable table;
    private List< JwsJenkinsJob > jobs;
    private List< JwsJenkinsUser > users;

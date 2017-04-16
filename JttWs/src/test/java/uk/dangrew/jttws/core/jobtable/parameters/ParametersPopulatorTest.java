@@ -26,7 +26,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.stereotype.Component;
 
-import uk.dangrew.jttws.core.jobtable.TableData;
+import uk.dangrew.jttws.core.jobtable.TableSpecification;
 import uk.dangrew.jttws.core.jobtable.jobname.JobNameAlphabetical;
 import uk.dangrew.jttws.core.jobtable.jobname.JobNameColumn;
 import uk.dangrew.jttws.core.jobtable.structure.Column;
@@ -40,12 +40,12 @@ public class ParametersPopulatorTest {
    @Mock private HttpServletRequest request;
    @Mock private HttpServletResponse response;
    @Mock private CookieManager cookies;
-   private TableData tableData;
+   private TableSpecification tableData;
    private ParametersPopulator systemUnderTest;
 
    @Before public void initialiseSystemUnderTest() {
       MockitoAnnotations.initMocks( this );
-      tableData = new TableData();
+      tableData = new TableSpecification();
       systemUnderTest = new ParametersPopulator( cookies );
    }//End Method
    

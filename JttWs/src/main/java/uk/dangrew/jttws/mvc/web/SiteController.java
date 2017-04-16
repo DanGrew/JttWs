@@ -18,7 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import uk.dangrew.jttws.core.jobtable.TableData;
+import uk.dangrew.jttws.core.jobtable.TableSpecification;
 import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
 import uk.dangrew.jttws.core.jobtable.parameters.ParametersPopulator;
 import uk.dangrew.jttws.core.jobtable.properties.JobTableProperties;
@@ -99,7 +99,7 @@ public class SiteController {
       
       model.addAttribute( JOB_COLUMNS, JobTableColumns.values() );
       
-      TableData data = new TableData();
+      TableSpecification data = new TableSpecification();
       JobTableParameters parameters = paramsPopulator.construct( data, request, response );
       
       PageTable table = new PageTable();
