@@ -26,22 +26,22 @@ import uk.dangrew.jttws.core.jobtable.common.ReverseSorting;
 import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
 import uk.dangrew.jttws.core.jobtable.structure.ColumnType;
 import uk.dangrew.jttws.core.jobtable.web.PageSorting;
-import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.repository.PageJob;
 
 public class BuildResultColumnTest {
 
-   private JwsJenkinsJob jwsJob;
+   private PageJob jwsJob;
    private JenkinsJob job;
-   private JwsJenkinsJob jwsJob2;
+   private PageJob jwsJob2;
    private JenkinsJob job2;
-   private List< JwsJenkinsJob > jobs;
+   private List< PageJob > jobs;
    
    private JobTableParameters parameters;
    private BuildResultColumn systemUnderTest;
 
    @Before public void initialiseSystemUnderTest() {
-      jwsJob = new JwsJenkinsJob( job = new JenkinsJobImpl( "This is a job" ) );
-      jwsJob2 = new JwsJenkinsJob( job2 = new JenkinsJobImpl( "This is another job" ) );
+      jwsJob = new PageJob( job = new JenkinsJobImpl( "This is a job" ) );
+      jwsJob2 = new PageJob( job2 = new JenkinsJobImpl( "This is another job" ) );
       jobs = new ArrayList<>();
       jobs.add( jwsJob );
       jobs.add( jwsJob2 );

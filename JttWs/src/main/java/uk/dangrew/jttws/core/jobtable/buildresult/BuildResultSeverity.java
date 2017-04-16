@@ -9,7 +9,7 @@
 package uk.dangrew.jttws.core.jobtable.buildresult;
 
 import uk.dangrew.jttws.core.jobtable.structure.SortingFunction;
-import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.repository.PageJob;
 import uk.dangrew.jttws.mvc.web.jobtable.SeverityComparator;
 
 /**
@@ -54,7 +54,7 @@ public class BuildResultSeverity implements SortingFunction {
    /**
     * {@inheritDoc}
     */
-   @Override public int compare( JwsJenkinsJob o1, JwsJenkinsJob o2 ) {
+   @Override public int compare( PageJob o1, PageJob o2 ) {
       return comparator.compare( o1.association().getBuildStatus(), o2.association().getBuildStatus() );
    }//End Method
 

@@ -23,7 +23,7 @@ import uk.dangrew.jttws.core.jobtable.structure.ColumnType;
 import uk.dangrew.jttws.core.jobtable.structure.SortingFunction;
 import uk.dangrew.jttws.core.jobtable.web.PageFilter;
 import uk.dangrew.jttws.core.jobtable.web.PageSorting;
-import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.repository.PageJob;
 import uk.dangrew.jttws.mvc.web.configuration.ConfigurationEntry;
 
 /**
@@ -98,15 +98,15 @@ public class JobNameColumn implements Column {
    /**
     * {@inheritDoc}
     */
-   @Override public String valueForJob( JwsJenkinsJob job ) {
+   @Override public String valueForJob( PageJob job ) {
       return job.name();
    }//End Method
 
    /**
     * {@inheritDoc}
     */
-   @Override public void sort( List< JwsJenkinsJob > jobs, JobTableParameters parameters ) {
-      Comparator< JwsJenkinsJob > function = sortingFunctions.get( parameters.sorting() );
+   @Override public void sort( List< PageJob > jobs, JobTableParameters parameters ) {
+      Comparator< PageJob > function = sortingFunctions.get( parameters.sorting() );
       if ( function == null ) {
          throw new IllegalArgumentException( "Invalid sorting function applied: " + parameters.sorting() );
       }
@@ -131,15 +131,15 @@ public class JobNameColumn implements Column {
    /**
     * {@inheritDoc}
     */
-   @Override public void filter( List< JwsJenkinsJob > jobs, JobTableParameters parameters ) {
-      List< JwsJenkinsJob > excludedJobs = filter.identifyExclusions( jobs, parameters.filterValueFor( name() ) );
+   @Override public void filter( List< PageJob > jobs, JobTableParameters parameters ) {
+      List< PageJob > excludedJobs = filter.identifyExclusions( jobs, parameters.filterValueFor( name() ) );
       jobs.removeAll( excludedJobs );
    }//End Method
    
    /**
     * {@inheritDoc}
     */
-   @Override public List< PageFilter > filters( List< JwsJenkinsJob > jobs, JobTableParameters parameters ) {
+   @Override public List< PageFilter > filters( List< PageJob > jobs, JobTableParameters parameters ) {
       return filter.filterOptions( jobs, parameters.filterValueFor( name() ) );
    }//End Method
 

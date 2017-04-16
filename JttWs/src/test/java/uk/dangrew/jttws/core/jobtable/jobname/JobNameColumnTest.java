@@ -26,13 +26,13 @@ import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
 import uk.dangrew.jttws.core.jobtable.structure.ColumnType;
 import uk.dangrew.jttws.core.jobtable.structure.SortingFunction;
 import uk.dangrew.jttws.core.jobtable.web.PageSorting;
-import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.repository.PageJob;
 
 public class JobNameColumnTest {
 
-   private List< JwsJenkinsJob > jobs;
-   private JwsJenkinsJob job1;
-   private JwsJenkinsJob job2;
+   private List< PageJob > jobs;
+   private PageJob job1;
+   private PageJob job2;
    private JobTableParameters parameters;
    
    private JobNameAlphabetical alphabetical;
@@ -44,8 +44,8 @@ public class JobNameColumnTest {
       MockitoAnnotations.initMocks( this );
       
       jobs = new ArrayList<>();
-      jobs.add( job1 = new JwsJenkinsJob( new JenkinsJobImpl( "anything" ) ) );
-      jobs.add( job2 = new JwsJenkinsJob( new JenkinsJobImpl( "zebra" ) ) );
+      jobs.add( job1 = new PageJob( new JenkinsJobImpl( "anything" ) ) );
+      jobs.add( job2 = new PageJob( new JenkinsJobImpl( "zebra" ) ) );
       
       parameters = new JobTableParameters();
       alphabetical = new JobNameAlphabetical();

@@ -17,10 +17,10 @@ import java.util.Set;
 import uk.dangrew.jttws.core.jobtable.common.WebUiParameterParsing;
 import uk.dangrew.jttws.core.jobtable.structure.Filter;
 import uk.dangrew.jttws.core.jobtable.web.PageFilter;
-import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.repository.PageJob;
 
 /**
- * The {@link JobNameFilter} is a {@link Filter} for filtering {@link JwsJenkinsJob}s by name.
+ * The {@link JobNameFilter} is a {@link Filter} for filtering {@link PageJob}s by name.
  */
 public class JobNameFilter implements Filter {
    
@@ -36,11 +36,11 @@ public class JobNameFilter implements Filter {
    /**
     * {@inheritDoc}
     */
-   @Override public List< PageFilter > filterOptions( List< JwsJenkinsJob > jobs, String existingFilters ) {
+   @Override public List< PageFilter > filterOptions( List< PageJob > jobs, String existingFilters ) {
       Set< String > individualFilters = new LinkedHashSet<>( webParsing.parseStringList( existingFilters ) );
       
       List< PageFilter > entries = new ArrayList<>();
-      for ( JwsJenkinsJob job : jobs ) {
+      for ( PageJob job : jobs ) {
          if ( !individualFilters.contains( job.name() ) ) {
             PageFilter entry = new PageFilter( job.name() );
             if ( !individualFilters.isEmpty() ) {
@@ -61,14 +61,14 @@ public class JobNameFilter implements Filter {
    /**
     * {@inheritDoc}
     */
-   @Override public List< JwsJenkinsJob > identifyExclusions( List< JwsJenkinsJob > jobs, String value ) {
-      List< JwsJenkinsJob > excludedJobs = new ArrayList<>();
+   @Override public List< PageJob > identifyExclusions( List< PageJob > jobs, String value ) {
+      List< PageJob > excludedJobs = new ArrayList<>();
       if ( value == null ) {
          return excludedJobs;
       }
       
       Set< String > includedJobs = new LinkedHashSet<>( webParsing.parseStringList( value ) );
-      for ( JwsJenkinsJob job : jobs ) {
+      for ( PageJob job : jobs ) {
          if ( !includedJobs.contains( job.name() ) ) {
             excludedJobs.add( job );
          }

@@ -13,7 +13,7 @@ import java.util.List;
 import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
 import uk.dangrew.jttws.core.jobtable.web.PageFilter;
 import uk.dangrew.jttws.core.jobtable.web.PageSorting;
-import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.repository.PageJob;
 
 /**
  * The {@link Column} provides an interface for a representation of a data column
@@ -47,34 +47,34 @@ public interface Column {
    public List< PageSorting > sortOptions();
    
    /**
-    * Method to construct the {@link PageSorting}s for the filters available for the given {@link JwsJenkinsJob}s
+    * Method to construct the {@link PageSorting}s for the filters available for the given {@link PageJob}s
     * and {@link JobTableParameters}. All jobs given should be accounted for and parameters should be used to preserve
     * existing filters even if they are not relevant.
-    * @param jobs the {@link JwsJenkinsJob} the filters are for.
+    * @param jobs the {@link PageJob} the filters are for.
     * @param parameters the parameters containing existing filters.
     * @return the {@link ConfigurationEntry}s.
     */
-   public List< PageFilter > filters( List< JwsJenkinsJob > jobs, JobTableParameters parameters );;
+   public List< PageFilter > filters( List< PageJob > jobs, JobTableParameters parameters );;
    
    /**
     * Method to provide the value to display in the table for the given job.
-    * @param job the {@link JwsJenkinsJob}.
+    * @param job the {@link PageJob}.
     * @return the {@link String} value to display in the table.
     */
-   public String valueForJob( JwsJenkinsJob job );
+   public String valueForJob( PageJob job );
 
    /**
     * Method to sort the given {@link List} given the {@link JobTableParameters} provided.
-    * @param jobs the {@link List} of {@link JwsJenkinsJob}s to sort.
+    * @param jobs the {@link List} of {@link PageJob}s to sort.
     * @param parameters the {@link JobTableParameters} for configuring the sort.
     */
-   public void sort( List< JwsJenkinsJob > jobs, JobTableParameters parameters );
+   public void sort( List< PageJob > jobs, JobTableParameters parameters );
    
    /**
     * Method to filter the given {@link List} given the {@link JobTableParameters} provided.
-    * @param jobs the {@link List} of {@link JwsJenkinsJob}s to filter.
+    * @param jobs the {@link List} of {@link PageJob}s to filter.
     * @param parameters the {@link JobTableParameters} for configuring the filter.
     */
-   public void filter( List< JwsJenkinsJob > jobs, JobTableParameters parameters );
+   public void filter( List< PageJob > jobs, JobTableParameters parameters );
 
 }//End Interface

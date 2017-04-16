@@ -18,10 +18,10 @@ import uk.dangrew.jtt.model.jobs.BuildResultStatus;
 import uk.dangrew.jtt.model.jobs.JenkinsJob;
 
 /**
- * The {@link JwsJenkinsJob} provides a wrapper for the {@link JenkinsJob} for
+ * The {@link PageJob} provides a wrapper for the {@link JenkinsJob} for
  * easily accessing properties in appropriate formats.
  */
-public class JwsJenkinsJob {
+public class PageJob {
 
    static final String NO_SUSPECTS = "No Suspects";
    static final DateTimeFormatter DATE_TIME_FORMATTER = new DateTimeFormatterBuilder()
@@ -29,10 +29,10 @@ public class JwsJenkinsJob {
    private final JenkinsJob job;
    
    /**
-    * Construts a new {@link JwsJenkinsJob}.
+    * Construts a new {@link PageJob}.
     * @param job the {@link JenkinsJob} being wrapped.
     */
-   public JwsJenkinsJob( JenkinsJob job ) {
+   public PageJob( JenkinsJob job ) {
       if ( job == null ) {
          throw new IllegalArgumentException( "Must provide non null Job." );
       }

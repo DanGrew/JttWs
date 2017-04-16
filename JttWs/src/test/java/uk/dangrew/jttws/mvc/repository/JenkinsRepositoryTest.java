@@ -54,11 +54,11 @@ public class JenkinsRepositoryTest {
       when( context.getBean( JenkinsConnection.class ) ).thenReturn( connection );
       
       @SuppressWarnings("unchecked") //mocking only 
-      List< JwsJenkinsJob > list = mock( List.class );
+      List< PageJob > list = mock( List.class );
       when( connection.getJobs() ).thenReturn( list );
       
       systemUnderTest.setApplicationContext( context );
-      List< JwsJenkinsJob > jobsRetrieved = systemUnderTest.getJenkinsJobs();
+      List< PageJob > jobsRetrieved = systemUnderTest.getJenkinsJobs();
       assertThat( jobsRetrieved, is( list ) );
       assertThat( jobsRetrieved, is( not( new ArrayList<>() ) ) );
    }//End Method

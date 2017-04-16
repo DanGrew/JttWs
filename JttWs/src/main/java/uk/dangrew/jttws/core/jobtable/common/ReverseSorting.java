@@ -9,7 +9,7 @@
 package uk.dangrew.jttws.core.jobtable.common;
 
 import uk.dangrew.jttws.core.jobtable.structure.SortingFunction;
-import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.repository.PageJob;
 
 /**
  * The {@link ReverseSorting} is a general mechanism for reversing a {@link SortingFunction}.
@@ -46,7 +46,7 @@ public class ReverseSorting implements SortingFunction {
    /**
     * {@inheritDoc}
     */
-   @Override public int compare( JwsJenkinsJob o1, JwsJenkinsJob o2 ) {
+   @Override public int compare( PageJob o1, PageJob o2 ) {
       return function.compare( o2, o1 );
    }//End Method
 

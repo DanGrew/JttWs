@@ -20,18 +20,18 @@ import uk.dangrew.jtt.model.jobs.JenkinsJobImpl;
 import uk.dangrew.jtt.model.users.JenkinsUser;
 import uk.dangrew.jtt.model.users.JenkinsUserImpl;
 
-public class JwsJenkinsJobTest {
+public class PageJobTest {
 
    private JenkinsJob job;
-   private JwsJenkinsJob systemUnderTest;
+   private PageJob systemUnderTest;
 
    @Before public void initialiseSystemUnderTest() {
       job = new JenkinsJobImpl( "anything" );
-      systemUnderTest = new JwsJenkinsJob( job );
+      systemUnderTest = new PageJob( job );
    }//End Method
 
    @Test( expected = IllegalArgumentException.class ) public void shouldNotAcceptNullJob() {
-      new JwsJenkinsJob( null );
+      new PageJob( null );
    }//End Method
    
    @Test public void shouldProvideAssociation(){
@@ -70,7 +70,7 @@ public class JwsJenkinsJobTest {
    }//End Method
    
    @Test public void shouldProvideNoCommitters() {
-      assertThat( systemUnderTest.committers(), is( JwsJenkinsJob.NO_SUSPECTS ) );
+      assertThat( systemUnderTest.committers(), is( PageJob.NO_SUSPECTS ) );
    }//End Method
    
    @Test public void shouldProvideSingleCommitter() {

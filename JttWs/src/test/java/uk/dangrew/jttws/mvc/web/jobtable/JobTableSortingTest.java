@@ -23,17 +23,17 @@ import org.mockito.MockitoAnnotations;
 
 import uk.dangrew.jtt.model.jobs.BuildResultStatus;
 import uk.dangrew.jtt.utility.TestCommon;
-import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.repository.PageJob;
 import uk.dangrew.jttws.mvc.web.jobtable.JobTableSorting;
 
 public class JobTableSortingTest {
 
-   @Mock private JwsJenkinsJob firstJws;
-   @Mock private JwsJenkinsJob secondJws;
+   @Mock private PageJob firstJws;
+   @Mock private PageJob secondJws;
    
-   private List< JwsJenkinsJob > jobs;
-   private List< JwsJenkinsJob > firstSecond;
-   private List< JwsJenkinsJob > secondFirst;
+   private List< PageJob > jobs;
+   private List< PageJob > firstSecond;
+   private List< PageJob > secondFirst;
    
    @Before public void initialiseSystemUnderTest(){
       MockitoAnnotations.initMocks( this );

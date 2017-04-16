@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import uk.dangrew.jttws.mvc.repository.JenkinsRepository;
-import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.repository.PageJob;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsUser;
 
 /**
@@ -35,10 +35,10 @@ public class JenkinsService {
    }//End Constructor
 	
 	/**
-	 * Getter the {@link JwsJenkinsJob}s.
-	 * @return the {@link JwsJenkinsJob}s.
+	 * Getter the {@link PageJob}s.
+	 * @return the {@link PageJob}s.
 	 */
-	public List< JwsJenkinsJob > getJobs(){
+	public List< PageJob > getJobs(){
 	   return repository.getJenkinsJobs();
 	}//End Method
 	

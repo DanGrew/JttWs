@@ -10,12 +10,12 @@ package uk.dangrew.jttws.core.jobtable.structure;
 
 import java.util.Comparator;
 
-import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.repository.PageJob;
 
 /**
- * The {@link SortingFunction} provides an interface for sorting {@link JwsJenkinsJob}s.
+ * The {@link SortingFunction} provides an interface for sorting {@link PageJob}s.
  */
-public interface SortingFunction extends Comparator< JwsJenkinsJob > {
+public interface SortingFunction extends Comparator< PageJob > {
 
    /**
     * Access to the name of the {@link SortingFunction}.

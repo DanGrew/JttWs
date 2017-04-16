@@ -15,17 +15,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.repository.PageJob;
 
 /**
- * {@link PageTable} provides a web ui representation of the {@link JwsJenkinsJob} table.
+ * {@link PageTable} provides a web ui representation of the {@link PageJob} table.
  */
 public class PageTable {
    
    private final Set< PageColumn > columns;
    private final Map< PageColumn, Set< PageFilter > > filters;
    private final Set< PageSorting > sortings;
-   private final Set< JwsJenkinsJob > jobs;
+   private final Set< PageJob > jobs;
    
    /**
     * Constructs a new {@link PageTable}.
@@ -102,18 +102,18 @@ public class PageTable {
    }//End Method
 
    /**
-    * Access to the {@link JwsJenkinsJob}s to show.
-    * @return the {@link JwsJenkinsJob}s.
+    * Access to the {@link PageJob}s to show.
+    * @return the {@link PageJob}s.
     */
-   public List< JwsJenkinsJob > jobs() {
+   public List< PageJob > jobs() {
       return new ArrayList<>( jobs );
    }//End Method
 
    /**
-    * Method to add the {@link JwsJenkinsJob}.
-    * @param job the {@link JwsJenkinsJob}.
+    * Method to add the {@link PageJob}.
+    * @param job the {@link PageJob}.
     */
-   public void addJob( JwsJenkinsJob job ) {
+   public void addJob( PageJob job ) {
       jobs.add( job );
    }//End Method
 

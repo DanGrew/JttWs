@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.repository.PageJob;
 
 /**
  * {@link JobTableSorting} provides the sorting options for the jobs list table.
@@ -30,21 +30,21 @@ public enum JobTableSorting {
    CommittersIncreasing( ( a, b ) -> a.committers().compareTo( b.committers() ) ),
    CommittersDecreasing( ( a, b ) -> CommittersIncreasing.comparator.compare( b, a ) );
    
-   private final Comparator< JwsJenkinsJob > comparator;
+   private final Comparator< PageJob > comparator;
    
    /**
     * Construct a new {@link JobTableSorting}.
     * @param comparator the {@link Comparator} for sorting. 
     */
-   private JobTableSorting( Comparator< JwsJenkinsJob > comparator ) {
+   private JobTableSorting( Comparator< PageJob > comparator ) {
       this.comparator = comparator;
    }//End Constructor
    
    /**
-    * Method to sort the given {@link JwsJenkinsJob}s.
-    * @param jobs the {@link List} of {@link JwsJenkinsJob} to sort.
+    * Method to sort the given {@link PageJob}s.
+    * @param jobs the {@link List} of {@link PageJob} to sort.
     */
-   public void sort( List< JwsJenkinsJob > jobs ) {
+   public void sort( List< PageJob > jobs ) {
       Collections.sort( jobs, comparator );
    }//End Method
    

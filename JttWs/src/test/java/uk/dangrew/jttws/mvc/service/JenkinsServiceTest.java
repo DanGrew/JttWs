@@ -24,7 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import uk.dangrew.jttws.mvc.repository.JenkinsRepository;
-import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.repository.PageJob;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsUser;
 
 public class JenkinsServiceTest {
@@ -47,7 +47,7 @@ public class JenkinsServiceTest {
    
    @Test public void shouldRetrieveJobsFromRepository(){
       @SuppressWarnings("unchecked") //mocking only 
-      List< JwsJenkinsJob > list = mock( List.class );
+      List< PageJob > list = mock( List.class );
       when( repository.getJenkinsJobs() ).thenReturn( list );
       
       assertThat( systemUnderTest.getJobs(), is( list ) );

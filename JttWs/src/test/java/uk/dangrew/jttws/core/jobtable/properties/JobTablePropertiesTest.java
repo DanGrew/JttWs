@@ -39,7 +39,7 @@ import uk.dangrew.jttws.core.jobtable.jobname.JobNameColumn;
 import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
 import uk.dangrew.jttws.core.jobtable.web.PageFilter;
 import uk.dangrew.jttws.core.jobtable.web.PageTable;
-import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.repository.PageJob;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsUser;
 import uk.dangrew.jttws.mvc.web.configuration.ConfigurationEntry;
 
@@ -52,7 +52,7 @@ public class JobTablePropertiesTest {
    private JobTableParameters parameters;
    @Mock private TableSpecification data;
    private PageTable table;
-   private List< JwsJenkinsJob > jobs;
+   private List< PageJob > jobs;
    private List< JwsJenkinsUser > users;
    private JobTableProperties systemUnderTest;
 
@@ -63,9 +63,9 @@ public class JobTablePropertiesTest {
       table = new PageTable();
       parameters = new JobTableParameters();
       jobs = Arrays.asList(
-               new JwsJenkinsJob( new JenkinsJobImpl( "My Job" ) ),
-               new JwsJenkinsJob( new JenkinsJobImpl( "Your Job" ) ),
-               new JwsJenkinsJob( new JenkinsJobImpl( "Their Job" ) )
+               new PageJob( new JenkinsJobImpl( "My Job" ) ),
+               new PageJob( new JenkinsJobImpl( "Your Job" ) ),
+               new PageJob( new JenkinsJobImpl( "Their Job" ) )
       );
       users = new ArrayList<>();
       systemUnderTest = new JobTableProperties();

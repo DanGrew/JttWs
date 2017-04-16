@@ -34,7 +34,7 @@ import uk.dangrew.jtt.model.jobs.JenkinsJob;
 import uk.dangrew.jttws.core.bean.JwsJenkinsDatabase;
 import uk.dangrew.jttws.core.login.JenkinsCredentials;
 import uk.dangrew.jttws.core.login.JenkinsLoginPrompt;
-import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.repository.PageJob;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsUser;
 
 /**
@@ -45,7 +45,7 @@ import uk.dangrew.jttws.mvc.repository.JwsJenkinsUser;
 public class JenkinsConnection implements ApplicationContextAware {
    
    private static final Logger logger = LoggerFactory.getLogger( JenkinsConnection.class );
-   private List< JwsJenkinsJob > jobs;
+   private List< PageJob > jobs;
    private List< JwsJenkinsUser > users;
    private Clock clock;
    
@@ -83,7 +83,7 @@ public class JenkinsConnection implements ApplicationContextAware {
          LiveStateFetcher fetcher = new LiveStateFetcher( database, property.get() );
          fetcher.loadLastCompletedBuild();
          database.jenkinsJobs().forEach( j -> {
-            JwsJenkinsJob dto = new JwsJenkinsJob( j );
+            PageJob dto = new PageJob( j );
             jobs.add( dto );
          } );
          
@@ -95,7 +95,7 @@ public class JenkinsConnection implements ApplicationContextAware {
          this.fetcher = fetcher;
    }
    
-   public List< JwsJenkinsJob > getJobs() {
+   public List< PageJob > getJobs() {
       return new ArrayList<>( jobs );
    }
    

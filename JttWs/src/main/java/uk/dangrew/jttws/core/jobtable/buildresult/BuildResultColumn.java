@@ -22,11 +22,11 @@ import uk.dangrew.jttws.core.jobtable.structure.ColumnType;
 import uk.dangrew.jttws.core.jobtable.structure.SortingFunction;
 import uk.dangrew.jttws.core.jobtable.web.PageFilter;
 import uk.dangrew.jttws.core.jobtable.web.PageSorting;
-import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.repository.PageJob;
 
 /**
  * The {@link BuildResultColumn} represents the column of data holding the {@link uk.dangrew.jtt.model.jobs.BuildResultStatus}
- * associated with the {@link JwsJenkinsJob}.
+ * associated with the {@link PageJob}.
  */
 public class BuildResultColumn implements Column {
    
@@ -85,14 +85,14 @@ public class BuildResultColumn implements Column {
    /**
     * {@inheritDoc}
     */
-   @Override public String valueForJob( JwsJenkinsJob job ) {
+   @Override public String valueForJob( PageJob job ) {
       return job.status().displayName();
    }//End Method
    
    /**
     * {@inheritDoc}
     */
-   @Override public void sort( List< JwsJenkinsJob > jobs, JobTableParameters parameters ) {
+   @Override public void sort( List< PageJob > jobs, JobTableParameters parameters ) {
       SortingFunction sorting = sortings.get( parameters.sorting() );
       if ( sorting == null ) {
          throw new IllegalArgumentException( "No sorting defined on " + name() + " for " + parameters.sorting() );
@@ -118,15 +118,15 @@ public class BuildResultColumn implements Column {
    /**
     * {@inheritDoc}
     */
-   @Override public void filter( List< JwsJenkinsJob > jobs, JobTableParameters parameters ) {
-      List< JwsJenkinsJob > excludedJobs = filter.identifyExclusions( jobs, parameters.filterValueFor( name() ) );
+   @Override public void filter( List< PageJob > jobs, JobTableParameters parameters ) {
+      List< PageJob > excludedJobs = filter.identifyExclusions( jobs, parameters.filterValueFor( name() ) );
       jobs.removeAll( excludedJobs );
    }//End Method
    
    /**
     * {@inheritDoc}
     */
-   @Override public List< PageFilter > filters( List< JwsJenkinsJob > jobs, JobTableParameters parameters ) {
+   @Override public List< PageFilter > filters( List< PageJob > jobs, JobTableParameters parameters ) {
       return filter.filterOptions( jobs, parameters.filterValueFor( name() ) );
    }//End Method
 

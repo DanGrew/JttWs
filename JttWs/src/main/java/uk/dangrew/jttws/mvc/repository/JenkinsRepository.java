@@ -47,10 +47,10 @@ public class JenkinsRepository implements ApplicationContextAware {
    }// End Constructor
 
    /**
-    * Getter for the entire {@link List} of {@link JwsJenkinsJob}s.
-    * @return the {@link JwsJenkinsJob}s.
+    * Getter for the entire {@link List} of {@link PageJob}s.
+    * @return the {@link PageJob}s.
     */
-   public List< JwsJenkinsJob > getJenkinsJobs() {
+   public List< PageJob > getJenkinsJobs() {
       if ( connection == null ) {
          logger.error( CONNECTION_ERROR );
          return new ArrayList<>();

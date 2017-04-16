@@ -22,20 +22,20 @@ import org.mockito.MockitoAnnotations;
 import uk.dangrew.jtt.model.jobs.BuildResultStatus;
 import uk.dangrew.jtt.model.jobs.JenkinsJobImpl;
 import uk.dangrew.jttws.core.jobtable.common.Comparison;
-import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.repository.PageJob;
 import uk.dangrew.jttws.mvc.web.jobtable.SeverityComparator;
 
 public class BuildResultSeverityTest {
 
-   private JwsJenkinsJob job1;
-   private JwsJenkinsJob job2;
+   private PageJob job1;
+   private PageJob job2;
    @Mock private SeverityComparator severity;
    private BuildResultSeverity systemUnderTest;
 
    @Before public void initialiseSystemUnderTest() {
       MockitoAnnotations.initMocks( this );
-      job1 = new JwsJenkinsJob( new JenkinsJobImpl( "Job1" ) );
-      job2 = new JwsJenkinsJob( new JenkinsJobImpl( "Job2" ) );
+      job1 = new PageJob( new JenkinsJobImpl( "Job1" ) );
+      job2 = new PageJob( new JenkinsJobImpl( "Job2" ) );
       systemUnderTest = new BuildResultSeverity( severity );
    }//End Method
    

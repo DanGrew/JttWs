@@ -33,12 +33,12 @@ import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
 import uk.dangrew.jttws.core.jobtable.structure.Column;
 import uk.dangrew.jttws.core.jobtable.structure.ColumnType;
 import uk.dangrew.jttws.core.jobtable.web.PageFilter;
-import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.repository.PageJob;
 
 public class TableSpecificationTest {
 
-   private JwsJenkinsJob job;
-   private List< JwsJenkinsJob > jobs;
+   private PageJob job;
+   private List< PageJob > jobs;
    private JobTableParameters parameters;
 
    @Mock private List< PageFilter > filters;
@@ -53,7 +53,7 @@ public class TableSpecificationTest {
       when( buildResultColumn.name() ).thenReturn( BuildResultColumn.staticName() );
       
       jobs = new ArrayList<>();
-      job = new JwsJenkinsJob( new JenkinsJobImpl( "Badminton" ) );
+      job = new PageJob( new JenkinsJobImpl( "Badminton" ) );
       parameters = new JobTableParameters();
       
       systemUnderTest = new TableSpecification( jobNameColumn, buildResultColumn );

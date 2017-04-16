@@ -21,20 +21,20 @@ import org.junit.Test;
 
 import uk.dangrew.jtt.model.jobs.JenkinsJobImpl;
 import uk.dangrew.jttws.core.jobtable.web.PageFilter;
-import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.repository.PageJob;
 
 public class JobNameFilterTest {
 
-   private List< JwsJenkinsJob > jobs;
-   private JwsJenkinsJob job1;
-   private JwsJenkinsJob job2;
+   private List< PageJob > jobs;
+   private PageJob job1;
+   private PageJob job2;
    
    private JobNameFilter systemUnderTest;
 
    @Before public void initialiseSystemUnderTest() {
       jobs = new ArrayList<>();
-      jobs.add( job1 = new JwsJenkinsJob( new JenkinsJobImpl( "Job1" ) ) );
-      jobs.add( job2 = new JwsJenkinsJob( new JenkinsJobImpl( "Job2" ) ) );
+      jobs.add( job1 = new PageJob( new JenkinsJobImpl( "Job1" ) ) );
+      jobs.add( job2 = new PageJob( new JenkinsJobImpl( "Job2" ) ) );
       systemUnderTest = new JobNameFilter();
    }//End Method
 

@@ -41,7 +41,7 @@ import uk.dangrew.jtt.model.users.JenkinsUserImpl;
 import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
 import uk.dangrew.jttws.core.jobtable.parameters.ParametersPopulator;
 import uk.dangrew.jttws.core.jobtable.properties.JobTableProperties;
-import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.repository.PageJob;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsUser;
 import uk.dangrew.jttws.mvc.service.JenkinsService;
 import uk.dangrew.jttws.mvc.web.jobtable.JobTableColumns;
@@ -55,7 +55,7 @@ public class SiteControllerTest {
    @Mock private HttpServletResponse response;
    
    private JobTableParameters parameters;
-   private List< JwsJenkinsJob > jobs;
+   private List< PageJob > jobs;
    private List< JwsJenkinsUser > users;
    
    @Mock private JobTableProperties properties;
@@ -69,7 +69,7 @@ public class SiteControllerTest {
       parameters = new JobTableParameters();
       when( paramsPopulator.construct( Mockito.any(), eq( request ), eq( response ) ) ).thenReturn( parameters );
       
-      jobs = Arrays.asList( new JwsJenkinsJob( new JenkinsJobImpl( "anything" ) ) );
+      jobs = Arrays.asList( new PageJob( new JenkinsJobImpl( "anything" ) ) );
       when( service.getJobs() ).thenReturn( jobs );
       users = Arrays.asList( new JwsJenkinsUser( new JenkinsUserImpl( "anyone" ) ) );
       when( service.getUsers() ).thenReturn( users );

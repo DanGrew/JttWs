@@ -21,7 +21,7 @@ import uk.dangrew.jttws.core.jobtable.structure.Column;
 import uk.dangrew.jttws.core.jobtable.web.PageColumn;
 import uk.dangrew.jttws.core.jobtable.web.PageFilter;
 import uk.dangrew.jttws.core.jobtable.web.PageTable;
-import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.repository.PageJob;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsUser;
 
 /**
@@ -41,7 +41,7 @@ public class JobTableProperties {
    private TableSpecification tableData;
    private PageTable table;
    private JobTableParameters parameters;
-   private List< JwsJenkinsJob > jobs;
+   private List< PageJob > jobs;
    private List< JwsJenkinsUser > users;
 
    /**
@@ -56,14 +56,14 @@ public class JobTableProperties {
     * @param table the {@link PageTable} to populate.
     * @param data the {@link TableSpecification}.
     * @param parameters the {@link JobTableParameters}.
-    * @param jobs the {@link List} of {@link JwsJenkinsJob}s available.
+    * @param jobs the {@link List} of {@link PageJob}s available.
     * @param users the {@link List} of {@link JwsJenkinsUser}s available.
     */
    public void populateTable( 
             PageTable table,
             TableSpecification data, 
             JobTableParameters parameters, 
-            List< JwsJenkinsJob > jobs, 
+            List< PageJob > jobs, 
             List< JwsJenkinsUser > users
    ) {
       this.table = table;
@@ -116,7 +116,6 @@ public class JobTableProperties {
       //refactor calls in pages for new interface
       //tidy up table data interface
       //implement populating sortings
-      //refactor inactive()
    }//End Method
    
 }//End Class

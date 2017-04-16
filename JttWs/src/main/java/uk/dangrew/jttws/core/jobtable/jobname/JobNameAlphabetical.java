@@ -9,7 +9,7 @@
 package uk.dangrew.jttws.core.jobtable.jobname;
 
 import uk.dangrew.jttws.core.jobtable.structure.SortingFunction;
-import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.repository.PageJob;
 
 /**
  * {@link JobNameAlphabetical} is a {@link SortingFunction} for the job name, ordering 
@@ -37,7 +37,7 @@ public class JobNameAlphabetical implements SortingFunction {
    /**
     * {@inheritDoc}
     */
-   @Override public int compare( JwsJenkinsJob o1, JwsJenkinsJob o2 ) {
+   @Override public int compare( PageJob o1, PageJob o2 ) {
       return o1.name().compareTo( o2.name() );
    }//End Method
 

@@ -18,14 +18,14 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import uk.dangrew.jttws.core.jobtable.structure.SortingFunction;
-import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.repository.PageJob;
 
 public class ReverseSortingTest {
 
    private static final int UNQIUE_ANSWER = 384756;
    
-   @Mock private JwsJenkinsJob job1;
-   @Mock private JwsJenkinsJob job2;
+   @Mock private PageJob job1;
+   @Mock private PageJob job2;
    @Mock private SortingFunction sort;
    private SortingFunction systemUnderTest;
 

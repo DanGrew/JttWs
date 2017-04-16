@@ -20,7 +20,7 @@ import org.junit.Test;
 
 import uk.dangrew.jtt.model.jobs.JenkinsJobImpl;
 import uk.dangrew.jtt.model.users.JenkinsUserImpl;
-import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.repository.PageJob;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsUser;
 
 public class JobTableDataTest {
@@ -30,10 +30,10 @@ public class JobTableDataTest {
    private JwsJenkinsUser diggle;
    private List< JwsJenkinsUser > users;
    
-   private JwsJenkinsJob city;
-   private JwsJenkinsJob thea;
-   private JwsJenkinsJob hood;
-   private List< JwsJenkinsJob > jobs;
+   private PageJob city;
+   private PageJob thea;
+   private PageJob hood;
+   private List< PageJob > jobs;
    private JobTableData systemUnderTest;
 
    @Before public void initialiseSystemUnderTest() {
@@ -45,9 +45,9 @@ public class JobTableDataTest {
       users.add( diggle = new JwsJenkinsUser( new JenkinsUserImpl( "Diggle" ) ) );
       
       jobs = new ArrayList<>();
-      jobs.add( city = new JwsJenkinsJob( new JenkinsJobImpl( "Save City" ) ) );
-      jobs.add( thea = new JwsJenkinsJob( new JenkinsJobImpl( "Save Thea" ) ) );
-      jobs.add( hood = new JwsJenkinsJob( new JenkinsJobImpl( "Repair Holes In Hood" ) ) );
+      jobs.add( city = new PageJob( new JenkinsJobImpl( "Save City" ) ) );
+      jobs.add( thea = new PageJob( new JenkinsJobImpl( "Save Thea" ) ) );
+      jobs.add( hood = new PageJob( new JenkinsJobImpl( "Repair Holes In Hood" ) ) );
       
       systemUnderTest.provide( jobs );
    }//End Method
@@ -59,7 +59,7 @@ public class JobTableDataTest {
    @Test public void shouldAppendFilteredJobs() {
       assertThat( systemUnderTest.getDisplayedJobs(), is( jobs ) );
       
-      JwsJenkinsJob anything = new JwsJenkinsJob( new JenkinsJobImpl( "anything" ) );
+      PageJob anything = new PageJob( new JenkinsJobImpl( "anything" ) );
       systemUnderTest.provide( Arrays.asList( anything ) );
       assertThat( systemUnderTest.getDisplayedJobs(), is( 
                Arrays.asList( jobs.get( 0 ), jobs.get( 1 ), jobs.get( 2 ), anything ) 

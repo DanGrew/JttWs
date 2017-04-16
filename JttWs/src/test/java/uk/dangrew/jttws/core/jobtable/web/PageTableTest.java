@@ -19,12 +19,12 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.repository.PageJob;
 
 public class PageTableTest {
 
-   @Mock private JwsJenkinsJob job1;
-   @Mock private JwsJenkinsJob job2;
+   @Mock private PageJob job1;
+   @Mock private PageJob job2;
    @Mock private PageColumn column1;
    @Mock private PageColumn column2;
    @Mock private PageSorting sorting1;

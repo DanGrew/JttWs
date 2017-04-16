@@ -21,7 +21,7 @@ import uk.dangrew.jttws.core.jobtable.structure.Column;
 import uk.dangrew.jttws.core.jobtable.structure.ColumnType;
 import uk.dangrew.jttws.core.jobtable.web.PageFilter;
 import uk.dangrew.jttws.core.jobtable.web.PageSorting;
-import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.repository.PageJob;
 import uk.dangrew.jttws.mvc.web.configuration.ConfigurationEntry;
 
 /**
@@ -80,11 +80,11 @@ public class TableSpecification {
     * Method to provide the {@link ConfigurationEntry}s for the {@link uk.dangrew.jttws.core.jobtable.structure.Filter}s available for the 
     * given {@link Column}.
     * @param columnName the name of the {@link Column}.
-    * @param jobs the {@link JwsJenkinsJob}s the filters are relevant to.
+    * @param jobs the {@link PageJob}s the filters are relevant to.
     * @param parameters the {@link JobTableParameters} for existing filters.
     * @return the {@link ConfigurationEntry}s.
     */
-   public List< PageFilter > filtersFor( String columnName, List< JwsJenkinsJob > jobs, JobTableParameters parameters ) {
+   public List< PageFilter > filtersFor( String columnName, List< PageJob > jobs, JobTableParameters parameters ) {
       Column column = columns.get( columnName );
       if ( column == null ) {
          return new ArrayList<>();
@@ -97,7 +97,7 @@ public class TableSpecification {
     * Method to provide the {@link PageSorting}s for the {@link uk.dangrew.jttws.core.jobtable.structure.Filter}s available for the 
     * given {@link Column}.
     * @param columnName the name of the {@link Column}.
-    * @param jobs the {@link JwsJenkinsJob}s the filters are relevant to.
+    * @param jobs the {@link PageJob}s the filters are relevant to.
     * @param parameters the {@link JobTableParameters} for existing filters.
     * @return the {@link PageSorting}s.
     */
@@ -113,10 +113,10 @@ public class TableSpecification {
    /**
     * Method to provide the value to display in the table for the given column and job.
     * @param columnName the name of the {@link Column}.
-    * @param job the {@link JwsJenkinsJob}.
+    * @param job the {@link PageJob}.
     * @return the {@link String} value to display in the table.
     */
-   public String valueForColumn( String columnName, JwsJenkinsJob job ) {
+   public String valueForColumn( String columnName, PageJob job ) {
       Column column = columns.get( columnName );
       if ( column == null ) {
          return UNKNOWN_ENTRY;
@@ -163,12 +163,12 @@ public class TableSpecification {
    }//End Method
 
    /**
-    * Method to sort the given {@link JwsJenkinsJob}s given the {@link JobTableParameters}. This will
+    * Method to sort the given {@link PageJob}s given the {@link JobTableParameters}. This will
     * look up the relevant column and sorting function and apply.
-    * @param jobs the {@link List} of {@link JwsJenkinsJob}s to sort.
+    * @param jobs the {@link List} of {@link PageJob}s to sort.
     * @param parameters the {@link JobTableParameters} providing the sorting method.
     */
-   public void sort( List< JwsJenkinsJob > jobs, JobTableParameters parameters ) {
+   public void sort( List< PageJob > jobs, JobTableParameters parameters ) {
       Column column = sortings.get( parameters.sorting() );
       if ( column == null ) {
          throw new IllegalArgumentException( "Invalid column sort to apply: " + parameters.sorting() );
@@ -178,12 +178,12 @@ public class TableSpecification {
    }//End Method
 
    /**
-    * Method to filter the given {@link JwsJenkinsJob}s given the {@link JobTableParameters}. This will
+    * Method to filter the given {@link PageJob}s given the {@link JobTableParameters}. This will
     * apply {@link uk.dangrew.jttws.core.jobtable.structure.Filter}s for each {@link Column}. 
-    * @param jobs the {@link List} of {@link JwsJenkinsJob}s to filter.
+    * @param jobs the {@link List} of {@link PageJob}s to filter.
     * @param parameters the {@link JobTableParameters} providing the filtering configuration.
     */
-   public void filter( List< JwsJenkinsJob > jobs, JobTableParameters parameters ) {
+   public void filter( List< PageJob > jobs, JobTableParameters parameters ) {
       for ( Column column : orderedTableColumns ) {
          column.filter( jobs, parameters );
       }

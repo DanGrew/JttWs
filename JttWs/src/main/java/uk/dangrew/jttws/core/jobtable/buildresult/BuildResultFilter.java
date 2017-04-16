@@ -18,7 +18,7 @@ import uk.dangrew.jtt.model.jobs.BuildResultStatus;
 import uk.dangrew.jttws.core.jobtable.common.WebUiParameterParsing;
 import uk.dangrew.jttws.core.jobtable.structure.Filter;
 import uk.dangrew.jttws.core.jobtable.web.PageFilter;
-import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
+import uk.dangrew.jttws.mvc.repository.PageJob;
 
 /**
  * The {@link BuildResultFilter} provides a {@link Filter} based on the {@link uk.dangrew.jtt.model.jobs.BuildResultStatus}.
@@ -37,7 +37,7 @@ public class BuildResultFilter implements Filter {
    /**
     * {@inheritDoc}
     */
-   @Override public List< PageFilter > filterOptions( List< JwsJenkinsJob > jobs, String existingFilters ) {
+   @Override public List< PageFilter > filterOptions( List< PageJob > jobs, String existingFilters ) {
       Set< String > filtered = new LinkedHashSet<>( webParsing.parseStringList( existingFilters ) );
       
       List< PageFilter > filters = new ArrayList<>();
@@ -57,14 +57,14 @@ public class BuildResultFilter implements Filter {
    /**
     * {@inheritDoc}
     */
-   @Override public List< JwsJenkinsJob > identifyExclusions( List< JwsJenkinsJob > jobs, String value ) {
-      List< JwsJenkinsJob > excludedJobs = new ArrayList<>();
+   @Override public List< PageJob > identifyExclusions( List< PageJob > jobs, String value ) {
+      List< PageJob > excludedJobs = new ArrayList<>();
       if ( value == null ) {
          return excludedJobs;
       }
       
       Set< String > includedStatuss = new LinkedHashSet<>( webParsing.parseStringList( value ) );
-      for ( JwsJenkinsJob job : jobs ) {
+      for ( PageJob job : jobs ) {
          if ( !includedStatuss.contains( job.status().displayName() ) ) {
             excludedJobs.add( job );
          }
