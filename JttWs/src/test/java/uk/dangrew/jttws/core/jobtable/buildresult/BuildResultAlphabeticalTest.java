@@ -10,6 +10,7 @@ package uk.dangrew.jttws.core.jobtable.buildresult;
 
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Before;
@@ -43,7 +44,7 @@ public class BuildResultAlphabeticalTest {
    
    @Test public void shouldBeLessThan() {
       job2.association().setBuildStatus( BuildResultStatus.UNSTABLE );
-      assertThat( systemUnderTest.compare( job1, job2 ), is( Comparison.LessThan.value() ) );
+      assertThat( systemUnderTest.compare( job1, job2 ), is( lessThanOrEqualTo( Comparison.LessThan.value() ) ) );
    }//End Method
    
    @Test public void shouldBeGreaterThan() {

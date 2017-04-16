@@ -20,6 +20,7 @@ import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
 import uk.dangrew.jttws.core.jobtable.structure.Column;
 import uk.dangrew.jttws.core.jobtable.web.PageColumn;
 import uk.dangrew.jttws.core.jobtable.web.PageFilter;
+import uk.dangrew.jttws.core.jobtable.web.PageSorting;
 import uk.dangrew.jttws.core.jobtable.web.PageTable;
 import uk.dangrew.jttws.mvc.repository.PageJob;
 import uk.dangrew.jttws.mvc.repository.PageUser;
@@ -38,7 +39,7 @@ public class JobTableProperties {
    
    private final WebUiParameterParsing parsing;
    
-   private TableSpecification tableData;
+   private TableSpecification tableSpec;
    private PageTable table;
    private JobTableParameters parameters;
    private List< PageJob > jobs;
@@ -67,15 +68,14 @@ public class JobTableProperties {
             List< PageUser > users
    ) {
       this.table = table;
-      this.tableData = data;
+      this.tableSpec = data;
       this.parameters = parameters;
       this.jobs = new ArrayList<>( jobs );
       this.users = new ArrayList<>( users );
       
       populateIncludedColumns();
+      populateSortOptions();
       populateFilteredJobs();
-      
-      //populate sorting config
    }//End Method
    
    /**
@@ -89,14 +89,14 @@ public class JobTableProperties {
     * Method to populate the {@link Column}s and whether they are in use or not.
     */
    private void populateIncludedColumns(){
-      List< String > includedJobs = parsing.parseStringList( parameters.includedColumns() );
+      List< String > includedColumns = parsing.parseStringList( parameters.includedColumns() );
       
-      for ( Column column : tableData.columns() ) {
-         boolean inactive = !includedJobs.isEmpty() && !includedJobs.contains( column.name() );
+      for ( Column column : tableSpec.columns() ) {
+         boolean inactive = !includedColumns.isEmpty() && !includedColumns.contains( column.name() );
          PageColumn pageColumn = new PageColumn( column, !inactive );
          table.addColumn( pageColumn );
          if ( !inactive ) {
-            List< PageFilter > columnFilters = tableData.filtersFor( column.name(), jobs, parameters );
+            List< PageFilter > columnFilters = tableSpec.filtersFor( column.name(), jobs, parameters );
             columnFilters.forEach( e -> table.addFilter( pageColumn, e ) );
          }
       }
@@ -106,13 +106,24 @@ public class JobTableProperties {
     * Method to populate the jobs following the filtering configured.
     */
    private void populateFilteredJobs(){
-      tableData.filter( jobs, parameters );
+      tableSpec.filter( jobs, parameters );
+      tableSpec.sort( jobs, parameters );
       jobs.forEach( table::addJob );
    }//End Method
    
+   /**
+    * Method to populate the sorting options.
+    */
    private void populateSortOptions(){
-      //refactor calls in pages for new interface
-      //implement populating sortings
+      for ( Column column : tableSpec.columns() ) {
+         for ( PageSorting sorting : tableSpec.sortingOptionsFor( column.name(), parameters ) ) {
+            boolean active = sorting.name().equals( parameters.sorting() );
+            if ( !active ) {
+               sorting.setInactive();
+            }
+            table.addSorting( sorting );
+         }
+      }
    }//End Method
    
 }//End Class

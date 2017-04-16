@@ -38,7 +38,7 @@ public class BuildResultAlphabetical implements SortingFunction {
     * {@inheritDoc}
     */
    @Override public int compare( PageJob o1, PageJob o2 ) {
-      return o1.status().compareTo( o2.status() );
+      return o1.status().displayName().compareTo( o2.status().displayName() );
    }//End Method
 
 }//End Class
