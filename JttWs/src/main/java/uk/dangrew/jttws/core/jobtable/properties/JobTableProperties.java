@@ -111,10 +111,7 @@ public class JobTableProperties {
    }//End Method
    
    private void populateSortOptions(){
-      //remove id fields
-      //refactor 'jws' to 'page'
       //refactor calls in pages for new interface
-      //tidy up table data interface
       //implement populating sortings
    }//End Method
    

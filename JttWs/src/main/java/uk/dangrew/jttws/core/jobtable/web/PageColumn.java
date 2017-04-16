@@ -11,6 +11,7 @@ package uk.dangrew.jttws.core.jobtable.web;
 import uk.dangrew.jttws.core.jobtable.common.Comparison;
 import uk.dangrew.jttws.core.jobtable.structure.Column;
 import uk.dangrew.jttws.core.jobtable.structure.ColumnType;
+import uk.dangrew.jttws.mvc.repository.PageJob;
 
 /**
  * The {@link PageColumn} provides the web ui version of the {@link Column}.
@@ -49,6 +50,14 @@ public class PageColumn implements Comparable< PageColumn >{
    public ColumnType type() {
       return column.type();
    }//End Method
+   
+   /**
+    * Access to the {@link Column#id()}.
+    * @return the id.
+    */
+   public String id(){
+      return column.id();
+   }//End Method
 
    /**
     * Access to whether the {@link Column} is active in the ui.
@@ -56,6 +65,15 @@ public class PageColumn implements Comparable< PageColumn >{
     */
    public boolean isActive() {
       return isActive;
+   }//End Method
+   
+   /**
+    * Method to provide the value to display in the table for the given job.
+    * @param job the {@link PageJob}.
+    * @return the {@link String} value to display in the table.
+    */
+   public String valueFor( PageJob job ) {
+      return column.valueForJob( job );
    }//End Method
 
    /**

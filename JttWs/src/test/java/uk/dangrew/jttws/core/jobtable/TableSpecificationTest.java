@@ -81,24 +81,6 @@ public class TableSpecificationTest {
       verify( buildResultColumn ).filter( jobs, parameters );
    }//End Method
    
-   @Test public void shouldProvideValueForColumn(){
-      when( buildResultColumn.valueForJob( job ) ).thenReturn( job.name() );
-      assertThat( systemUnderTest.valueForColumn( BuildResultColumn.staticName(), job ), is( job.name() ) );
-   }//End Method
-   
-   @Test public void shouldHandleInvalidColumnNameWhenValueRequested(){
-      assertThat( systemUnderTest.valueForColumn( "anything", job ), is( TableSpecification.UNKNOWN_ENTRY ) );
-   }//End Method
-   
-   @Test public void shouldProvideTypeForColumn(){
-      when( buildResultColumn.type() ).thenReturn( ColumnType.ProgressBar );
-      assertThat( systemUnderTest.typeForColumn( BuildResultColumn.staticName() ), is( ColumnType.ProgressBar ) );
-   }//End Method
-   
-   @Test public void shouldHandleInvalidColumnNameWhenTypeRequested(){
-      assertThat( systemUnderTest.typeForColumn( "anything" ), is( ColumnType.String ) );
-   }//End Method
-   
    @Test public void shouldProvideFilterConfigurationForColumn(){
       when( jobNameColumn.filters( jobs, parameters ) ).thenReturn( filters );
       assertThat( systemUnderTest.filtersFor( jobNameColumn.name(), jobs, parameters ), is( filters ) );
@@ -106,15 +88,6 @@ public class TableSpecificationTest {
    
    @Test public void shouldProvideEmptyConfigurationForInvalidColumn(){
       assertThat( systemUnderTest.filtersFor( "anything", jobs, parameters ), is( new ArrayList<>() ) );
-   }//End Method
-   
-   @Test public void shouldProvideIdForColumn(){
-      doCallRealMethod().when( jobNameColumn ).id();
-      assertThat( systemUnderTest.idForColumn( jobNameColumn.name() ), is( jobNameColumn.id() ) );
-   }//End Method
-   
-   @Test public void shouldNotAcceptInvalidColumnForId(){
-      assertThat( systemUnderTest.idForColumn( "anything" ), is( TableSpecification.UNKNOWN_ENTRY ) );
    }//End Method
    
    @Test public void shouldProvideColumnForId(){

@@ -24,11 +24,13 @@ import uk.dangrew.jttws.core.jobtable.buildresult.BuildResultColumn;
 import uk.dangrew.jttws.core.jobtable.common.Comparison;
 import uk.dangrew.jttws.core.jobtable.structure.Column;
 import uk.dangrew.jttws.core.jobtable.structure.ColumnType;
+import uk.dangrew.jttws.mvc.repository.PageJob;
 
 public class PageColumnTest {
 
    private static final String ANYTHING = "anything";
    
+   @Mock private PageJob job;
    @Mock private Column column;
    @Mock private Column column2;
    private PageColumn alternate;   
@@ -108,5 +110,15 @@ public class PageColumnTest {
       
       assertThat( new PageColumn( column, false ).compareTo( systemUnderTest ), is( Comparison.LessThan.value() ) );
    }//End Method
-
+   
+   @Test public void shouldProvideValueForJob(){
+      when( column.valueForJob( job ) ).thenReturn( "anything" );
+      assertThat( systemUnderTest.valueFor( job ), is( "anything" ) );
+   }//End Method
+   
+   @Test public void shouldProvideId(){
+      when( column.id() ).thenReturn( "anything" );
+      assertThat( systemUnderTest.id(), is( "anything" ) );
+   }//End Method
+   
 }//End Class

@@ -18,7 +18,6 @@ import uk.dangrew.jttws.core.jobtable.buildresult.BuildResultColumn;
 import uk.dangrew.jttws.core.jobtable.jobname.JobNameColumn;
 import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
 import uk.dangrew.jttws.core.jobtable.structure.Column;
-import uk.dangrew.jttws.core.jobtable.structure.ColumnType;
 import uk.dangrew.jttws.core.jobtable.web.PageFilter;
 import uk.dangrew.jttws.core.jobtable.web.PageSorting;
 import uk.dangrew.jttws.mvc.repository.PageJob;
@@ -111,55 +110,12 @@ public class TableSpecification {
    }//End Method
    
    /**
-    * Method to provide the value to display in the table for the given column and job.
-    * @param columnName the name of the {@link Column}.
-    * @param job the {@link PageJob}.
-    * @return the {@link String} value to display in the table.
-    */
-   public String valueForColumn( String columnName, PageJob job ) {
-      Column column = columns.get( columnName );
-      if ( column == null ) {
-         return UNKNOWN_ENTRY;
-      }
-      
-      return column.valueForJob( job );
-   }//End Method
-   
-   /**
-    * Method to provide the id to use for the given column.
-    * @param columnName the name of the {@link Column}.
-    * @return the {@link String} id.
-    */
-   public String idForColumn( String columnName ) {
-      Column column = columns.get( columnName );
-      if ( column == null ) {
-         return UNKNOWN_ENTRY;
-      }
-      
-      return column.id();
-   }//End Method
-   
-   /**
     * Method to provide the id to use for the given column.
     * @param id the id of the {@link Column}.
     * @return the {@link Column} found, or null.
     */
    public Column columnForId( String id ) {
       return ids.get( id );
-   }//End Method
-   
-   /**
-    * Method to provide the type to display for the given column.
-    * @param columnName the name of the {@link Column}.
-    * @return the {@link String} value to display in the table.
-    */
-   public ColumnType typeForColumn( String columnName ) {
-      Column column = columns.get( columnName );
-      if ( column == null ) {
-         return ColumnType.String;
-      }
-      
-      return column.type();
    }//End Method
 
    /**
