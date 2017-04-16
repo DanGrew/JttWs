@@ -23,7 +23,6 @@ import uk.dangrew.jttws.core.jobtable.web.PageFilter;
 import uk.dangrew.jttws.core.jobtable.web.PageTable;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsJob;
 import uk.dangrew.jttws.mvc.repository.JwsJenkinsUser;
-import uk.dangrew.jttws.mvc.web.configuration.ConfigurationProvider;
 
 /**
  * The {@link JobTableProperties} provides a method of converting {@link TableData} into the relevant
@@ -38,7 +37,6 @@ public class JobTableProperties {
    static final String FILTERS = "filters";
    
    private final WebUiParameterParsing parsing;
-   private final ConfigurationProvider configuration;
    
    private TableData tableData;
    private PageTable table;
@@ -51,7 +49,6 @@ public class JobTableProperties {
     */
    public JobTableProperties() {
       this.parsing = new WebUiParameterParsing();
-      this.configuration = new ConfigurationProvider();
    }//End Constructor
 
    /**
@@ -116,13 +113,10 @@ public class JobTableProperties {
    private void populateSortOptions(){
       //remove id fields
       //refactor 'jws' to 'page'
-      //tidy up impl in here
-      //tidy up test for this
       //refactor calls in pages for new interface
       //tidy up table data interface
       //rename table data to table spec
       //implement populating sortings
-      //remove config provider
       //refactor inactive()
    }//End Method
    
