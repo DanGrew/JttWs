@@ -11,13 +11,17 @@
 	<table class="table table-striped">
 		<colgroup>
 			<c:forEach items="${data.columns()}" var="column">
-				<col span="1" style="width: 20%;">
+				<c:if test="${column.isActive()}">
+					<col span="1" style="width: 20%;">
+				</c:if>
 			</c:forEach>
 		</colgroup>
 		<thead>
 			<tr>
 				<c:forEach items="${data.columns()}" var="column">
-					<th>${column.name()}</th>
+					<c:if test="${column.isActive()}">
+						<th>${column.name()}</th>
+					</c:if>
 				</c:forEach>
 			</tr>
 		</thead>
@@ -25,16 +29,18 @@
 			<c:forEach items="${data.jobs()}" var="job">
 				<tr>
 					<c:forEach items="${data.columns()}" var="column">
-						<td>
-							<c:if test="${column.type() eq 'String'}">
-								<c:out value="${column.valueFor( job )}" />
-							</c:if>
-							<c:if test="${column.type() eq 'ProgressBar'}">
-								<div class="progress">
-									<div class="progress-bar" style="width: ${column.valueFor( job )}%"></div>
-								</div>
-							</c:if>
-						</td>
+						<c:if test="${column.isActive()}">
+							<td>
+								<c:if test="${column.type() eq 'String'}">
+									<c:out value="${column.valueFor( job )}" />
+								</c:if>
+								<c:if test="${column.type() eq 'ProgressBar'}">
+									<div class="progress">
+										<div class="progress-bar" style="width: ${column.valueFor( job )}%"></div>
+									</div>
+								</c:if>
+							</td>
+						</c:if>
 					</c:forEach>
 				</tr>
 			</c:forEach>

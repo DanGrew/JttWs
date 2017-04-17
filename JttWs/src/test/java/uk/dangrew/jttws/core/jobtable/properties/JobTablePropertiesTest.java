@@ -84,9 +84,11 @@ public class JobTablePropertiesTest {
       parameters.includeColumns( JobNameColumn.staticName() );
       systemUnderTest.populateTable( table, data, parameters, jobs, users );
       
-      assertThat( table.columns(), hasSize( 1 ) );
+      assertThat( table.columns(), hasSize( 2 ) );
       assertThat( table.columns().get( 0 ).name(), is( JobNameColumn.staticName() ) );
       assertThat( table.columns().get( 0 ).isActive(), is( true ) );
+      assertThat( table.columns().get( 1 ).name(), is( BuildResultColumn.staticName() ) );
+      assertThat( table.columns().get( 1 ).isActive(), is( false ) );
    }//End Method
    
    @Test public void shouldPopulateColumnsInParametersWhenNothingConfigured() {
@@ -119,6 +121,7 @@ public class JobTablePropertiesTest {
       systemUnderTest.populateTable( table, data, parameters, jobs, users );
       
       assertThat( table.filtersFor( table.columns().get( 0 ) ), is( jobNameColumn.filters( jobs, parameters ) ) );
+      assertThat( table.filtersFor( table.columns().get( 1 ) ), is( new ArrayList<>() ) );
    }//End Method
    
    @Test public void shouldBeSpringComponent(){
