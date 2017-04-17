@@ -51,7 +51,7 @@ h3 {display: inline;}
 			<tbody>
 				<tr>
 					<td><select class="selectpicker" id="columnFilter" multiple
-						data-live-search="true" onchange="nothing">
+						data-live-search="true" onchange="filterColumns()">
 							<c:forEach items="${data.columns()}" var="entry">
 								<c:if test="${entry.isActive()}">
 									<option selected>${entry.name()}</option>

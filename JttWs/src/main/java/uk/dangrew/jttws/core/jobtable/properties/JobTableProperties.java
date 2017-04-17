@@ -92,13 +92,16 @@ public class JobTableProperties {
       List< String > includedColumns = parsing.parseStringList( parameters.includedColumns() );
       
       for ( Column column : tableSpec.columns() ) {
-         boolean inactive = !includedColumns.isEmpty() && !includedColumns.contains( column.name() );
-         PageColumn pageColumn = new PageColumn( column, !inactive );
-         table.addColumn( pageColumn );
-         if ( !inactive ) {
-            List< PageFilter > columnFilters = column.filters( jobs, parameters );
-            columnFilters.forEach( e -> table.addFilter( pageColumn, e ) );
+         boolean active = includedColumns.isEmpty() || includedColumns.contains( column.name() );
+         if ( !active ) {
+            //exclude columns from data
+            continue;
          }
+         PageColumn pageColumn = new PageColumn( column, active );
+         table.addColumn( pageColumn );
+         
+         List< PageFilter > columnFilters = column.filters( jobs, parameters );
+         columnFilters.forEach( e -> table.addFilter( pageColumn, e ) );
       }
    }//End Method
    

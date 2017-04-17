@@ -29,3 +29,17 @@ function sortAndRefreshJobs() {
         }
     });
 }
+
+function filterColumns() {
+    var f = $('#columnFilter').val().toString();
+    $.ajax({
+        type : "GET",
+        url : "jobs-table",
+        data : {
+            "columns" : f
+        },
+        success : function(result) {
+            $('#job-table').html(result);
+        }
+    });
+}

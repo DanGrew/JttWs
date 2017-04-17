@@ -11,9 +11,7 @@ package uk.dangrew.jttws.core.jobtable.parameters;
 import java.util.HashMap;
 import java.util.Map;
 
-import javafx.util.Pair;
 import uk.dangrew.jttws.core.jobtable.jobname.JobNameAlphabetical;
-import uk.dangrew.jttws.core.jobtable.jobname.JobNameColumn;
 
 /**
  * The {@link JobTableParameters} provides a representation of the configuration made

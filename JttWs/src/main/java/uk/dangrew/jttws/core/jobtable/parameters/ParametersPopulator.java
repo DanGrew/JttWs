@@ -27,6 +27,7 @@ public class ParametersPopulator {
    static final String VALUE = "value";
    static final String ID = "id";
    static final String SORT = "sort";
+   static final String COLUMNS = "columns";
    
    private final CookieManager cookies;
    
@@ -55,10 +56,30 @@ public class ParametersPopulator {
    public JobTableParameters construct( TableSpecification tableSpec, HttpServletRequest request, HttpServletResponse response ){
       JobTableParameters parameters = new JobTableParameters();
       
+      populateColumns( parameters, request, response );
       populateFilters( parameters, tableSpec, request, response );
       populateSorting( parameters, request, response );
       
       return parameters;
+   }//End Method
+   
+   /**
+    * Method to populate the columns being shown from the given parameters.
+    * @param parameters the {@link JobTableParameters}.
+    * @param request the {@link HttpServletRequest}.
+    * @param response the {@link HttpServletResponse}.
+    */
+   private void populateColumns( 
+            JobTableParameters parameters, 
+            HttpServletRequest request, 
+            HttpServletResponse response 
+   ){
+      String columns = cookies.retrieveCookie( COLUMNS, request, response );
+      if ( columns == null ) {
+         return;
+      }
+      
+      parameters.includeColumns( columns );
    }//End Method
    
    /**
