@@ -33,79 +33,13 @@ h3 {display: inline;}
 
 <div id="config" class="collapse">
 	<div class="container">
-		<table class="table">
-			<colgroup>
-				<col span="1" style="width: 10%;">
-				<col span="1" style="width: 10%;">
-			</colgroup>
-			<thead>
-				<tr>
-					<th>Columns</th>
-					<th>Sort</th>
-					<c:forEach items="${data.columns()}" var="entry">
-						<th>${entry.name()} Filter</th>
-					</c:forEach>
-					<th>User Filter</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td><select class="selectpicker" id="columnFilter" multiple
-						data-live-search="true" onchange="filterColumns()">
-							<c:forEach items="${data.columns()}" var="entry">
-								<c:if test="${entry.isActive()}">
-									<option selected>${entry.name()}</option>
-								</c:if>
-								<c:if test="${not entry.isActive()}">
-									<option>${entry.name()}</option>
-								</c:if>
-							</c:forEach>
-					</select></td>
-	
-					<td><select class="selectpicker" id="jobSort"
-						data-live-search="true" onchange="sortAndRefreshJobs()">
-							<c:forEach items="${data.sortings()}" var="entry">
-								<c:if test="${entry.isActive()}">
-									<option selected>${entry.name()}</option>
-								</c:if>
-								<c:if test="${not entry.isActive()}">
-									<option>${entry.name()}</option>
-								</c:if>
-							</c:forEach>
-					</select></td>
-					
-					<c:forEach items="${data.columns()}" var="column">
-						<td><select class="selectpicker" id="${column.id()}" multiple
-							data-live-search="true" onchange="filterAndRefreshJobs( this )">
-								<c:forEach items="${data.filtersFor( column )}" var="entry">
-									<c:if test="${entry.isActive()}">
-										<option selected>${entry.name()}</option>
-									</c:if>
-									<c:if test="${not entry.isActive()}">
-										<option>${entry.name()}</option>
-									</c:if>
-								</c:forEach>
-						</select></td>
-					</c:forEach>
-					
-					<td><select class="selectpicker" id="userFilter" multiple
-						data-live-search="true" onchange="filterAndRefreshJobs()">
-							<c:forEach items="${user_entries}" var="entry">
-								<c:if test="${entry.isActive()}">
-									<option selected>${entry.name()}</option>
-								</c:if>
-								<c:if test="${not entry.isActive()}">
-									<option>${entry.name()}</option>
-								</c:if>
-							</c:forEach>
-					</select></td>
-				</tr>
-			</tbody>
-		</table>
+		<jsp:include page="job-table-configuration-top.jsp" />
+	</div>
+	<div class="container">
+		<jsp:include page="job-table-configuration-filters.jsp" />
 	</div>
 </div>
 <div class="container">
-
 	<jsp:include page="job-table.jsp" />
 	<footer>
 		<p>&copy; Dan Grew 2017</p>

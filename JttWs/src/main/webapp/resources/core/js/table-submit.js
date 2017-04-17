@@ -17,12 +17,12 @@ function filterAndRefreshJobs( filter ) {
 }
 
 function sortAndRefreshJobs() {
-    var f = $('#jobSort').val().toString();
+    var sorting = $('#jobSort').val().toString();
     $.ajax({
         type : "GET",
         url : "jobs-table",
         data : {
-            "sort" : f
+            "sort" : sorting
         },
         success : function(result) {
             $('#job-table').html(result);
@@ -31,12 +31,12 @@ function sortAndRefreshJobs() {
 }
 
 function filterColumns() {
-    var f = $('#columnFilter').val().toString();
+    var filter = $('#columnFilter').val().toString();
     $.ajax({
         type : "GET",
         url : "jobs-table",
         data : {
-            "columns" : f
+            "columns" : filter
         },
         success : function(result) {
             $('#job-table').html(result);
