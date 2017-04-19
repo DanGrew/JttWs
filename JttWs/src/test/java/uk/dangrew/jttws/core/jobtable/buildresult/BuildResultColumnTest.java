@@ -118,7 +118,7 @@ public class BuildResultColumnTest {
    }//End Method
    
    @Test public void shouldApplyFilterToExcludeAllJobs(){
-      parameters.filterBy( systemUnderTest.name(), "" );
+      parameters.filterBy( systemUnderTest.name(), BuildResultStatus.SUCCESS.displayName() );
       systemUnderTest.filter( jobs, parameters );
       assertThat( jobs, is( new ArrayList<>() ) );
    }//End Method

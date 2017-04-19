@@ -86,7 +86,7 @@ public class JobNameColumnTest {
    }//End Method
    
    @Test public void shouldApplyFilterToExcludeAllJobs(){
-      parameters.filterBy( systemUnderTest.name(), "" );
+      parameters.filterBy( systemUnderTest.name(), "somethin" );
       systemUnderTest.filter( jobs, parameters );
       assertThat( jobs, is( new ArrayList<>() ) );
    }//End Method

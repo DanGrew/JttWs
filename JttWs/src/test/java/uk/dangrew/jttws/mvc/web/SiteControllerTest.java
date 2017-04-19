@@ -88,20 +88,6 @@ public class SiteControllerTest {
       ).getAnnotation( Autowired.class ), is( notNullValue() ) );
    }//End Method
    
-   @Test public void homeShouldProvideJobsFromService() throws Exception{
-      mvc.perform( get( SiteController.HOME_ADDRESS ) )
-         .andExpect( status().isOk() )
-         .andExpect( model().attribute( SiteController.JOB_COLUMNS, JobTableColumns.values() )
-      );
-   }//End Method
-   
-   @Test public void refreshTableShouldProvideJobsFromService() throws Exception{
-      mvc.perform( get( SiteController.JOBS_TABLE_ADDRESS ) )
-         .andExpect( status().isOk() )
-         .andExpect( model().attribute( SiteController.JOB_COLUMNS, JobTableColumns.values() )
-      );
-   }//End Method
-   
    @Test public void shouldProvideHomePage(){
       assertThat( systemUnderTest.home( 
                request, response, model 
