@@ -97,8 +97,6 @@ public class SiteController {
       List< PageJob > jobs = jenkinsJobs.getJobs();
       List< PageUser > users = jenkinsJobs.getUsers();
       
-      model.addAttribute( JOB_COLUMNS, JobTableColumns.values() );
-      
       TableSpecification data = new TableSpecification();
       JobTableParameters parameters = paramsPopulator.construct( data, request, response );
       

@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import uk.dangrew.jttws.core.jobtable.buildresult.BuildResultColumn;
+import uk.dangrew.jttws.core.jobtable.committers.CommittersColumn;
 import uk.dangrew.jttws.core.jobtable.jobname.JobNameColumn;
 import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
 import uk.dangrew.jttws.core.jobtable.structure.Column;
@@ -38,7 +39,7 @@ public class TableSpecification {
     * Constructs a new {@link TableSpecification}.
     */
    public TableSpecification() {
-      this( new JobNameColumn(), new BuildResultColumn() );
+      this( new JobNameColumn(), new BuildResultColumn(), new CommittersColumn() );
    }//End Constructor
    
    /**

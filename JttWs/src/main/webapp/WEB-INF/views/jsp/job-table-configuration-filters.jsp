@@ -23,7 +23,6 @@
 						<th>${entry.name()} Filter</th>
 					</c:if>
 				</c:forEach>
-				<th>User Filter</th>
 			</tr>
 		</thead>
 		<tbody>
