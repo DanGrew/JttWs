@@ -44,6 +44,10 @@ public class BuildResultFilterTest {
       assertThat( systemUnderTest.identifyExclusions( jobs, null ), is( new ArrayList<>() ) );
    }//End Method
    
+   @Test public void shouldIncludeAllJobIfEmptyValueProvided() {
+      assertThat( systemUnderTest.identifyExclusions( jobs, "" ), is( new ArrayList<>() ) );
+   }//End Method
+   
    @Test public void shouldIncludeJob() {
       job1.association().setBuildStatus( BuildResultStatus.SUCCESS );
       assertThat( systemUnderTest.identifyExclusions( jobs, BuildResultStatus.SUCCESS.displayName() ), is( Arrays.asList( job2 ) ) );

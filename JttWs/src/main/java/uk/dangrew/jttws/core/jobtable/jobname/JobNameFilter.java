@@ -63,7 +63,7 @@ public class JobNameFilter implements Filter {
     */
    @Override public List< PageJob > identifyExclusions( List< PageJob > jobs, String value ) {
       List< PageJob > excludedJobs = new ArrayList<>();
-      if ( value == null ) {
+      if ( value == null || value.isEmpty() ) {
          return excludedJobs;
       }
       

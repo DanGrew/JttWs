@@ -42,6 +42,10 @@ public class JobNameFilterTest {
       assertThat( systemUnderTest.identifyExclusions( jobs, null ), is( new ArrayList<>() ) );
    }//End Method
    
+   @Test public void shouldIncludeAllJobIfEmptyValueProvided() {
+      assertThat( systemUnderTest.identifyExclusions( jobs, "" ), is( new ArrayList<>() ) );
+   }//End Method
+   
    @Test public void shouldIncludeJob() {
       assertThat( systemUnderTest.identifyExclusions( jobs, job1.name() ), is( Arrays.asList( job2 ) ) );
    }//End Method
