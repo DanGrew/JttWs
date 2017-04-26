@@ -18,6 +18,7 @@ import uk.dangrew.jttws.core.jobtable.buildresult.BuildResultColumn;
 import uk.dangrew.jttws.core.jobtable.committers.CommittersColumn;
 import uk.dangrew.jttws.core.jobtable.jobname.JobNameColumn;
 import uk.dangrew.jttws.core.jobtable.parameters.JobTableParameters;
+import uk.dangrew.jttws.core.jobtable.progress.ProgressColumn;
 import uk.dangrew.jttws.core.jobtable.structure.Column;
 import uk.dangrew.jttws.mvc.repository.PageJob;
 import uk.dangrew.jttws.mvc.web.configuration.ConfigurationEntry;
@@ -39,7 +40,7 @@ public class TableSpecification {
     * Constructs a new {@link TableSpecification}.
     */
    public TableSpecification() {
-      this( new JobNameColumn(), new BuildResultColumn(), new CommittersColumn() );
+      this( new JobNameColumn(), new ProgressColumn(), new BuildResultColumn(), new CommittersColumn() );
    }//End Constructor
    
    /**
