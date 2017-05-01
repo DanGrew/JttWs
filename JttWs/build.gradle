@@ -1,10 +1,24 @@
-apply plugin: 'java'
-apply plugin: 'war'
-apply plugin: 'eclipse'
-apply plugin: 'eclipse-wtp'
-apply plugin: 'jetty'
+plugins {
+    id "com.jfrog.bintray" version "1.6"
+}
 
-// JDK 7
+allprojects { 
+	apply plugin: 'java'
+	apply plugin: 'maven'
+	apply plugin: 'maven-publish'
+	apply plugin: 'war'
+	apply plugin: 'eclipse'
+	apply plugin: 'eclipse-wtp'
+	apply plugin: 'jetty'
+}
+
+description = """Jenkins Test Tracker Web Services"""
+group = 'JttWs'
+
+def buildNumberFromEnvironment = System.getenv()[ 'VERSION_NUMBER' ]
+def buildNumberForThisEnvironment = ( buildNumberFromEnvironment != null ? buildNumberFromEnvironment : 'WORKSPACE' ) 
+version = buildNumberForThisEnvironment
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
@@ -72,6 +86,50 @@ test {
     reports {
 	    junitXml.enabled = true
 	    html.enabled = false
+    }
+}
+
+task packageTests(type: Jar) {
+  from sourceSets.test.output
+  classifier = 'tests'
+}
+artifacts.archives packageTests
+
+bintray {
+    user = bintrayUser
+    key = bintrayKey
+    configurations = ['archives']
+    publications = ['core']
+    
+    publish = true //auto publish everything
+    
+    pkg {
+        repo = 'JttWs'
+        name = 'JttWs'
+        userOrg = bintrayUser
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/DanGrew/JttWs.git'
+        
+        version {
+            name = buildNumberForThisEnvironment
+            desc = 'Continuous Delivery rolling version'
+            released = new Date()
+        }
+    }
+}
+
+publishing {
+    publications {
+    	//publish standard core components - jar + tests
+        core(MavenPublication) {
+        	//publish all items
+            from components.java
+            
+        	//configure description
+            groupId 'JttWs'
+            artifactId 'JttWs'
+            version version
+        }
     }
 }
 
