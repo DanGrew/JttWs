@@ -15,7 +15,6 @@ import java.util.List;
 import org.apache.http.client.HttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -26,12 +25,13 @@ import com.sun.javafx.application.PlatformImpl;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import uk.dangrew.jtt.api.handling.live.LiveStateFetcher;
-import uk.dangrew.jtt.api.sources.ExternalApi;
-import uk.dangrew.jtt.api.sources.JenkinsApiImpl;
+import uk.dangrew.jtt.connection.api.handling.live.LiveStateFetcher;
+import uk.dangrew.jtt.connection.api.sources.ExternalApi;
+import uk.dangrew.jtt.connection.api.sources.JenkinsApiImpl;
 import uk.dangrew.jtt.model.jobs.BuildState;
 import uk.dangrew.jtt.model.jobs.JenkinsJob;
-import uk.dangrew.jttws.core.bean.JwsJenkinsDatabase;
+import uk.dangrew.jtt.model.storage.database.JenkinsDatabase;
+import uk.dangrew.jtt.model.storage.database.SystemWideJenkinsDatabaseImpl;
 import uk.dangrew.jttws.core.login.JenkinsCredentials;
 import uk.dangrew.jttws.core.login.JenkinsLoginPrompt;
 import uk.dangrew.jttws.mvc.repository.PageJob;
@@ -49,11 +49,12 @@ public class JenkinsConnection implements ApplicationContextAware {
    private List< PageUser > users;
    private Clock clock;
    
-   @Autowired
-   private JwsJenkinsDatabase database;
    private LiveStateFetcher fetcher;
+   private JenkinsDatabase database;
    
    @Override public void setApplicationContext( ApplicationContext applicationContext ) {
+      database = new SystemWideJenkinsDatabaseImpl().get();
+      
       this.jobs = new ArrayList<>();
       this.users = new ArrayList<>();
       this.clock = Clock.systemUTC();
@@ -80,7 +81,7 @@ public class JenkinsConnection implements ApplicationContextAware {
          
          property.set( api );
          
-         LiveStateFetcher fetcher = new LiveStateFetcher( database, property.get() );
+         LiveStateFetcher fetcher = new LiveStateFetcher( property.get() );
          fetcher.loadLastCompletedBuild();
          database.jenkinsJobs().forEach( j -> {
             PageJob dto = new PageJob( j );

@@ -24,7 +24,6 @@ import uk.dangrew.jttws.core.jobtable.structure.SortingFunction;
 import uk.dangrew.jttws.core.jobtable.web.PageFilter;
 import uk.dangrew.jttws.core.jobtable.web.PageSorting;
 import uk.dangrew.jttws.mvc.repository.PageJob;
-import uk.dangrew.jttws.mvc.web.configuration.ConfigurationEntry;
 
 /**
  * The {@link JobNameColumn} provides a {@link Column} to display the job name in the job

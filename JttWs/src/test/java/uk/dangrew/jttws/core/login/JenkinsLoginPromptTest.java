@@ -21,20 +21,20 @@ import com.sun.javafx.application.PlatformImpl;
 
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
-import uk.dangrew.jtt.graphics.JavaFxInitializer;
+import uk.dangrew.sd.graphics.launch.TestApplication;
 
 public class JenkinsLoginPromptTest {
 
    private JenkinsLoginPrompt systemUnderTest;
 
    @Before public void initialiseSystemUnderTest() {
-      JavaFxInitializer.startPlatform();
+      TestApplication.startPlatform();
       PlatformImpl.runAndWait( () -> systemUnderTest = new JenkinsLoginPrompt() );
    }//End Method
 
    @Ignore
    @Test public void manual() {
-      JavaFxInitializer.startPlatform();
+      TestApplication.startPlatform();
       
       PlatformImpl.runAndWait( () -> {
          new JenkinsLoginPrompt().showAndWait();

@@ -14,9 +14,6 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.Arrays;
 import java.util.List;
@@ -44,7 +41,6 @@ import uk.dangrew.jttws.core.jobtable.properties.JobTableProperties;
 import uk.dangrew.jttws.mvc.repository.PageJob;
 import uk.dangrew.jttws.mvc.repository.PageUser;
 import uk.dangrew.jttws.mvc.service.JenkinsService;
-import uk.dangrew.jttws.mvc.web.jobtable.JobTableColumns;
 
 public class SiteControllerTest {
 

@@ -22,9 +22,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import uk.dangrew.jtt.model.jobs.BuildResultStatus;
-import uk.dangrew.jtt.utility.TestCommon;
+import uk.dangrew.jtt.model.utility.TestCommon;
 import uk.dangrew.jttws.mvc.repository.PageJob;
-import uk.dangrew.jttws.mvc.web.jobtable.JobTableSorting;
 
 public class JobTableSortingTest {
 

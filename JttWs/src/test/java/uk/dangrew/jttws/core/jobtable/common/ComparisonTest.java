@@ -10,7 +10,7 @@ package uk.dangrew.jttws.core.jobtable.common;
 
 import org.junit.Test;
 
-import uk.dangrew.jtt.utility.TestCommon;
+import uk.dangrew.jtt.model.utility.TestCommon;
 
 public class ComparisonTest {
 

@@ -15,7 +15,6 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
-import javafx.util.Pair;
 import uk.dangrew.jttws.core.jobtable.jobname.JobNameAlphabetical;
 import uk.dangrew.jttws.core.jobtable.jobname.JobNameColumn;
 

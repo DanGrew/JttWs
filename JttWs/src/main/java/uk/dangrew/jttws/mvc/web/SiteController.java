@@ -26,7 +26,6 @@ import uk.dangrew.jttws.core.jobtable.web.PageTable;
 import uk.dangrew.jttws.mvc.repository.PageJob;
 import uk.dangrew.jttws.mvc.repository.PageUser;
 import uk.dangrew.jttws.mvc.service.JenkinsService;
-import uk.dangrew.jttws.mvc.web.jobtable.JobTableColumns;
 
 /**
  * The {@link SiteController} provides a {@link Controller} for handling requests to load pages. 

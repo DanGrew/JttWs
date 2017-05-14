@@ -25,8 +25,6 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import uk.dangrew.jttws.mvc.web.configuration.CookieManager;
-
 public class CookieManagerTest {
 
    private static final String PARAMETER = "parameter";
